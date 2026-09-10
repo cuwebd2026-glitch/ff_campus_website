@@ -1,7 +1,18 @@
-import { CampusCup } from "@/components/campus-cup/CampusCup";
+import { Routes, Route } from "react-router-dom";
+import { Home } from "@/pages/Home";
+import { Rules } from "@/pages/Rules";
+import { Prizes } from "@/pages/Prizes";
+import { Faq } from "@/pages/Faq";
+import { RegistrationForm } from "@/components/campus-cup/RegistrationForm";
 
-function App() {
-  return <CampusCup />;
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/rules" element={<Rules />} />
+      <Route path="/prizes" element={<Prizes />} />
+      <Route path="/faq" element={<Faq />} />
+      <Route path="/register" element={<RegistrationForm />} />
+    </Routes>
+  );
 }
-
-export default App;
