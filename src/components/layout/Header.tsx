@@ -30,45 +30,52 @@ export function Header() {
 
   return (
     <header className={cn("ff-header", compact && "is-compact")}>
-      <div className="ff-header-inner">
-        {/* Logos */}
-        <Link to="/" className="flex items-center shrink-0 gap-2" aria-label="Campus Cup home">
-          <img src="/cu_logo.png" alt="Chandigarh University" className="h-10 md:h-12 w-auto object-contain shrink-0" />
-          <X className="w-3 h-3 opacity-50 shrink-0 text-[var(--color-ff-orange)]" aria-hidden="true" />
-          <img
-            src="/gfgcu_light.png"
-            alt="GFG Community"
-            className="h-14 md:h-20 w-auto object-contain"
-          />
-        </Link>
+      <div className="ff-header-inner !max-w-[1550px] !w-[96%] !px-4 md:!px-8 flex items-center justify-between gap-4">
+        
+        {/* 1. Left: Logos */}
+<Link to="/" className="flex items-center shrink-0 gap-2.5 md:gap-4" aria-label="Campus Cup home">
+  <img
+    src="/cu_logo.png"
+    alt="Chandigarh University"
+    className="h-10 md:h-12 w-auto object-contain shrink-0"
+  />
+  <X className="w-4 h-4 opacity-50 shrink-0 text-[var(--color-ff-orange)]" aria-hidden="true" />
+  <img
+    src="/gfgcu_light.png"
+    alt="GFG Community"
+    className="h-32 md:h-44 w-auto object-contain shrink-0 -my-12 -ml-3 -translate-y-1 md:-translate-y-1.5"
+  />
+</Link>
 
-        {/* Desktop Nav */}
-        <nav className="ff-nav-links" aria-label="Main navigation">
+        {/* 2. Center: Nav Links */}
+        <nav className="hidden md:flex flex-1 justify-center items-center gap-6 lg:gap-8" aria-label="Main navigation">
           {navItems.map(([label, href]) => (
             <a key={label} href={href} className="ff-nav-link">
               {label}
             </a>
           ))}
-          
+        </nav>
+
+        {/* 3. Right: Register Button & Mobile Trigger */}
+        <div className="flex items-center gap-4 shrink-0">
           <Link
             to="/register"
             state={{ from: location.pathname }}
-            className="no-underline ml-4"
+            className="hidden md:block no-underline"
           >
             <button className="ff-btn-primary cursor-pointer !px-6 !py-2 !text-sm">
               REGISTER
             </button>
           </Link>
-        </nav>
 
-        {/* Mobile trigger */}
-        <button
-          className="md:hidden text-white cursor-pointer"
-          onClick={() => setOpen(true)}
-          aria-label="Open menu"
-        >
-          <Menu />
-        </button>
+          <button
+            className="md:hidden text-white cursor-pointer"
+            onClick={() => setOpen(true)}
+            aria-label="Open menu"
+          >
+            <Menu />
+          </button>
+        </div>
       </div>
 
       {/* Mobile Panel */}
