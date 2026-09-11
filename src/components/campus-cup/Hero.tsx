@@ -1,40 +1,104 @@
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { Crosshair } from "lucide-react";
-import { PrimaryButton, SecondaryButton, Sticker, TournamentBadge } from "./common";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { Link } from "react-router-dom";
 
 export function Hero() {
-  const reduced = useReducedMotion();
-  const { scrollY } = useScroll();
-  const artworkY = useTransform(scrollY, [0, 800], [0, reduced ? 0 : 70]);
+  const heroRef    = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const hudRef     = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Content fade up
+      gsap.fromTo(contentRef.current,
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 1.4, ease: "power3.out", delay: 0.3 }
+      );
+      // Scanline flicker on load
+      gsap.fromTo(".hero-scanline",
+        { opacity: 0 },
+        { opacity: 0.04, duration: 0.1, repeat: 4, yoyo: true, ease: "none", delay: 0.2 }
+      );
+    }, heroRef);
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section id="top" className="cc-hero">
-      <div className="cc-hero-grid" aria-hidden="true" />
-      <motion.div className="cc-hero-art" style={{ y: artworkY }}>
-        <div className="cc-art-corner tl" /><div className="cc-art-corner br" />
-        <Crosshair />
-        <strong>HERO ARTWORK</strong>
-        <span>OFFICIAL VISUAL<br />PLACEHOLDER</span>
-        <small>/branding/campus-cup-logo.png</small>
-      </motion.div>
-      <div className="cc-hero-copy">
-        <motion.div className="cc-hero-kicker cc-enter-one"><span>CU QUALIFIER</span><i />14·09·26</motion.div>
-        <motion.h1 className="cc-enter-two">
-          <span>CAMPUS</span><span>CUP <em>S2</em></span>
-        </motion.h1>
-        <motion.div className="cc-hero-sub cc-enter-three">
-          <p>Chandigarh University<br /><strong>College Qualifier</strong></p>
-          <div><span>Organized by</span>GFG Community<br />Chandigarh University</div>
-        </motion.div>
-        <motion.div className="cc-hero-actions cc-enter-four"><PrimaryButton /><SecondaryButton /></motion.div>
+    <section id="top" className="ff-hero" ref={heroRef}>
+      {/* Background Video */}
+      <video className="ff-hero-video" src="/bg.MP4" autoPlay muted loop playsInline aria-hidden="true" />
+
+      {/* Dark Vignette Overlay */}
+      <div className="ff-hero-overlay" aria-hidden="true" />
+
+      {/* Scanlines overlay — FF/retro game feel */}
+      <div
+        className="hero-scanline absolute inset-0 pointer-events-none z-[1]"
+        style={{
+          backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.15) 3px, rgba(0,0,0,0.15) 4px)",
+          opacity: 0,
+        }}
+        aria-hidden="true"
+      />
+
+
+      {/* Main Content */}
+      <div className="ff-hero-content" ref={contentRef} style={{ opacity: 0 }}>
+
+        <div className="ff-hero-kicker">
+          <span className="ff-hero-kicker-line" />
+          <span className="ff-hero-kicker-text">14 SEPTEMBER 2026</span>
+          <span className="ff-hero-kicker-line" />
+        </div>
+
+        {/* FF-style title with outline text */}
+        <h1 className="ff-hero-title relative">
+          CAMPUS CUP{" "}
+          <span
+            className="ff-hero-title-accent"
+            style={{
+              WebkitTextStroke: "2px var(--color-ff-orange)",
+              color: "transparent",
+              textShadow: "0 0 40px rgba(255,107,0,0.6)",
+            }}
+          >
+            S2
+          </span>
+        </h1>
+
+        {/* FF-style tag line with HUD dashes */}
+        <div className="flex items-center gap-3 justify-center mb-4">
+          <div className="flex gap-1">
+            {[1,2,3].map(i => <div key={i} className="w-4 h-px bg-[var(--color-ff-orange)] opacity-60" />)}
+          </div>
+          <span className="font-sans text-xs tracking-[0.3em] text-[var(--color-ff-orange)] uppercase opacity-80">
+            GARENA FREE FIRE
+          </span>
+          <div className="flex gap-1">
+            {[1,2,3].map(i => <div key={i} className="w-4 h-px bg-[var(--color-ff-orange)] opacity-60" />)}
+          </div>
+        </div>
+
+        <p className="ff-hero-subtitle">
+          THE ULTIMATE COLLEGE QUALIFIER AT CHANDIGARH UNIVERSITY.
+          ORGANIZED BY GFG COMMUNITY.
+        </p>
+
+        <div className="ff-hero-actions">
+          <Link to="/register" className="no-underline">
+            <button className="ff-btn-primary cursor-pointer">
+              REGISTER YOUR SQUAD
+            </button>
+          </Link>
+          <button
+            className="ff-btn-outline cursor-pointer"
+            onClick={() => document.getElementById("tournament")?.scrollIntoView({ behavior: "smooth" })}
+          >
+            EXPLORE THE TOURNAMENT ↓
+          </button>
+        </div>
+
       </div>
-      <div className="cc-hero-date"><span>14</span><div>SEPTEMBER<strong>2026</strong></div></div>
-      <Sticker className="cc-hero-sticker">BATTLE READY</Sticker>
-      <div className="cc-hero-badges">
-        <TournamentBadge index="01">College qualifier</TournamentBadge>
-        <TournamentBadge index="02">Season two</TournamentBadge>
-      </div>
-      <div className="cc-scroll-cue"><span>SCROLL TO ENTER</span><i /></div>
     </section>
   );
 }

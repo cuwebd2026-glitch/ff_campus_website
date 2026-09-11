@@ -70,10 +70,15 @@ export function GamingIcon({ icon: Icon, label }: { icon: LucideIcon; label: str
 }
 
 function LogoSlot({ label, path }: { label: string; path: string }) {
+  const imgSrc =
+    path.includes("gfg") || path.includes("GFG")
+      ? "/gfgcu_light.png"
+      : path.includes("cu") || path.includes("CU") || path.includes("chandigarh")
+        ? "/cu_logo.png"
+        : path;
   return (
-    <div className="cc-logo-slot" title={`Future asset: ${path}`}>
-      <span aria-hidden="true" className="cc-logo-mark" />
-      <span>{label}<small>LOGO SLOT</small></span>
+    <div className="cc-logo-slot" title={label}>
+      <img src={imgSrc} alt={label} loading="lazy" />
     </div>
   );
 }

@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
-import { ArrowRight, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { LogoSlot, PrimaryButton } from "@/components/campus-cup/common";
 
 const navItems = [
-  ["Tournament", "tournament"],
-  ["Rules", "rules"],
-  ["Prizes", "prizes"],
-  ["Schedule", "schedule"],
-  ["FAQ", "faq"],
+  ["HOME", "/"],
+  ["TOURNAMENT", "/#tournament"],
+  ["RULES", "/#rules"],
+  ["PRIZES", "/#prizes"],
+  ["SCHEDULE", "/#schedule"],
+  ["FAQ", "/#faq"],
 ] as const;
 
 export function Header() {
@@ -25,68 +24,90 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    setOpen(false);
+  }, [location]);
+
   return (
-    <header className={cn("cc-header", compact && "is-compact")}>
-      <div className="cc-header-inner">
-        <Link to="/" className="cc-brand-lockup" aria-label="Campus Cup home">
-          <LogoSlot label="GFG COMMUNITY" path="/branding/gfg-logo.png" />
-          <X className="cc-brand-x" aria-hidden="true" />
-          <LogoSlot label="CHANDIGARH UNIVERSITY" path="/branding/cu-logo.png" />
+    <header className={cn("ff-header", compact && "is-compact")}>
+      <div className="ff-header-inner">
+        {/* Logos */}
+        <Link to="/" className="flex items-center shrink-0 gap-2" aria-label="Campus Cup home">
+          <img src="/cu_logo.png" alt="Chandigarh University" className="h-10 md:h-12 w-auto object-contain shrink-0" />
+          <X className="w-3 h-3 opacity-50 shrink-0 text-[var(--color-ff-orange)]" aria-hidden="true" />
+          <img
+            src="/gfgcu_light.png"
+            alt="GFG Community"
+            className="h-14 md:h-20 w-auto object-contain"
+          />
         </Link>
 
-        <nav className="cc-desktop-nav" aria-label="Main navigation">
-          {navItems.map(([label, id]) => (
-            <a key={id} href={`/#${id}`}>{label}</a>
+        {/* Desktop Nav */}
+        <nav className="ff-nav-links" aria-label="Main navigation">
+          {navItems.map(([label, href]) => (
+            <a key={label} href={href} className="ff-nav-link">
+              {label}
+            </a>
           ))}
+          
+          <Link
+            to="/register"
+            state={{ from: location.pathname }}
+            className="no-underline ml-4"
+          >
+            <button className="ff-btn-primary cursor-pointer !px-6 !py-2 !text-sm">
+              REGISTER
+            </button>
+          </Link>
         </nav>
 
-        <Link to="/register" state={{ from: location.pathname }} className="no-underline">
-          <PrimaryButton className="cc-header-cta" />
-        </Link>
-
-        <Button
-          variant="ghost"
-          size="icon"
-          className="cc-menu-trigger"
+        {/* Mobile trigger */}
+        <button
+          className="md:hidden text-white cursor-pointer"
           onClick={() => setOpen(true)}
           aria-label="Open menu"
         >
           <Menu />
-        </Button>
+        </button>
       </div>
 
-      <div className={cn("cc-mobile-panel", open && "is-open")} aria-hidden={!open}>
-        <div className="cc-mobile-top">
-          <span>CC / S2</span>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setOpen(false)}
-            aria-label="Close menu"
-          >
-            <X />
-          </Button>
+      {/* Mobile Panel */}
+      {open && (
+        <div className="fixed inset-0 bg-[var(--color-ff-bg)] z-50 flex flex-col p-6">
+          <div className="flex justify-between items-center mb-12">
+            <div className="font-display text-2xl text-[var(--color-ff-orange)]">CC S2</div>
+            <button onClick={() => setOpen(false)} className="text-white cursor-pointer">
+              <X />
+            </button>
+          </div>
+
+          <nav className="flex flex-col gap-6" aria-label="Mobile navigation">
+            {navItems.map(([label, href]) => (
+              <a
+                key={label}
+                href={href}
+                className="font-display text-4xl text-white hover:text-[var(--color-ff-orange)]"
+                onClick={() => setOpen(false)}
+              >
+                {label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="mt-auto pt-8 border-t border-[var(--color-ff-border)]">
+            <Link
+              to="/register"
+              state={{ from: location.pathname }}
+              className="no-underline w-full"
+              onClick={() => setOpen(false)}
+            >
+              <button className="ff-btn-primary w-full cursor-pointer">
+                REGISTER NOW
+              </button>
+            </Link>
+          </div>
         </div>
-
-        <nav aria-label="Mobile navigation">
-          {navItems.map(([label, id], i) => (
-            <a key={id} href={`/#${id}`} onClick={() => setOpen(false)}>
-              <b>0{i + 1}</b>{label}<ArrowRight />
-            </a>
-          ))}
-        </nav>
-
-        <Link
-          to="/register"
-          state={{ from: location.pathname }}
-          className="w-full no-underline"
-          onClick={() => setOpen(false)}
-        >
-          <PrimaryButton className="w-full" />
-        </Link>
-
-        <p>14 SEP 2026 / CHANDIGARH UNIVERSITY</p>
-      </div>
+      )}
     </header>
   );
 }
