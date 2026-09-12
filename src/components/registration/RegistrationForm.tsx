@@ -258,35 +258,54 @@ export function RegistrationForm() {
   return (
     <div
       ref={formCardRef}
-      className="relative border border-border bg-card p-6 md:p-10 shadow-2xl overflow-hidden"
+      className="relative ff-glass-card rounded-md p-6 sm:p-8 md:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_50px_rgba(255,107,0,0.1)] overflow-hidden border border-white/15"
     >
       {/* Tactical Corner Brackets */}
-      <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-primary" />
-      <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-primary" />
-      <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-primary" />
-      <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-primary" />
+      <div className="absolute top-0 left-0 w-3.5 h-3.5 border-t-2 border-l-2 border-primary z-20" />
+      <div className="absolute top-0 right-0 w-3.5 h-3.5 border-t-2 border-r-2 border-primary z-20" />
+      <div className="absolute bottom-0 left-0 w-3.5 h-3.5 border-b-2 border-l-2 border-primary z-20" />
+      <div className="absolute bottom-0 right-0 w-3.5 h-3.5 border-b-2 border-r-2 border-primary z-20" />
 
       {/* Cyber Scanning Laser Line */}
       <div className="cc-scanline-laser opacity-40" />
 
       {/* Form Header */}
-      <div className="mb-8 border-b border-border/80 pb-6 text-center">
-        <div className="cc-sticker mx-auto mb-3">OFFICIAL TOURNAMENT REGISTRATION // CC-S2</div>
-        <h1 className="font-display text-4xl sm:text-5xl font-black italic uppercase tracking-tight text-foreground">
-          SQUAD ENTRY <span className="text-primary">PORTAL</span>
-        </h1>
-        <p className="mx-auto mt-2 max-w-xl font-body text-xs sm:text-sm text-muted-foreground">
-          Register your 4-player core roster and optional substitute for the Chandigarh University
-          qualifier.
-        </p>
+      <div className="mb-6 border-b border-white/10 pb-6 text-center sm:text-left flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div className="inline-flex items-center gap-2 px-2 py-0.5 border border-primary/40 bg-primary/10 text-primary font-display text-[10px] font-black uppercase tracking-widest mb-2">
+            OFFICIAL TOURNAMENT REGISTRATION // CC-S2
+          </div>
+          <h2 className="font-display text-3xl sm:text-4xl font-black italic uppercase tracking-tight text-white leading-none">
+            SQUAD ENTRY <span className="text-primary drop-shadow-[0_0_15px_rgba(255,107,0,0.5)]">TERMINAL</span>
+          </h2>
+          <p className="mt-1 font-body text-xs text-muted-foreground">
+            Configure squad identity, verify 4 core roster players, and lock in slot allocation.
+          </p>
+        </div>
+
+        {/* Tactical Stage Indicator */}
+        <div className="flex sm:flex-col items-center sm:items-end justify-center gap-1 shrink-0">
+          <span className="font-mono text-[10px] uppercase text-muted-foreground">MISSION PHASE</span>
+          <span className="font-display text-2xl font-black text-amber italic tracking-wider">
+            STAGE 0{step}<span className="text-white/40 text-base font-normal">/03</span>
+          </span>
+        </div>
+      </div>
+
+      {/* Burning Flame Progress Bar */}
+      <div className="relative w-full h-1.5 bg-black/50 border border-white/10 rounded-full mb-6 overflow-hidden">
+        <div
+          className="ff-flame-bar h-full transition-all duration-500 rounded-full"
+          style={{ width: step === 1 ? "33.3%" : step === 2 ? "66.6%" : "100%" }}
+        />
       </div>
 
       {/* Tactical Stepper HUD */}
-      <div className="mb-8 grid grid-cols-3 gap-2 border-b border-border/80 pb-6">
+      <div className="mb-8 grid grid-cols-3 gap-2 sm:gap-3 border-b border-white/10 pb-6">
         {[
-          { num: 1, label: "01 // SQUAD & IGL", desc: "Identity & Captain" },
-          { num: 2, label: "02 // ROSTER & PROOFS", desc: "Players & Documents" },
-          { num: 3, label: "03 // LOCK-IN & SUBMIT", desc: "War-Room Review" },
+          { num: 1, label: "01 // SQUAD IDENTITY", desc: "Team & Captain" },
+          { num: 2, label: "02 // OPERATOR ROSTER", desc: "Players & ID Proofs" },
+          { num: 3, label: "03 // FINAL LOCK-IN", desc: "War-Room Dispatch" },
         ].map((s) => {
           const isActive = step === s.num;
           const isDone = step > s.num;
@@ -294,32 +313,32 @@ export function RegistrationForm() {
           return (
             <div
               key={s.num}
-              className={`relative flex flex-col items-center sm:items-start p-2.5 border transition-all duration-300 ${
+              className={`relative flex flex-col items-center sm:items-start p-2.5 sm:p-3 border transition-all duration-300 rounded-sm ${
                 isActive
-                  ? "border-amber bg-surface-raised shadow-[0_0_15px_rgba(245,158,11,0.15)]"
+                  ? "border-primary bg-primary/10 shadow-[0_0_20px_rgba(255,107,0,0.2)]"
                   : isDone
-                    ? "border-primary/50 bg-primary/5"
-                    : "border-border/40 bg-surface-deep opacity-60"
+                    ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-400"
+                    : "border-white/10 bg-black/40 opacity-50"
               }`}
             >
               {isActive && (
-                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-amber shadow-[0_0_8px_var(--amber)]" />
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary shadow-[0_0_8px_var(--color-ff-orange)]" />
               )}
               <div className="flex items-center gap-2 w-full">
                 <div
-                  className={`flex h-6 w-6 items-center justify-center font-display text-xs font-black transition-colors ${
+                  className={`flex h-6 w-6 items-center justify-center font-display text-xs font-black transition-colors rounded-xs ${
                     isActive
-                      ? "bg-amber text-primary-foreground shadow-[0_0_10px_rgba(245,158,11,0.5)]"
+                      ? "bg-primary text-black shadow-[0_0_12px_rgba(255,107,0,0.6)]"
                       : isDone
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-surface-deep text-steel border border-border"
+                        ? "bg-emerald-500 text-black shadow-[0_0_10px_rgba(34,197,94,0.5)]"
+                        : "bg-surface-deep text-steel border border-white/15"
                   }`}
                 >
-                  {isDone ? <Check className="h-3.5 w-3.5" /> : `0${s.num}`}
+                  {isDone ? <Check className="h-3.5 w-3.5 stroke-[3]" /> : `0${s.num}`}
                 </div>
                 <span
                   className={`font-display text-xs font-black uppercase tracking-wider hidden sm:inline transition-colors ${
-                    isActive ? "text-amber" : isDone ? "text-primary" : "text-steel"
+                    isActive ? "text-primary" : isDone ? "text-emerald-400" : "text-steel"
                   }`}
                 >
                   {s.label}
