@@ -33,4 +33,13 @@ export interface RegistrationResponse {
   success: boolean;
   registration_id?: string;
   error?: string;
+  closed?: boolean;
+}
+
+export interface RegistrationStatusResponse {
+  success: boolean;
+  count?: number;
+  cap?: number;
+  closed: boolean;
+  error?: string;
 }

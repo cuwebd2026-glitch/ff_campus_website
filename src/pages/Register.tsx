@@ -6,18 +6,22 @@ import {
   Users,
   MapPin,
   ShieldAlert,
+  Loader2,
 } from "lucide-react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { RegistrationForm } from "@/components/registration/RegistrationForm";
+import { RegistrationClosed } from "@/components/registration/RegistrationClosed";
 import { FireEmberCanvas } from "@/components/registration/FireEmberCanvas";
+import { useRegistrationStatus } from "@/hooks/useRegistrationStatus";
 
 export function Register() {
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { loading, closed } = useRegistrationStatus();
 
   useGSAP(
     () => {
@@ -205,7 +209,15 @@ export function Register() {
 
         {/* ── Accessible Full-Width Registration Terminal ── */}
         <div className="reg-page-form">
-          <RegistrationForm />
+          {loading ? (
+            <div className="ff-glass-card rounded-md p-10 flex items-center justify-center border border-white/15 bg-black/40 backdrop-blur-md min-h-[200px]">
+              <Loader2 className="w-6 h-6 animate-spin text-primary" />
+            </div>
+          ) : closed ? (
+            <RegistrationClosed />
+          ) : (
+            <RegistrationForm />
+          )}
         </div>
       </div>
 
