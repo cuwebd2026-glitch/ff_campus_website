@@ -152,7 +152,7 @@ export function Register() {
           <div className="cc-scanline-laser opacity-40 z-20" />
 
           {/* Battle Video Container with Artwork Fallback */}
-          <div className="relative w-full h-[220px] sm:h-[280px] md:h-[340px] bg-black overflow-hidden group">
+          <div className="relative w-full h-[250px] sm:h-[300px] md:h-[360px] bg-black overflow-hidden group">
             {/* Free Fire Battle Video Loop */}
             <video
               ref={videoRef}
@@ -204,27 +204,36 @@ export function Register() {
             </div>
 
             {/* Bottom Content Area */}
-            <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4 z-10">
-              <div>
-                {/* Tactical Badges */}
-                <div className="flex flex-wrap items-center gap-2 mb-2">
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 border border-primary/50 bg-primary/20 text-primary font-display text-[10px] font-black uppercase tracking-widest backdrop-blur-sm">
-                    <Flame className="w-3 h-3 fill-primary" /> OFFICIAL GARENA QUALIFIER
-                  </span>
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 border border-white/20 bg-black/60 text-white font-mono text-[10px] uppercase backdrop-blur-sm">
-                    <Radio className="w-3 h-3 text-amber" /> 4-PLAYER CORE + 1 SUB
-                  </span>
-                </div>
+            <div className="absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-6 sm:right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4 z-10">
+              <div className="flex items-center gap-3 sm:gap-4 md:gap-5">
+                {/* Official Campus Cup Season 2 Graphic Shield Logo */}
+                <img
+                  src="/cc-s2-logo.png"
+                  alt="Campus Cup Season 2"
+                  className="h-16 sm:h-20 md:h-24 w-auto object-contain shrink-0 drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)] hover:scale-105 transition-transform duration-300"
+                />
 
-                <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black italic uppercase tracking-tight text-white leading-none drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
-                  CAMPUS CUP CLASH{" "}
-                  <span className="text-primary drop-shadow-[0_0_20px_rgba(255,107,0,0.7)]">
-                    SEASON 2
-                  </span>
-                </h1>
-                <p className="mt-1 text-xs sm:text-sm font-body text-zinc-300 max-w-xl drop-shadow">
-                  Drop into the Chandigarh University battle arena. Register your squad roster to lock in your tournament slot.
-                </p>
+                <div>
+                  {/* Tactical Badges */}
+                  <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 border border-primary/50 bg-primary/20 text-primary font-display text-[10px] font-black uppercase tracking-widest backdrop-blur-sm">
+                      <Flame className="w-3 h-3 fill-primary" /> OFFICIAL GARENA QUALIFIER
+                    </span>
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 border border-white/20 bg-black/60 text-white font-mono text-[10px] uppercase backdrop-blur-sm">
+                      <Radio className="w-3 h-3 text-amber" /> 4-PLAYER CORE + 1 SUB
+                    </span>
+                  </div>
+
+                  <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black italic uppercase tracking-tight text-white leading-none drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+                    CAMPUS CUP CLASH{" "}
+                    <span className="text-primary drop-shadow-[0_0_20px_rgba(255,107,0,0.7)]">
+                      SEASON 2
+                    </span>
+                  </h1>
+                  <p className="mt-1 text-xs sm:text-sm font-body text-zinc-300 max-w-lg drop-shadow">
+                    Drop into the Chandigarh University battle arena. Register your squad roster to lock in your tournament slot.
+                  </p>
+                </div>
               </div>
 
               {/* Tournament Partner Logos */}
