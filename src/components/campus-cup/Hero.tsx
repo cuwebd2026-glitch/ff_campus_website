@@ -1,33 +1,57 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { Link } from "react-router-dom";
-import { X } from "lucide-react";
 
 export function Hero() {
-  const heroRef    = useRef<HTMLElement>(null);
+  const heroRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const hudRef     = useRef<HTMLDivElement>(null);
+  const hudRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Content fade up
-      gsap.fromTo(contentRef.current,
+      gsap.fromTo(
+        contentRef.current,
         { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 1.4, ease: "power3.out", delay: 0.3 }
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.4,
+          ease: "power3.out",
+          delay: 0.3,
+        }
       );
+
       // Scanline flicker on load
-      gsap.fromTo(".hero-scanline",
+      gsap.fromTo(
+        ".hero-scanline",
         { opacity: 0 },
-        { opacity: 0.04, duration: 0.1, repeat: 4, yoyo: true, ease: "none", delay: 0.2 }
+        {
+          opacity: 0.04,
+          duration: 0.1,
+          repeat: 4,
+          yoyo: true,
+          ease: "none",
+          delay: 0.2,
+        }
       );
     }, heroRef);
+
     return () => ctx.revert();
   }, []);
 
   return (
     <section id="top" className="ff-hero" ref={heroRef}>
       {/* Background Video */}
-      <video className="ff-hero-video" src="/bg.MP4" autoPlay muted loop playsInline aria-hidden="true" />
+      <video
+        className="ff-hero-video"
+        src="/bg.MP4"
+        autoPlay
+        muted
+        loop
+        playsInline
+        aria-hidden="true"
+      />
 
       {/* Dark Vignette Overlay */}
       <div className="ff-hero-overlay" aria-hidden="true" />
@@ -36,7 +60,8 @@ export function Hero() {
       <div
         className="hero-scanline absolute inset-0 pointer-events-none z-[1]"
         style={{
-          backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.15) 3px, rgba(0,0,0,0.15) 4px)",
+          backgroundImage:
+            "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.15) 3px, rgba(0,0,0,0.15) 4px)",
           opacity: 0,
         }}
         aria-hidden="true"
@@ -44,7 +69,6 @@ export function Hero() {
 
       {/* Main Content */}
       <div className="ff-hero-content" ref={contentRef} style={{ opacity: 0 }}>
-
         <div className="ff-hero-kicker">
           <span className="ff-hero-kicker-line" />
           <span className="ff-hero-kicker-text">14 SEPTEMBER 2026</span>
@@ -66,38 +90,32 @@ export function Hero() {
           </span>
         </h1>
 
-        {/* Garena X Free Fire MAX Logos with HUD Dashes */}
-<div className="flex items-center gap-3 md:gap-4 justify-center mb-6">
-  <div className="flex gap-1 shrink-0">
-    {[1, 2, 3].map(i => (
-      <div key={i} className="w-3 md:w-5 h-px bg-[var(--color-ff-orange)] opacity-60" />
-    ))}
-  </div>
-
-  <div className="flex items-center gap-3 md:gap-4 shrink-0">
-    <img
-      src="/Garena.png"
-      alt="Garena"
-      className="h-12 md:h-18 w-auto object-contain shrink-0 self-center"
-    />
-    <X className="w-4 h-4 opacity-60 shrink-0 text-[var(--color-ff-orange)] self-center" aria-hidden="true" />
-    <img
-      src="/FREE_FIRE_MAX_LOGO.png"
-      alt="Free Fire MAX"
-      className="h-8 md:h-10 w-auto object-contain shrink-0 self-center"
-    />
-  </div>
-
-  <div className="flex gap-1 shrink-0">
-    {[1, 2, 3].map(i => (
-      <div key={i} className="w-3 md:w-5 h-px bg-[var(--color-ff-orange)] opacity-60" />
-    ))}
-  </div>
-</div>
+        {/* FF-style tag line with HUD dashes */}
+        <div className="flex items-center gap-3 justify-center mb-4">
+          <div className="flex gap-1">
+            {[1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className="w-4 h-px bg-[var(--color-ff-orange)] opacity-60"
+              />
+            ))}
+          </div>
+          <span className="font-sans text-xs tracking-[0.3em] text-[var(--color-ff-orange)] uppercase opacity-80">
+            GARENA FREE FIRE
+          </span>
+          <div className="flex gap-1">
+            {[1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className="w-4 h-px bg-[var(--color-ff-orange)] opacity-60"
+              />
+            ))}
+          </div>
+        </div>
 
         <p className="ff-hero-subtitle">
-          THE ULTIMATE COLLEGE QUALIFIER AT CHANDIGARH UNIVERSITY.
-          ORGANIZED BY GFG COMMUNITY.
+          THE ULTIMATE COLLEGE QUALIFIER AT CHANDIGARH UNIVERSITY. ORGANIZED BY
+          GFG COMMUNITY.
         </p>
 
         <div className="ff-hero-actions">
@@ -108,12 +126,15 @@ export function Hero() {
           </Link>
           <button
             className="ff-btn-outline cursor-pointer"
-            onClick={() => document.getElementById("tournament")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={() =>
+              document.getElementById("tournament")?.scrollIntoView({
+                behavior: "smooth",
+              })
+            }
           >
             EXPLORE THE TOURNAMENT ↓
           </button>
         </div>
-
       </div>
     </section>
   );
