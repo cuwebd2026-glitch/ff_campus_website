@@ -23,9 +23,15 @@ export function useRegistrationForm() {
   const [successRegId, setSuccessRegId] = useState<string>("");
   const [copied, setCopied] = useState<boolean>(false);
 
+  // Helper to show errors and scroll up
+  const triggerError = (msg: string) => {
+    setErrorMsg(msg);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const addMember = () => {
     if (members.length >= 5) {
-      setErrorMsg("Maximum 5 members allowed per squad (4 Core + 1 Substitute).");
+      triggerError("Maximum 5 members allowed per squad (4 Core + 1 Substitute).");
       return;
     }
     setErrorMsg("");
@@ -49,12 +55,12 @@ export function useRegistrationForm() {
 
   const validateStep1 = (): boolean => {
     if (!teamName.trim()) {
-      setErrorMsg("Please enter your Team Name.");
+      triggerError("Please enter your Team Name.");
       return false;
     }
 
     if (members.length === 0) {
-      setErrorMsg("At least one member is required.");
+      triggerError("At least one member is required.");
       return false;
     }
 
@@ -67,35 +73,35 @@ export function useRegistrationForm() {
       const memberLabel = i === 0 ? "In-Game Leader [IGL]" : `Player ${i + 1}`;
 
       if (!m.full_name.trim()) {
-        setErrorMsg(`${memberLabel}: Full Name is required.`);
+        triggerError(`${memberLabel}: Full Name is required.`);
         return false;
       }
       if (!nameRegex.test(m.full_name.trim())) {
-        setErrorMsg(`${memberLabel}: Full Name must not contain numbers.`);
+        triggerError(`${memberLabel}: Full Name must not contain numbers.`);
         return false;
       }
       if (!m.college_uid.trim()) {
-        setErrorMsg(`${memberLabel}: College UID is required.`);
+        triggerError(`${memberLabel}: College UID is required.`);
         return false;
       }
       if (!m.phone_number.trim() || !phoneRegex.test(m.phone_number.trim())) {
-        setErrorMsg(`${memberLabel}: Phone Number must be exactly 10 digits.`);
+        triggerError(`${memberLabel}: Phone Number must be exactly 10 digits.`);
         return false;
       }
       if (!m.personal_email.trim() || !emailRegex.test(m.personal_email.trim())) {
-        setErrorMsg(`${memberLabel}: Valid Personal Email is required.`);
+        triggerError(`${memberLabel}: Valid Personal Email is required.`);
         return false;
       }
       if (!m.official_email.trim() || !emailRegex.test(m.official_email.trim())) {
-        setErrorMsg(`${memberLabel}: Valid Official/College Email is required.`);
+        triggerError(`${memberLabel}: Valid Official/College Email is required.`);
         return false;
       }
       if (!m.section.trim()) {
-        setErrorMsg(`${memberLabel}: Section is required.`);
+        triggerError(`${memberLabel}: Section is required.`);
         return false;
       }
       if (!m.block.trim()) {
-        setErrorMsg(`${memberLabel}: Block is required.`);
+        triggerError(`${memberLabel}: Block is required.`);
         return false;
       }
     }
@@ -131,7 +137,7 @@ export function useRegistrationForm() {
     const secretKey = import.meta.env.VITE_APP_SECRET_TOKEN;
 
     if (!scriptUrl || !secretKey) {
-      setErrorMsg("Configuration error: Missing API endpoint or secret token.");
+      triggerError("Configuration error: Missing API endpoint or secret token. Please contact an admin.");
       setSubmitting(false);
       return;
     }
@@ -171,10 +177,10 @@ export function useRegistrationForm() {
       if (result.success && result.registration_id) {
         setSuccessRegId(result.registration_id);
       } else {
-        setErrorMsg(result.error || "Registration submission failed. Please try again.");
+        triggerError(result.error || "Registration submission failed. Please try again.");
       }
     } catch {
-      setErrorMsg("Network error connecting to tournament server. Please check your connection.");
+      triggerError("Network error connecting to tournament server. Please check your connection.");
     } finally {
       setSubmitting(false);
     }

@@ -163,8 +163,12 @@ export function CompulsoryGoogleFormStep({
         <button
           type="button"
           onClick={onFinalSubmit}
-          disabled={submitting}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-xs font-display text-sm font-black uppercase tracking-wider bg-primary text-black hover:bg-white hover:text-black transition-all duration-200 shadow-[0_0_25px_rgba(255,107,0,0.5)] active:scale-95 cursor-pointer disabled:opacity-50"
+          disabled={submitting || !hasOpenedForm}
+          className={`inline-flex items-center gap-2 px-6 py-3 rounded-xs font-display text-sm font-black uppercase tracking-wider shadow-[0_0_25px_rgba(255,107,0,0.5)] transition-all duration-200 ${
+            !hasOpenedForm
+              ? "bg-black text-white/50 border border-white/20 cursor-not-allowed shadow-none"
+              : "bg-primary text-black hover:bg-white hover:text-black cursor-pointer active:scale-95"
+          }`}
         >
           {submitting ? (
             <>

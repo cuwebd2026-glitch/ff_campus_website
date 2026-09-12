@@ -27,7 +27,7 @@ export function CharacterReveal() {
     const app = new PIXI.Application({
       width: canvasWidth,
       height: canvasHeight,
-      transparent: true,
+      backgroundAlpha: 0,
       resolution: 1,
       autoDensity: false,
     });
