@@ -48,7 +48,7 @@ export function CharacterReveal() {
 
         const character = new Spine(resources.andrew.spineData);
         for (let i = 1; i <= 7; i++) {
-          try { character.skeleton.setAttachment(`AndrewAwakening_smoke_${i}`, null); } catch {}
+          try { character.skeleton.setAttachment(`AndrewAwakening_smoke_${i}`, undefined); } catch {}
         }
 
         const scale = isMobile ? 0.16 : 0.28;
