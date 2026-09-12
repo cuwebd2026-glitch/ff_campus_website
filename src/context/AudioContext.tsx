@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
 
 interface AudioContextType {
   isPlaying: boolean;
@@ -10,14 +9,13 @@ interface AudioContextType {
 const AudioContext = createContext<AudioContextType>({
   isPlaying: true,
   toggleMusic: () => {},
-  currentTrackName: "",
+  currentTrackName: "Free Fire World Cup Theme",
 });
 
-const WORLD_CUP_TRACK = "/audio/04. Free Fire Lobby - World Cup I.mp3";
-const WINTERLANDS_TRACK = "/audio/03. Free Fire Lobby - Winterlands I.mp3";
+const FREE_FIRE_THEME_TRACK = "/audio/04. Free Fire Lobby - World Cup I.mp3";
+const TRACK_NAME = "Free Fire World Cup Theme";
 
 export function AudioProvider({ children }: { children: React.ReactNode }) {
-  const location = useLocation();
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // Default music to ON unless explicitly disabled by user
@@ -30,17 +28,13 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
 
   const isPlayingRef = useRef<boolean>(isPlaying);
 
-  const isRegisterPage = location.pathname === "/register";
-  const targetTrack = isRegisterPage ? WINTERLANDS_TRACK : WORLD_CUP_TRACK;
-  const currentTrackName = isRegisterPage ? "Winterlands I" : "World Cup I";
-
   useEffect(() => {
     isPlayingRef.current = isPlaying;
   }, [isPlaying]);
 
-  // Initialize single persistent Audio element with Default ON
+  // Initialize single persistent Audio element playing across entire website
   useEffect(() => {
-    const audio = new Audio(targetTrack);
+    const audio = new Audio(FREE_FIRE_THEME_TRACK);
     audio.loop = true;
     audio.volume = 0.35;
     audioRef.current = audio;
@@ -85,27 +79,6 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  // Route-based track switching: World Cup across site, Winterlands on /register
-  useEffect(() => {
-    if (!audioRef.current) return;
-
-    const currentSrc = decodeURIComponent(audioRef.current.src);
-    if (!currentSrc.endsWith(targetTrack)) {
-      const shouldKeepPlaying = isPlayingRef.current;
-      audioRef.current.src = targetTrack;
-      audioRef.current.load();
-
-      if (shouldKeepPlaying) {
-        audioRef.current
-          .play()
-          .then(() => {
-            setIsPlaying(true);
-          })
-          .catch(() => {});
-      }
-    }
-  }, [targetTrack]);
-
   const toggleMusic = () => {
     if (!audioRef.current) return;
 
@@ -127,7 +100,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AudioContext.Provider value={{ isPlaying, toggleMusic, currentTrackName }}>
+    <AudioContext.Provider value={{ isPlaying, toggleMusic, currentTrackName: TRACK_NAME }}>
       {children}
     </AudioContext.Provider>
   );
