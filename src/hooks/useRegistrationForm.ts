@@ -1,159 +1,159 @@
-import { useState, FormEvent } from "react";
-import { PlayerData, RegistrationPayload, RegistrationResponse } from "../types/registration";
-import { compressAndConvertToBase64 } from "../utils/imageUtils";
+import { useState } from "react";
+import { MemberData, RegistrationPayload, RegistrationResponse } from "../types/registration";
 
-export const emptyPlayer = (): PlayerData => ({
-  player_name: "",
-  student_uid: "",
-  department: "",
-  year: "1st Year",
-  ff_uid: "",
-  ign: "",
-  id_card_file: null,
-  ff_profile_file: null,
+export const createEmptyMember = (): MemberData => ({
+  id: `mem_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+  name: "",
+  uid: "",
+  phone: "",
+  email: "",
+  section: "",
+  block: "",
 });
 
 export function useRegistrationForm() {
   const [step, setStep] = useState<number>(1);
   const [teamName, setTeamName] = useState<string>("");
-  const [iglEmail, setIglEmail] = useState<string>("");
-  const [iglPhone, setIglPhone] = useState<string>("");
+  const [members, setMembers] = useState<MemberData[]>([createEmptyMember()]);
 
-  const [players, setPlayers] = useState<PlayerData[]>([
-    emptyPlayer(),
-    emptyPlayer(),
-    emptyPlayer(),
-    emptyPlayer(),
-  ]);
-
-  const [hasSubstitute, setHasSubstitute] = useState<boolean>(false);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [submitStatus, setSubmitStatus] = useState<string>("");
-  const [submitProgress, setSubmitProgress] = useState<number>(0);
   const [errorMsg, setErrorMsg] = useState<string>("");
   const [successRegId, setSuccessRegId] = useState<string>("");
   const [copied, setCopied] = useState<boolean>(false);
 
-  const handlePhoneChange = (val: string) => {
-    setIglPhone(val.replace(/\D/g, "").slice(0, 10));
+  // Add Member (up to 5 maximum)
+  const addMember = () => {
+    if (members.length >= 5) {
+      setErrorMsg("Maximum 5 members allowed per squad (4 Core + 1 Substitute).");
+      return;
+    }
+    setErrorMsg("");
+    setMembers((prev) => [...prev, createEmptyMember()]);
   };
 
-  const handlePlayerChange = (
-    index: number,
-    field: keyof PlayerData,
-    val: PlayerData[keyof PlayerData],
-  ) => {
-    setPlayers((prev) => {
+  // Remove Member (only members 2-5 can be removed)
+  const removeMember = (index: number) => {
+    if (index === 0) return;
+    setErrorMsg("");
+    setMembers((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  // Update specific field of a member
+  const updateMember = (index: number, field: keyof MemberData, value: string) => {
+    setErrorMsg("");
+    setMembers((prev) => {
       const updated = [...prev];
-      let value = val;
-      if (field === "student_uid") value = String(val).toUpperCase();
-      if (field === "ff_uid") value = String(val).replace(/\D/g, "");
       updated[index] = { ...updated[index], [field]: value };
       return updated;
     });
   };
 
-  const toggleSubstitute = () => {
-    if (hasSubstitute) {
-      setPlayers((prev) => prev.slice(0, 4));
-      setHasSubstitute(false);
-    } else {
-      setPlayers((prev) => [...prev, emptyPlayer()]);
-      setHasSubstitute(true);
-    }
-  };
-
+  // Validation for Step 1 (Roster)
   const validateStep1 = (): boolean => {
-    if (!teamName.trim()) return (setErrorMsg("Team Name is required."), false);
-    if (!iglEmail.trim() || !/\S+@\S+\.\S+/.test(iglEmail))
-      return (setErrorMsg("Valid IGL Email is required."), false);
-    if (iglPhone.length !== 10) return (setErrorMsg("IGL Phone number must be 10 digits."), false);
-    setErrorMsg("");
-    return true;
-  };
-
-  const validateStep2 = (): boolean => {
-    for (let i = 0; i < players.length; i++) {
-      const p = players[i];
-      const pLabel = `Player ${i + 1}`;
-      if (!p.player_name.trim()) return (setErrorMsg(`${pLabel}: Name is required.`), false);
-      if (!p.student_uid.trim()) return (setErrorMsg(`${pLabel}: Student UID is required.`), false);
-      if (!p.department.trim()) return (setErrorMsg(`${pLabel}: Department is required.`), false);
-      if (!p.ff_uid.trim()) return (setErrorMsg(`${pLabel}: Free Fire UID is required.`), false);
-      if (!p.ign.trim()) return (setErrorMsg(`${pLabel}: Free Fire IGN is required.`), false);
-      if (!p.id_card_file)
-        return (setErrorMsg(`${pLabel}: Student ID Card image is required.`), false);
-      if (!p.ff_profile_file)
-        return (setErrorMsg(`${pLabel}: Free Fire Profile Screenshot is required.`), false);
+    if (!teamName.trim()) {
+      setErrorMsg("Please enter your Squad / Team Name.");
+      return false;
     }
+
+    if (members.length === 0) {
+      setErrorMsg("At least one member is required.");
+      return false;
+    }
+
+    for (let i = 0; i < members.length; i++) {
+      const m = members[i];
+      const memberLabel = i === 0 ? "Member 1 (Captain)" : `Member ${i + 1}`;
+
+      if (!m.name.trim()) {
+        setErrorMsg(`${memberLabel}: Participant Name is required.`);
+        return false;
+      }
+      if (!m.uid.trim()) {
+        setErrorMsg(`${memberLabel}: UID (Free Fire / Student) is required.`);
+        return false;
+      }
+      if (!m.phone.trim() || m.phone.length !== 10) {
+        setErrorMsg(`${memberLabel}: Phone Number must be exactly 10 digits.`);
+        return false;
+      }
+      if (!m.email.trim() || !/\S+@\S+\.\S+/.test(m.email)) {
+        setErrorMsg(`${memberLabel}: Valid Email ID is required.`);
+        return false;
+      }
+      if (!m.section.trim()) {
+        setErrorMsg(`${memberLabel}: Section is required.`);
+        return false;
+      }
+      if (!m.block.trim()) {
+        setErrorMsg(`${memberLabel}: Campus Block is required.`);
+        return false;
+      }
+    }
+
     setErrorMsg("");
     return true;
   };
 
   const goNext = () => {
-    if (step === 1 && validateStep1()) setStep(2);
-    else if (step === 2 && validateStep2()) setStep(3);
+    if (step === 1 && validateStep1()) {
+      setStep(2);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   const goBack = () => {
     setErrorMsg("");
-    setStep((s) => s - 1);
+    setStep(1);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+  // Final Submit to Google Apps Script Endpoint
+  const handleSubmit = async () => {
+    if (!validateStep1()) {
+      setStep(1);
+      return;
+    }
+
     setSubmitting(true);
     setErrorMsg("");
-    setSubmitProgress(5);
+    setSubmitStatus("Locking in squad roster...");
 
     const scriptUrl = import.meta.env.VITE_APPS_SCRIPT_URL;
     const secretKey = import.meta.env.VITE_APP_SECRET_TOKEN;
 
     if (!scriptUrl || !secretKey) {
-      setErrorMsg("Configuration error: Missing API endpoint or secret key.");
+      setErrorMsg("Configuration error: Missing API endpoint or secret token.");
       setSubmitting(false);
       return;
     }
 
     try {
-      setSubmitStatus("Securing your spot...");
-      const processedPlayers = [];
-
-      for (let i = 0; i < players.length; i++) {
-        const p = players[i];
-        const stepPct = Math.round(10 + (i / players.length) * 70);
-        setSubmitProgress(stepPct);
-        setSubmitStatus(`Compressing docs for Player ${i + 1} of ${players.length}...`);
-
-        const id_card_base64 = p.id_card_file
-          ? await compressAndConvertToBase64(p.id_card_file)
-          : "";
-        const ff_profile_base64 = p.ff_profile_file
-          ? await compressAndConvertToBase64(p.ff_profile_file)
-          : "";
-
-        processedPlayers.push({
-          player_name: p.player_name,
-          student_uid: p.student_uid,
-          department: p.department,
-          year: p.year,
-          ff_uid: p.ff_uid,
-          ign: p.ign,
-          id_card_base64,
-          ff_profile_base64,
-        });
-      }
-
-      setSubmitProgress(85);
-      setSubmitStatus("Transmitting squad details to server...");
+      const captain = members[0];
+      const processedPlayers = members.map((m, idx) => ({
+        player_name: m.name.trim(),
+        student_uid: m.uid.trim(),
+        department: `${m.section.trim()} / ${m.block.trim()}`,
+        year: idx === 0 ? "Captain (IGL)" : idx === 4 ? "Substitute" : "Core Player",
+        ff_uid: m.uid.trim(),
+        ign: m.name.trim(),
+        phone: m.phone.trim(),
+        email: m.email.trim(),
+        section: m.section.trim(),
+        block: m.block.trim(),
+        id_card_base64: "",
+        ff_profile_base64: "",
+      }));
 
       const payload: RegistrationPayload = {
         secret_key: secretKey,
-        team_name: teamName,
-        igl_email: iglEmail,
-        igl_phone: iglPhone,
+        team_name: teamName.trim(),
+        igl_email: captain.email.trim(),
+        igl_phone: captain.phone.trim(),
         players: processedPlayers,
       };
+
+      setSubmitStatus("Transmitting squad details to tournament server...");
 
       const res = await fetch(scriptUrl, {
         method: "POST",
@@ -161,17 +161,15 @@ export function useRegistrationForm() {
         body: JSON.stringify(payload),
       });
 
-      setSubmitProgress(95);
       const result: RegistrationResponse = await res.json();
 
       if (result.success && result.registration_id) {
-        setSubmitProgress(100);
         setSuccessRegId(result.registration_id);
       } else {
-        setErrorMsg(result.error || "Registration failed. Try again.");
+        setErrorMsg(result.error || "Registration submission failed. Please try again.");
       }
     } catch {
-      setErrorMsg("Network error during submission. Check your internet connection.");
+      setErrorMsg("Network error connecting to tournament server. Please check your connection.");
     } finally {
       setSubmitting(false);
     }
@@ -189,17 +187,12 @@ export function useRegistrationForm() {
     step,
     teamName,
     setTeamName,
-    iglEmail,
-    setIglEmail,
-    iglPhone,
-    handlePhoneChange,
-    players,
-    handlePlayerChange,
-    hasSubstitute,
-    toggleSubstitute,
+    members,
+    addMember,
+    removeMember,
+    updateMember,
     submitting,
     submitStatus,
-    submitProgress,
     errorMsg,
     successRegId,
     copied,
@@ -209,3 +202,5 @@ export function useRegistrationForm() {
     handleCopyRegId,
   };
 }
+
+export default useRegistrationForm;

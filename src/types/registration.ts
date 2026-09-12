@@ -1,3 +1,13 @@
+export interface MemberData {
+  id: string;
+  name: string;
+  uid: string;
+  phone: string;
+  email: string;
+  section: string;
+  block: string;
+}
+
 export interface PlayerData {
   player_name: string;
   student_uid: string;
@@ -12,12 +22,16 @@ export interface PlayerData {
 export interface ProcessedPlayerPayload {
   player_name: string;
   student_uid: string;
-  department: string;
-  year: string;
+  department?: string;
+  year?: string;
   ff_uid: string;
-  ign: string;
-  id_card_base64: string;
-  ff_profile_base64: string;
+  ign?: string;
+  phone?: string;
+  email?: string;
+  section?: string;
+  block?: string;
+  id_card_base64?: string;
+  ff_profile_base64?: string;
 }
 
 export interface RegistrationPayload {
