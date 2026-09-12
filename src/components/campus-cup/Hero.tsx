@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { Link } from "react-router-dom";
+import { X } from "lucide-react";
 
 export function Hero() {
   const heroRef    = useRef<HTMLElement>(null);
@@ -41,7 +42,6 @@ export function Hero() {
         aria-hidden="true"
       />
 
-
       {/* Main Content */}
       <div className="ff-hero-content" ref={contentRef} style={{ opacity: 0 }}>
 
@@ -66,18 +66,34 @@ export function Hero() {
           </span>
         </h1>
 
-        {/* FF-style tag line with HUD dashes */}
-        <div className="flex items-center gap-3 justify-center mb-4">
-          <div className="flex gap-1">
-            {[1,2,3].map(i => <div key={i} className="w-4 h-px bg-[var(--color-ff-orange)] opacity-60" />)}
-          </div>
-          <span className="font-sans text-xs tracking-[0.3em] text-[var(--color-ff-orange)] uppercase opacity-80">
-            GARENA FREE FIRE
-          </span>
-          <div className="flex gap-1">
-            {[1,2,3].map(i => <div key={i} className="w-4 h-px bg-[var(--color-ff-orange)] opacity-60" />)}
-          </div>
-        </div>
+        {/* Garena X Free Fire MAX Logos with HUD Dashes */}
+<div className="flex items-center gap-3 md:gap-4 justify-center mb-6">
+  <div className="flex gap-1 shrink-0">
+    {[1, 2, 3].map(i => (
+      <div key={i} className="w-3 md:w-5 h-px bg-[var(--color-ff-orange)] opacity-60" />
+    ))}
+  </div>
+
+  <div className="flex items-center gap-3 md:gap-4 shrink-0">
+    <img
+      src="/Garena.png"
+      alt="Garena"
+      className="h-12 md:h-18 w-auto object-contain shrink-0 self-center"
+    />
+    <X className="w-4 h-4 opacity-60 shrink-0 text-[var(--color-ff-orange)] self-center" aria-hidden="true" />
+    <img
+      src="/FREE_FIRE_MAX_LOGO.png"
+      alt="Free Fire MAX"
+      className="h-8 md:h-10 w-auto object-contain shrink-0 self-center"
+    />
+  </div>
+
+  <div className="flex gap-1 shrink-0">
+    {[1, 2, 3].map(i => (
+      <div key={i} className="w-3 md:w-5 h-px bg-[var(--color-ff-orange)] opacity-60" />
+    ))}
+  </div>
+</div>
 
         <p className="ff-hero-subtitle">
           THE ULTIMATE COLLEGE QUALIFIER AT CHANDIGARH UNIVERSITY.
