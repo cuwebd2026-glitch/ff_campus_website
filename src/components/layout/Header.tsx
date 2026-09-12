@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Volume2, VolumeX } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { useAudio } from "@/context/AudioContext";
 
 const navItems = [
   ["HOME", "/"],
@@ -16,6 +17,7 @@ export function Header() {
   const [compact, setCompact] = useState(false);
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const { isPlaying, toggleMusic, currentTrackName } = useAudio();
 
   useEffect(() => {
     const onScroll = () => setCompact(window.scrollY > 48);
@@ -31,21 +33,20 @@ export function Header() {
   return (
     <header className={cn("ff-header", compact && "is-compact")}>
       <div className="ff-header-inner !max-w-[1550px] !w-[96%] !px-4 md:!px-8 flex items-center justify-between gap-4">
-        
         {/* 1. Left: Logos */}
-<Link to="/" className="flex items-center shrink-0 gap-2.5 md:gap-4" aria-label="Campus Cup home">
-  <img
-    src="/cu_logo.png"
-    alt="Chandigarh University"
-    className="h-10 md:h-12 w-auto object-contain shrink-0"
-  />
-  <X className="w-4 h-4 opacity-50 shrink-0 text-[var(--color-ff-orange)]" aria-hidden="true" />
-  <img
-    src="/gfgcu_light.png"
-    alt="GFG Community"
-    className="h-32 md:h-44 w-auto object-contain shrink-0 -my-12 -ml-3 -translate-y-1 md:-translate-y-1.5"
-  />
-</Link>
+        <Link to="/" className="flex items-center shrink-0 gap-2.5 md:gap-4" aria-label="Campus Cup home">
+          <img
+            src="/cu_logo.png"
+            alt="Chandigarh University"
+            className="h-10 md:h-12 w-auto object-contain shrink-0"
+          />
+          <X className="w-4 h-4 opacity-50 shrink-0 text-[var(--color-ff-orange)]" aria-hidden="true" />
+          <img
+            src="/gfgcu_light.png"
+            alt="GFG Community"
+            className="h-32 md:h-44 w-auto object-contain shrink-0 -my-12 -ml-3 -translate-y-1 md:-translate-y-1.5"
+          />
+        </Link>
 
         {/* 2. Center: Nav Links */}
         <nav className="hidden md:flex flex-1 justify-center items-center gap-6 lg:gap-8" aria-label="Main navigation">
@@ -56,8 +57,34 @@ export function Header() {
           ))}
         </nav>
 
-        {/* 3. Right: Register Button & Mobile Trigger */}
-        <div className="flex items-center gap-4 shrink-0">
+        {/* 3. Right: Music Button, Register Button & Mobile Trigger */}
+        <div className="flex items-center gap-3 md:gap-4 shrink-0">
+          {/* Header Music ON/OFF Button */}
+          <button
+            type="button"
+            onClick={toggleMusic}
+            className={cn(
+              "flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xs border font-display text-xs font-black uppercase tracking-wider transition-all duration-200 cursor-pointer",
+              isPlaying
+                ? "border-primary bg-primary/15 text-primary shadow-[0_0_12px_rgba(255,107,0,0.3)]"
+                : "border-white/20 bg-white/5 text-muted-foreground hover:text-white hover:border-white/40",
+            )}
+            title={isPlaying ? `Music ON (${currentTrackName}) - Click to Mute` : "Music OFF - Click to Play"}
+            aria-label={isPlaying ? "Turn music off" : "Turn music on"}
+          >
+            {isPlaying ? (
+              <>
+                <Volume2 className="w-3.5 h-3.5 text-primary animate-pulse" />
+                <span>MUSIC ON</span>
+              </>
+            ) : (
+              <>
+                <VolumeX className="w-3.5 h-3.5 text-muted-foreground" />
+                <span>MUSIC OFF</span>
+              </>
+            )}
+          </button>
+
           <Link
             to="/register"
             state={{ from: location.pathname }}
@@ -101,11 +128,35 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="mt-auto pt-8 border-t border-[var(--color-ff-border)]">
+          <div className="mt-auto pt-6 border-t border-[var(--color-ff-border)] space-y-3">
+            {/* Mobile Music Toggle */}
+            <button
+              type="button"
+              onClick={toggleMusic}
+              className={cn(
+                "w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xs border font-display text-sm font-black uppercase tracking-wider transition-all cursor-pointer",
+                isPlaying
+                  ? "border-primary bg-primary/20 text-primary shadow-[0_0_15px_rgba(255,107,0,0.3)]"
+                  : "border-white/20 bg-white/5 text-muted-foreground hover:text-white",
+              )}
+            >
+              {isPlaying ? (
+                <>
+                  <Volume2 className="w-4 h-4 text-primary animate-pulse" />
+                  <span>FREE FIRE MUSIC: ON ({currentTrackName})</span>
+                </>
+              ) : (
+                <>
+                  <VolumeX className="w-4 h-4 text-muted-foreground" />
+                  <span>FREE FIRE MUSIC: OFF</span>
+                </>
+              )}
+            </button>
+
             <Link
               to="/register"
               state={{ from: location.pathname }}
-              className="no-underline w-full"
+              className="no-underline w-full block"
               onClick={() => setOpen(false)}
             >
               <button className="ff-btn-primary w-full cursor-pointer">
