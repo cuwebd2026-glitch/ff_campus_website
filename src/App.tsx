@@ -3,7 +3,7 @@ import { Home } from "@/pages/Home";
 import { Rules } from "@/pages/Rules";
 import { Prizes } from "@/pages/Prizes";
 import { Faq } from "@/pages/Faq";
-import { RegistrationForm } from "@/components/campus-cup/RegistrationForm";
+import { Register } from "@/pages/Register";
 
 export default function App() {
   return (
@@ -12,7 +12,7 @@ export default function App() {
       <Route path="/rules" element={<Rules />} />
       <Route path="/prizes" element={<Prizes />} />
       <Route path="/faq" element={<Faq />} />
-      <Route path="/register" element={<RegistrationForm />} />
+      <Route path="/register" element={<Register />} />
     </Routes>
   );
 }

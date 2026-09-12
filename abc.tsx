@@ -1,8 +1,5 @@
 import { useState, type FormEvent } from "react";
-import {
-  Link,
-  createFileRoute,
-} from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import {
   ArrowLeft,
   ArrowRight,
@@ -44,12 +41,7 @@ const emptyPlayer = (): Player => ({
   ign: "",
 });
 
-const initialPlayers: Player[] = [
-  emptyPlayer(),
-  emptyPlayer(),
-  emptyPlayer(),
-  emptyPlayer(),
-];
+const initialPlayers: Player[] = [emptyPlayer(), emptyPlayer(), emptyPlayer(), emptyPlayer()];
 
 function RegisterPage() {
   const [step, setStep] = useState(1);
@@ -65,11 +57,7 @@ function RegisterPage() {
 
   const hasFifthPlayer = players.length === 5;
 
-  const updatePlayer = (
-    index: number,
-    field: keyof Player,
-    value: string,
-  ) => {
+  const updatePlayer = (index: number, field: keyof Player, value: string) => {
     setPlayers((current) =>
       current.map((player, i) =>
         i === index
@@ -138,8 +126,7 @@ function RegisterPage() {
 
       fields.forEach(([field, label]) => {
         if (!player[field].trim()) {
-          nextErrors[`player_${index}_${field}`] =
-            `${label} is required.`;
+          nextErrors[`player_${index}_${field}`] = `${label} is required.`;
         }
       });
     });
@@ -174,31 +161,26 @@ function RegisterPage() {
     setErrors({});
 
     try {
-      const { data, error } = await supabase.rpc(
-        "submit_registration",
-        {
-          p_team_name: teamName.trim(),
-          p_igl_email: iglEmail.trim(),
-          p_igl_phone: iglPhone.trim(),
-          p_players: players.map((player) => ({
-            player_name: player.player_name.trim(),
-            student_uid: player.student_uid.trim(),
-            department: player.department.trim(),
-            year: player.year.trim(),
-            ff_uid: player.ff_uid.trim(),
-            ign: player.ign.trim(),
-          })),
-        },
-      );
+      const { data, error } = await supabase.rpc("submit_registration", {
+        p_team_name: teamName.trim(),
+        p_igl_email: iglEmail.trim(),
+        p_igl_phone: iglPhone.trim(),
+        p_players: players.map((player) => ({
+          player_name: player.player_name.trim(),
+          student_uid: player.student_uid.trim(),
+          department: player.department.trim(),
+          year: player.year.trim(),
+          ff_uid: player.ff_uid.trim(),
+          ign: player.ign.trim(),
+        })),
+      });
 
       if (error) {
         throw error;
       }
 
       if (!data?.registration_id) {
-        throw new Error(
-          "Registration was submitted, but no registration ID was returned.",
-        );
+        throw new Error("Registration was submitted, but no registration ID was returned.");
       }
 
       setRegistrationId(data.registration_id);
@@ -227,17 +209,13 @@ function RegisterPage() {
           <div className="cc-registration-lines" />
 
           <div className="relative z-10 w-full max-w-3xl px-5">
-            <div className="cc-sticker mb-8">
-              REGISTRATION CONFIRMED
-            </div>
+            <div className="cc-sticker mb-8">REGISTRATION CONFIRMED</div>
 
             <div className="mx-auto mb-8 grid h-20 w-20 place-items-center border border-background bg-background text-primary">
               <Check className="h-10 w-10" />
             </div>
 
-            <p className="mb-3">
-              CAMPUS CUP S2 // CHANDIGARH UNIVERSITY
-            </p>
+            <p className="mb-3">CAMPUS CUP S2 // CHANDIGARH UNIVERSITY</p>
 
             <h1 className="font-display text-[clamp(4.5rem,11vw,10rem)] font-black italic leading-[0.72] uppercase">
               YOU&apos;RE
@@ -252,9 +230,7 @@ function RegisterPage() {
                 REGISTRATION ID
               </div>
 
-              <div className="font-display text-4xl font-black tracking-wide">
-                {registrationId}
-              </div>
+              <div className="font-display text-4xl font-black tracking-wide">{registrationId}</div>
 
               <div className="mt-5 border-t border-background/20 pt-4 text-xs leading-6 opacity-80">
                 Save this registration ID for your records.
@@ -292,9 +268,7 @@ function RegisterPage() {
               Back to tournament
             </Link>
 
-            <div className="cc-sticker mb-5">
-              CAMPUS CUP S2
-            </div>
+            <div className="cc-sticker mb-5">CAMPUS CUP S2</div>
 
             <p className="mb-3 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.16em] text-steel">
               <span className="h-px w-10 bg-border" />
@@ -304,16 +278,15 @@ function RegisterPage() {
             <h1 className="font-display text-[clamp(4rem,9vw,8.5rem)] font-black italic uppercase leading-[0.76]">
               ENTER
               <br />
-              THE <span className="text-transparent [WebkitTextStroke:1px_theme(colors.primary)]">BATTLE.</span>
+              THE{" "}
+              <span className="text-transparent [WebkitTextStroke:1px_theme(colors.primary)]">
+                BATTLE.
+              </span>
             </h1>
 
             <p className="mt-8 max-w-2xl text-sm leading-7 text-muted-foreground md:text-base">
-              Assemble your squad and lock in your place for the
-              Chandigarh University College Qualifier on{" "}
-              <strong className="text-amber">
-                14 September 2026
-              </strong>
-              .
+              Assemble your squad and lock in your place for the Chandigarh University College
+              Qualifier on <strong className="text-amber">14 September 2026</strong>.
             </p>
           </div>
         </section>
@@ -321,24 +294,9 @@ function RegisterPage() {
         {/* Progress */}
         <section className="border-y border-border bg-surface-deep">
           <div className="mx-auto grid max-w-[1100px] grid-cols-3">
-            <StepIndicator
-              number="01"
-              label="TEAM"
-              active={step === 1}
-              complete={step > 1}
-            />
-            <StepIndicator
-              number="02"
-              label="SQUAD"
-              active={step === 2}
-              complete={step > 2}
-            />
-            <StepIndicator
-              number="03"
-              label="REVIEW"
-              active={step === 3}
-              complete={false}
-            />
+            <StepIndicator number="01" label="TEAM" active={step === 1} complete={step > 1} />
+            <StepIndicator number="02" label="SQUAD" active={step === 2} complete={step > 2} />
+            <StepIndicator number="03" label="REVIEW" active={step === 3} complete={false} />
           </div>
         </section>
 
@@ -458,10 +416,7 @@ function RegistrationHeader() {
   return (
     <header className="cc-header">
       <div className="cc-header-inner">
-        <Link
-          to="/"
-          className="cc-brand-lockup no-underline"
-        >
+        <Link to="/" className="cc-brand-lockup no-underline">
           <div className="cc-logo-slot">
             <div className="cc-logo-mark" />
             <span>
@@ -495,11 +450,7 @@ function RegistrationHeader() {
         </div>
 
         <div className="md:hidden">
-          <Link
-            to="/"
-            className="text-amber no-underline"
-            aria-label="Back to Campus Cup"
-          >
+          <Link to="/" className="text-amber no-underline" aria-label="Back to Campus Cup">
             <ArrowLeft className="h-5 w-5" />
           </Link>
         </div>
@@ -545,11 +496,7 @@ function StepIndicator({
         </div>
 
         <div className="hidden text-[8px] font-bold uppercase tracking-[0.14em] text-muted-foreground sm:block">
-          {number === "01"
-            ? "Team command"
-            : number === "02"
-              ? "Player roster"
-              : "Final check"}
+          {number === "01" ? "Team command" : number === "02" ? "Player roster" : "Final check"}
         </div>
       </div>
     </div>
@@ -580,9 +527,7 @@ function TeamStep({
           <Users className="h-5 w-5" />
         </div>
 
-        <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.16em] text-steel">
-          PHASE 01
-        </p>
+        <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.16em] text-steel">PHASE 01</p>
 
         <h2 className="font-display text-5xl font-black italic uppercase leading-none md:text-6xl">
           TEAM
@@ -593,8 +538,7 @@ function TeamStep({
         </h2>
 
         <p className="mt-5 max-w-sm text-sm leading-7 text-muted-foreground">
-          Start with your squad identity and the details of your
-          in-game leader.
+          Start with your squad identity and the details of your in-game leader.
         </p>
       </div>
 
@@ -640,9 +584,8 @@ function TeamStep({
           <div className="flex gap-3 border border-border bg-surface-deep p-4 text-xs leading-6 text-muted-foreground">
             <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-amber" />
             <p>
-              No registration fee is collected through this website.
-              Only the tournament registration information required by
-              the organizers is collected.
+              No registration fee is collected through this website. Only the tournament
+              registration information required by the organizers is collected.
             </p>
           </div>
         </div>
@@ -662,11 +605,7 @@ function PlayersStep({
   players: Player[];
   errors: Record<string, string>;
   hasFifthPlayer: boolean;
-  onChange: (
-    index: number,
-    field: keyof Player,
-    value: string,
-  ) => void;
+  onChange: (index: number, field: keyof Player, value: string) => void;
   onAddPlayer: () => void;
   onRemovePlayer: () => void;
 }) {
@@ -687,8 +626,8 @@ function PlayersStep({
           </h2>
 
           <p className="mt-5 max-w-xl text-sm leading-7 text-muted-foreground">
-            Four players are required. A fifth player can be added
-            when your final roster contains five members.
+            Four players are required. A fifth player can be added when your final roster contains
+            five members.
           </p>
         </div>
 
@@ -739,11 +678,7 @@ function PlayerCard({
   index: number;
   player: Player;
   errors: Record<string, string>;
-  onChange: (
-    index: number,
-    field: keyof Player,
-    value: string,
-  ) => void;
+  onChange: (index: number, field: keyof Player, value: string) => void;
   optional?: boolean;
 }) {
   return (
@@ -755,9 +690,7 @@ function PlayerCard({
           </div>
 
           <div>
-            <div className="font-display text-xl font-black uppercase">
-              PLAYER {index + 1}
-            </div>
+            <div className="font-display text-xl font-black uppercase">PLAYER {index + 1}</div>
 
             <div className="text-[8px] font-bold uppercase tracking-[0.15em] text-steel">
               {optional ? "OPTIONAL ROSTER SLOT" : "REQUIRED ROSTER SLOT"}
@@ -772,9 +705,7 @@ function PlayerCard({
         <Field
           label="Player name"
           value={player.player_name}
-          onChange={(value) =>
-            onChange(index, "player_name", value)
-          }
+          onChange={(value) => onChange(index, "player_name", value)}
           placeholder="FULL NAME"
           icon={<UserRound className="h-4 w-4" />}
           error={errors[`player_${index}_player_name`]}
@@ -783,9 +714,7 @@ function PlayerCard({
         <Field
           label="CU Student ID"
           value={player.student_uid}
-          onChange={(value) =>
-            onChange(index, "student_uid", value)
-          }
+          onChange={(value) => onChange(index, "student_uid", value)}
           placeholder="CHANDIGARH UNIVERSITY ID"
           icon={<ShieldCheck className="h-4 w-4" />}
           error={errors[`player_${index}_student_uid`]}
@@ -794,9 +723,7 @@ function PlayerCard({
         <Field
           label="Department"
           value={player.department}
-          onChange={(value) =>
-            onChange(index, "department", value)
-          }
+          onChange={(value) => onChange(index, "department", value)}
           placeholder="E.G. CSE"
           error={errors[`player_${index}_department`]}
         />
@@ -844,9 +771,7 @@ function ReviewStep({
   return (
     <div>
       <div className="mb-9">
-        <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.16em] text-steel">
-          PHASE 03
-        </p>
+        <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.16em] text-steel">PHASE 03</p>
 
         <h2 className="font-display text-6xl font-black italic uppercase leading-none md:text-7xl">
           FINAL
@@ -857,8 +782,7 @@ function ReviewStep({
         </h2>
 
         <p className="mt-5 max-w-xl text-sm leading-7 text-muted-foreground">
-          Verify every detail before locking your Campus Cup
-          registration.
+          Verify every detail before locking your Campus Cup registration.
         </p>
       </div>
 
@@ -894,20 +818,11 @@ function ReviewStep({
                   {String(index + 1).padStart(2, "0")}
                 </div>
 
-                <ReviewItem
-                  label="PLAYER"
-                  value={player.player_name}
-                />
+                <ReviewItem label="PLAYER" value={player.player_name} />
 
-                <ReviewItem
-                  label="CU UID"
-                  value={player.student_uid}
-                />
+                <ReviewItem label="CU UID" value={player.student_uid} />
 
-                <ReviewItem
-                  label="FF UID // IGN"
-                  value={`${player.ff_uid} // ${player.ign}`}
-                />
+                <ReviewItem label="FF UID // IGN" value={`${player.ff_uid} // ${player.ign}`} />
               </div>
             ))}
           </div>
@@ -917,8 +832,8 @@ function ReviewStep({
           <Check className="mt-1 h-4 w-4 shrink-0 text-amber" />
 
           <p>
-            By submitting, you confirm that the information entered
-            above is accurate and belongs to the participating team.
+            By submitting, you confirm that the information entered above is accurate and belongs to
+            the participating team.
           </p>
         </div>
       </div>
@@ -926,22 +841,14 @@ function ReviewStep({
   );
 }
 
-function ReviewItem({
-  label,
-  value,
-}: {
-  label: string;
-  value: string;
-}) {
+function ReviewItem({ label, value }: { label: string; value: string }) {
   return (
     <div>
       <div className="mb-2 text-[8px] font-bold uppercase tracking-[0.16em] text-steel">
         {label}
       </div>
 
-      <div className="font-display text-xl font-bold uppercase leading-tight">
-        {value}
-      </div>
+      <div className="font-display text-xl font-bold uppercase leading-tight">{value}</div>
     </div>
   );
 }

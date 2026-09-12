@@ -6,8 +6,13 @@ export function Footer() {
     <footer className="cc-footer">
       <div>
         <div className="cc-footer-brand">
-          <strong>CC<span>S2</span></strong>
-          <p>Campus Cup Season 2<br />Chandigarh University College Qualifier</p>
+          <strong>
+            CC<span>S2</span>
+          </strong>
+          <p>
+            Campus Cup Season 2<br />
+            Chandigarh University College Qualifier
+          </p>
         </div>
         <div className="cc-footer-logos">
           <LogoSlot label="GFG COMMUNITY" path="/branding/gfg-logo.png" />

@@ -38,7 +38,11 @@ export function useRegistrationForm() {
     setIglPhone(val.replace(/\D/g, "").slice(0, 10));
   };
 
-  const handlePlayerChange = (index: number, field: keyof PlayerData, val: any) => {
+  const handlePlayerChange = (
+    index: number,
+    field: keyof PlayerData,
+    val: PlayerData[keyof PlayerData],
+  ) => {
     setPlayers((prev) => {
       const updated = [...prev];
       let value = val;
@@ -60,10 +64,10 @@ export function useRegistrationForm() {
   };
 
   const validateStep1 = (): boolean => {
-    if (!teamName.trim()) return setErrorMsg("Team Name is required."), false;
+    if (!teamName.trim()) return (setErrorMsg("Team Name is required."), false);
     if (!iglEmail.trim() || !/\S+@\S+\.\S+/.test(iglEmail))
-      return setErrorMsg("Valid IGL Email is required."), false;
-    if (iglPhone.length !== 10) return setErrorMsg("IGL Phone number must be 10 digits."), false;
+      return (setErrorMsg("Valid IGL Email is required."), false);
+    if (iglPhone.length !== 10) return (setErrorMsg("IGL Phone number must be 10 digits."), false);
     setErrorMsg("");
     return true;
   };
@@ -72,14 +76,15 @@ export function useRegistrationForm() {
     for (let i = 0; i < players.length; i++) {
       const p = players[i];
       const pLabel = `Player ${i + 1}`;
-      if (!p.player_name.trim()) return setErrorMsg(`${pLabel}: Name is required.`), false;
-      if (!p.student_uid.trim()) return setErrorMsg(`${pLabel}: Student UID is required.`), false;
-      if (!p.department.trim()) return setErrorMsg(`${pLabel}: Department is required.`), false;
-      if (!p.ff_uid.trim()) return setErrorMsg(`${pLabel}: Free Fire UID is required.`), false;
-      if (!p.ign.trim()) return setErrorMsg(`${pLabel}: Free Fire IGN is required.`), false;
-      if (!p.id_card_file) return setErrorMsg(`${pLabel}: Student ID Card image is required.`), false;
+      if (!p.player_name.trim()) return (setErrorMsg(`${pLabel}: Name is required.`), false);
+      if (!p.student_uid.trim()) return (setErrorMsg(`${pLabel}: Student UID is required.`), false);
+      if (!p.department.trim()) return (setErrorMsg(`${pLabel}: Department is required.`), false);
+      if (!p.ff_uid.trim()) return (setErrorMsg(`${pLabel}: Free Fire UID is required.`), false);
+      if (!p.ign.trim()) return (setErrorMsg(`${pLabel}: Free Fire IGN is required.`), false);
+      if (!p.id_card_file)
+        return (setErrorMsg(`${pLabel}: Student ID Card image is required.`), false);
       if (!p.ff_profile_file)
-        return setErrorMsg(`${pLabel}: Free Fire Profile Screenshot is required.`), false;
+        return (setErrorMsg(`${pLabel}: Free Fire Profile Screenshot is required.`), false);
     }
     setErrorMsg("");
     return true;
@@ -120,7 +125,9 @@ export function useRegistrationForm() {
         setSubmitProgress(stepPct);
         setSubmitStatus(`Compressing docs for Player ${i + 1} of ${players.length}...`);
 
-        const id_card_base64 = p.id_card_file ? await compressAndConvertToBase64(p.id_card_file) : "";
+        const id_card_base64 = p.id_card_file
+          ? await compressAndConvertToBase64(p.id_card_file)
+          : "";
         const ff_profile_base64 = p.ff_profile_file
           ? await compressAndConvertToBase64(p.ff_profile_file)
           : "";

@@ -36,7 +36,9 @@ export function Header() {
 
         <nav className="cc-desktop-nav" aria-label="Main navigation">
           {navItems.map(([label, id]) => (
-            <a key={id} href={`/#${id}`}>{label}</a>
+            <a key={id} href={`/#${id}`}>
+              {label}
+            </a>
           ))}
         </nav>
 
@@ -71,7 +73,9 @@ export function Header() {
         <nav aria-label="Mobile navigation">
           {navItems.map(([label, id], i) => (
             <a key={id} href={`/#${id}`} onClick={() => setOpen(false)}>
-              <b>0{i + 1}</b>{label}<ArrowRight />
+              <b>0{i + 1}</b>
+              {label}
+              <ArrowRight />
             </a>
           ))}
         </nav>
