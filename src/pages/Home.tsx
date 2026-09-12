@@ -9,7 +9,7 @@ import { PrizeSection } from "@/components/campus-cup/PrizeSection";
 import { RulesSection } from "@/components/campus-cup/RulesSection";
 import { ScheduleTimeline } from "@/components/campus-cup/ScheduleTimeline";
 import { FAQAccordion } from "@/components/campus-cup/FAQAccordion";
-import { RegistrationCTA } from "@/components/campus-cup/RegistrationCTA";
+// import { RegistrationCTA } from "@/components/campus-cup/RegistrationCTA";
 
 export function Home() {
   return (
@@ -25,7 +25,7 @@ export function Home() {
       <SectionDivider flipY />
       <ScheduleTimeline />
       <FAQAccordion />
-      <RegistrationCTA />
+      {/* <RegistrationCTA /> */}
       <Footer />
     </main>
   );

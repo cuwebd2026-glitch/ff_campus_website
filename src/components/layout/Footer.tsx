@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { X, Instagram, Twitter, Linkedin, ChevronUp } from "lucide-react";
+import { X, Instagram, Mail, Linkedin, ChevronUp } from "lucide-react";
 
 const footerNavLinks = [
   { label: "HOME", href: "/" },
@@ -46,10 +46,10 @@ export function Footer() {
       <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[var(--color-ff-orange)] opacity-[0.03] blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        {/* Main 3-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 mb-12">
+        {/* Main 2-Column Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 mb-12 items-start">
           {/* 1. Left Column: Event Identity */}
-          <div className="md:col-span-4 lg:col-span-5">
+          <div className="md:col-span-5 lg:col-span-4">
             <div className="flex items-center gap-3.5 md:gap-4 mb-6">
               <img
                 src="/gfgcu_light.png"
@@ -69,21 +69,25 @@ export function Footer() {
             </p>
             <div className="flex gap-3">
               <a
-                href="#"
+                href="https://www.instagram.com/gfg.cu/"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Instagram"
                 className="w-9 h-9 border border-white/10 bg-white/[0.02] hover:border-[var(--color-ff-orange)] hover:text-[var(--color-ff-orange)] hover:bg-[var(--color-ff-orange)]/10 flex items-center justify-center text-white/40 transition-all duration-300 group"
               >
                 <Instagram className="w-4 h-4 group-hover:scale-110 transition-transform" />
               </a>
               <a
-                href="#"
-                aria-label="Twitter"
+                href="mailto:gfg.cu@cumail.in"
+                aria-label="Email"
                 className="w-9 h-9 border border-white/10 bg-white/[0.02] hover:border-[var(--color-ff-orange)] hover:text-[var(--color-ff-orange)] hover:bg-[var(--color-ff-orange)]/10 flex items-center justify-center text-white/40 transition-all duration-300 group"
               >
-                <Twitter className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/company/geeksforgeeks-campus-body-cu/"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="LinkedIn"
                 className="w-9 h-9 border border-white/10 bg-white/[0.02] hover:border-[var(--color-ff-orange)] hover:text-[var(--color-ff-orange)] hover:bg-[var(--color-ff-orange)]/10 flex items-center justify-center text-white/40 transition-all duration-300 group"
               >
@@ -92,66 +96,39 @@ export function Footer() {
             </div>
           </div>
 
-          {/* 2. Center Column: The Battleground */}
-          <div className="md:col-span-4 lg:col-span-4">
+          {/* 2. Right Column: The Battleground */}
+          <div className="md:col-span-7 lg:col-span-8">
             <h3 className="font-display text-2xl tracking-widest text-white mb-6 uppercase flex items-center gap-2">
               <span className="w-2 h-2 bg-[var(--color-ff-orange)]" />
               THE BATTLEGROUND
             </h3>
-            <ul className="space-y-4 font-sans">
-              <li className="flex flex-col">
-                <span className="text-white/30 font-bold tracking-[0.2em] text-[10px] uppercase mb-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 font-sans">
+              <div className="flex flex-col bg-white/[0.02] border border-white/5 p-4">
+                <span className="text-white/30 font-bold tracking-[0.2em] text-[11px] uppercase mb-1.5">
                   DATE
                 </span>
-                <span className="text-white text-sm">14 September 2026</span>
-              </li>
-              <li className="flex flex-col">
-                <span className="text-white/30 font-bold tracking-[0.2em] text-[10px] uppercase mb-1">
+                <span className="text-white text-base font-semibold">16 September 2026</span>
+              </div>
+              <div className="flex flex-col bg-white/[0.02] border border-white/5 p-4">
+                <span className="text-white/30 font-bold tracking-[0.2em] text-[11px] uppercase mb-1.5">
                   VENUE
                 </span>
-                <span className="text-white text-sm">Chandigarh University Campus</span>
-              </li>
-              <li className="flex flex-col">
-                <span className="text-[var(--color-ff-gold)]/60 font-bold tracking-[0.2em] text-[10px] uppercase mb-1">
+                <span className="text-white text-base font-semibold">Chandigarh University Campus</span>
+              </div>
+              <div className="flex flex-col bg-white/[0.02] border border-white/5 p-4">
+                <span className="text-[var(--color-ff-gold)]/60 font-bold tracking-[0.2em] text-[11px] uppercase mb-1.5">
                   ENTRY
                 </span>
-                <span className="text-[var(--color-ff-gold)] text-sm uppercase tracking-wider font-semibold">
+                <span className="text-[var(--color-ff-gold)] text-base uppercase tracking-wider font-bold">
                   FREE OF CHARGE
                 </span>
-              </li>
-              <li className="flex flex-col">
-                <span className="text-white/30 font-bold tracking-[0.2em] text-[10px] uppercase mb-1">
+              </div>
+              <div className="flex flex-col bg-white/[0.02] border border-white/5 p-4">
+                <span className="text-white/30 font-bold tracking-[0.2em] text-[11px] uppercase mb-1.5">
                   EVENT
                 </span>
-                <span className="text-white text-sm">Campus Cup S2 — CU Qualifier</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* 3. Right Column: Contact Comms */}
-          <div className="md:col-span-4 lg:col-span-3">
-            <h3 className="font-display text-2xl tracking-widest text-white mb-6 uppercase flex items-center gap-2">
-              <span className="w-2 h-2 bg-[var(--color-ff-orange)]" />
-              CONTACT COMMS
-            </h3>
-            <div className="font-sans text-sm text-white/60 mb-1">GFG Community CU</div>
-            <a
-              href="mailto:contact@gfgcu.com"
-              className="font-sans text-sm font-bold tracking-wider text-[var(--color-ff-orange)] hover:text-white transition-colors relative inline-block group pb-1"
-            >
-              CONTACT@GFGCU.COM
-              <span className="absolute bottom-0 left-0 w-full h-px bg-[var(--color-ff-orange)]/40 group-hover:bg-white/40 transition-colors" />
-            </a>
-
-            {/* Updates Block */}
-            <div className="mt-6 pt-5 border-t border-white/10">
-              <span className="text-white/30 font-bold tracking-[0.2em] text-[10px] uppercase block mb-1 font-sans">
-                UPDATES
-              </span>
-              <p className="font-sans text-xs text-white/50 leading-relaxed">
-                Follow our official social channels for announcements, match updates and event
-                information.
-              </p>
+                <span className="text-white text-base font-semibold">Campus Cup S2 — CU Qualifier</span>
+              </div>
             </div>
           </div>
         </div>

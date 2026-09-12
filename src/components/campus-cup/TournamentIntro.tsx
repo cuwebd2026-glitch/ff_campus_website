@@ -103,17 +103,17 @@ export function TournamentIntro() {
           <span className="inline-block px-8 opacity-50">•</span>
           <span className="inline-block px-8">01 QUALIFIER</span>
           <span className="inline-block px-8 opacity-50">•</span>
-          <span className="inline-block px-8">14-09 DATE</span>
+          <span className="inline-block px-8">16-09 DATE</span>
           <span className="inline-block px-8 opacity-50">•</span>
-          <span className="inline-block px-8">CHANDIGARH UNIV</span>
+          <span className="inline-block px-8">CHANDIGARH UNIVERSITY</span>
           <span className="inline-block px-8 opacity-50">•</span>
           <span className="inline-block px-8">02 SEASON</span>
           <span className="inline-block px-8 opacity-50">•</span>
           <span className="inline-block px-8">01 QUALIFIER</span>
           <span className="inline-block px-8 opacity-50">•</span>
-          <span className="inline-block px-8">14-09 DATE</span>
+          <span className="inline-block px-8">16-09 DATE</span>
           <span className="inline-block px-8 opacity-50">•</span>
-          <span className="inline-block px-8">CHANDIGARH UNIV</span>
+          <span className="inline-block px-8">CHANDIGARH UNIVERSITY</span>
           <span className="inline-block px-8 opacity-50">•</span>
         </div>
       </div>

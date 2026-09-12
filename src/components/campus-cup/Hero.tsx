@@ -71,7 +71,7 @@ export function Hero() {
       <div className="ff-hero-content" ref={contentRef} style={{ opacity: 0 }}>
         <div className="ff-hero-kicker">
           <span className="ff-hero-kicker-line" />
-          <span className="ff-hero-kicker-text">14 SEPTEMBER 2026</span>
+          <span className="ff-hero-kicker-text">16 SEPTEMBER 2026</span>
           <span className="ff-hero-kicker-line" />
         </div>
 
