@@ -58,16 +58,16 @@ export function Header() {
         </nav>
 
         {/* 3. Right: Music Button, Register Button & Mobile Trigger */}
-        <div className="flex items-center gap-3 md:gap-4 shrink-0">
+        <div className="flex items-center gap-2 md:gap-4 shrink-0">
           {/* Header Music ON/OFF Button */}
           <button
             type="button"
             onClick={toggleMusic}
             className={cn(
-              "flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xs border font-display text-xs font-black uppercase tracking-wider transition-all duration-200 cursor-pointer",
+              "flex items-center gap-1.5 p-1 md:px-3 md:py-1.5 md:rounded-xs md:border font-display text-xs font-black uppercase tracking-wider transition-all duration-200 cursor-pointer",
               isPlaying
-                ? "border-primary bg-primary/15 text-primary shadow-[0_0_12px_rgba(255,107,0,0.3)]"
-                : "border-white/20 bg-white/5 text-muted-foreground hover:text-white hover:border-white/40",
+                ? "text-primary md:border-primary md:bg-primary/15 md:shadow-[0_0_12px_rgba(255,107,0,0.3)]"
+                : "text-muted-foreground hover:text-white md:border-white/20 md:bg-white/5 md:hover:border-white/40",
             )}
             title={isPlaying ? `Music ON (${currentTrackName}) - Click to Mute` : "Music OFF - Click to Play"}
             aria-label={isPlaying ? "Turn music off" : "Turn music on"}
@@ -75,12 +75,12 @@ export function Header() {
             {isPlaying ? (
               <>
                 <Volume2 className="w-3.5 h-3.5 text-primary animate-pulse" />
-                <span>MUSIC ON</span>
+                <span className="hidden md:inline">MUSIC ON</span>
               </>
             ) : (
               <>
                 <VolumeX className="w-3.5 h-3.5 text-muted-foreground" />
-                <span>MUSIC OFF</span>
+                <span className="hidden md:inline">MUSIC OFF</span>
               </>
             )}
           </button>

@@ -31,6 +31,22 @@ export function PrizeSection() {
           scrollTrigger: { trigger: cardsRef.current, start: "top 78%", toggleActions: "play none none reverse" } }
       );
 
+      // Animate falling particles
+      const particles = sectionRef.current?.querySelectorAll(".prize-particle") || [];
+      particles.forEach((p) => {
+        gsap.fromTo(p, 
+          { y: 0, opacity: Math.random() * 0.5 + 0.3 },
+          {
+            y: 800 + Math.random() * 400, // Fall downwards
+            opacity: 0,
+            duration: 3 + Math.random() * 4,
+            repeat: -1,
+            ease: "power1.inOut",
+            delay: Math.random() * 5,
+          }
+        );
+      });
+
     }, sectionRef);
     return () => ctx.revert();
   }, []);
@@ -38,10 +54,56 @@ export function PrizeSection() {
   return (
     <section id="prizes" ref={sectionRef} className="relative py-28 overflow-hidden bg-[#030303]">
 
-      {/* Radial fire glow from center */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="champion-glow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[var(--color-ff-gold)] blur-[150px]" style={{ opacity: 0.6, transform: "translate(-50%, -50%) scale(1.1)" }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-[var(--color-ff-orange)] opacity-[0.08] blur-[80px]" />
+      {/* Spotlight and Watermark */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        
+        {/* Free Fire Style Crosshair Watermark */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.04]">
+          <svg width="500" height="500" viewBox="0 0 100 100" fill="none" stroke="var(--color-ff-orange)" strokeWidth="0.5">
+            <circle cx="50" cy="50" r="45" />
+            <circle cx="50" cy="50" r="30" strokeDasharray="2 4" />
+            <circle cx="50" cy="50" r="5" fill="var(--color-ff-orange)" />
+            <line x1="50" y1="0" x2="50" y2="20" />
+            <line x1="50" y1="80" x2="50" y2="100" />
+            <line x1="0" y1="50" x2="20" y2="50" />
+            <line x1="80" y1="50" x2="100" y2="50" />
+          </svg>
+        </div>
+
+        {/* Spotlight & Particles Container */}
+        <div 
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[100%]"
+          style={{ 
+            clipPath: "polygon(40% 0, 60% 0, 100% 100%, 0% 100%)",
+          }}
+        >
+          {/* Spotlight Background */}
+          <div className="absolute inset-0"
+               style={{ 
+                 background: "linear-gradient(180deg, rgba(232,177,74,0.15) 0%, transparent 80%)",
+                 filter: "blur(40px)"
+               }} 
+          />
+          
+          {/* Floating Hexagonal Particles */}
+          <div className="prize-particles absolute inset-0">
+            {Array.from({ length: 50 }).map((_, i) => (
+              <div 
+                key={i} 
+                className="prize-particle absolute bg-[var(--color-ff-gold)]"
+                style={{
+                  width: "4px",
+                  height: "4px",
+                  left: `${Math.random() * 100}%`,
+                  top: `-${Math.random() * 20}%`, // Start above screen
+                  opacity: 0,
+                  boxShadow: "0 0 4px var(--color-ff-gold)",
+                  clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" // Hexagon shape
+                }}
+              />
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Subtle grid */}

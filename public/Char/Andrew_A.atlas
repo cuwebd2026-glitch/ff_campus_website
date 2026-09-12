@@ -1,0 +1,769 @@
+
+Andrew_A.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+AndrewAwakening_arm_L_01
+  rotate: true
+  xy: 816, 550
+  size: 225, 180
+  orig: 226, 180
+  offset: 1, 0
+  index: -1
+AndrewAwakening_arm_L_02
+  rotate: false
+  xy: 247, 827
+  size: 361, 192
+  orig: 361, 192
+  offset: 0, 0
+  index: -1
+AndrewAwakening_arm_R_01
+  rotate: true
+  xy: 825, 97
+  size: 71, 163
+  orig: 71, 166
+  offset: 0, 1
+  index: -1
+AndrewAwakening_arm_R_02
+  rotate: 180
+  xy: 499, 548
+  size: 349, 266
+  orig: 357, 280
+  offset: 0, 14
+  index: -1
+AndrewAwakening_body
+  rotate: true
+  xy: 581, 823
+  size: 197, 261
+  orig: 197, 262
+  offset: 0, 0
+  index: -1
+AndrewAwakening_collar_01
+  rotate: false
+  xy: 844, 245
+  size: 115, 49
+  orig: 115, 51
+  offset: 0, 2
+  index: -1
+AndrewAwakening_collar_02
+  rotate: false
+  xy: 550, 500
+  size: 87, 69
+  orig: 87, 69
+  offset: 0, 0
+  index: -1
+AndrewAwakening_collar_03
+  rotate: false
+  xy: 343, 278
+  size: 103, 83
+  orig: 103, 83
+  offset: 0, 0
+  index: -1
+AndrewAwakening_ear
+  rotate: false
+  xy: 2, 343
+  size: 25, 39
+  orig: 25, 39
+  offset: 0, 0
+  index: -1
+AndrewAwakening_finger_L_01
+  rotate: false
+  xy: 275, 77
+  size: 48, 90
+  orig: 49, 90
+  offset: 1, 0
+  index: -1
+AndrewAwakening_finger_L_02a
+  rotate: false
+  xy: 153, 428
+  size: 37, 35
+  orig: 37, 36
+  offset: 0, 1
+  index: -1
+AndrewAwakening_finger_L_02b
+  rotate: true
+  xy: 952, 496
+  size: 89, 47
+  orig: 90, 47
+  offset: 0, 0
+  index: -1
+AndrewAwakening_finger_L_03
+  rotate: false
+  xy: 183, 28
+  size: 140, 60
+  orig: 140, 65
+  offset: 0, 5
+  index: -1
+AndrewAwakening_finger_L_04
+  rotate: false
+  xy: 625, 246
+  size: 121, 63
+  orig: 133, 63
+  offset: 12, 0
+  index: -1
+AndrewAwakening_finger_L_05
+  rotate: false
+  xy: 550, 339
+  size: 100, 55
+  orig: 100, 57
+  offset: 0, 1
+  index: -1
+AndrewAwakening_finger_R_01
+  rotate: false
+  xy: 396, 778
+  size: 29, 29
+  orig: 29, 30
+  offset: 0, 0
+  index: -1
+AndrewAwakening_finger_R_02
+  rotate: 180
+  xy: 686, 8
+  size: 57, 69
+  orig: 57, 69
+  offset: 0, 0
+  index: -1
+AndrewAwakening_finger_R_03
+  rotate: false
+  xy: 450, 323
+  size: 60, 73
+  orig: 60, 73
+  offset: 0, 0
+  index: -1
+AndrewAwakening_finger_R_04
+  rotate: false
+  xy: 637, 531
+  size: 60, 72
+  orig: 60, 72
+  offset: 0, 0
+  index: -1
+AndrewAwakening_finger_R_05
+  rotate: 270
+  xy: 955, 864
+  size: 48, 59
+  orig: 48, 60
+  offset: 0, 1
+  index: -1
+AndrewAwakening_hair_01
+  rotate: true
+  xy: 114, 92
+  size: 202, 165
+  orig: 241, 172
+  offset: 38, 0
+  index: -1
+AndrewAwakening_hair_02
+  rotate: 180
+  xy: 893, 33
+  size: 49, 69
+  orig: 61, 78
+  offset: 0, 0
+  index: -1
+AndrewAwakening_hair_03
+  rotate: false
+  xy: 536, 70
+  size: 90, 105
+  orig: 91, 105
+  offset: 0, 0
+  index: -1
+AndrewAwakening_hair_04
+  rotate: false
+  xy: 902, 40
+  size: 87, 40
+  orig: 87, 40
+  offset: 0, 0
+  index: -1
+AndrewAwakening_hair_05
+  rotate: false
+  xy: 551, 315
+  size: 79, 39
+  orig: 79, 39
+  offset: 0, 0
+  index: -1
+AndrewAwakening_hair_06
+  rotate: false
+  xy: 800, 348
+  size: 119, 53
+  orig: 125, 56
+  offset: 6, 0
+  index: -1
+AndrewAwakening_hair_07
+  rotate: false
+  xy: 878, 160
+  size: 113, 44
+  orig: 113, 44
+  offset: 0, 0
+  index: -1
+AndrewAwakening_hair_08
+  rotate: false
+  xy: 247, 819
+  size: 119, 58
+  orig: 119, 59
+  offset: 0, 0
+  index: -1
+AndrewAwakening_hair_09
+  rotate: false
+  xy: 2, 762
+  size: 91, 27
+  orig: 102, 27
+  offset: 11, 0
+  index: -1
+AndrewAwakening_hair_10
+  rotate: false
+  xy: 65, 305
+  size: 46, 32
+  orig: 52, 32
+  offset: 3, 0
+  index: -1
+AndrewAwakening_hair_11
+  rotate: false
+  xy: 723, 995
+  size: 83, 24
+  orig: 83, 25
+  offset: 0, 0
+  index: -1
+AndrewAwakening_hair_12
+  rotate: false
+  xy: 673, 72
+  size: 91, 51
+  orig: 92, 51
+  offset: 1, 0
+  index: -1
+AndrewAwakening_hair_13
+  rotate: true
+  xy: 334, 24
+  size: 127, 97
+  orig: 127, 102
+  offset: 0, 5
+  index: -1
+AndrewAwakening_hair_14
+  rotate: false
+  xy: 502, 161
+  size: 70, 83
+  orig: 72, 83
+  offset: 2, 0
+  index: -1
+AndrewAwakening_hair_15
+  rotate: false
+  xy: 842, 849
+  size: 43, 57
+  orig: 44, 59
+  offset: 1, 1
+  index: -1
+AndrewAwakening_hair_16
+  rotate: false
+  xy: 98, 169
+  size: 25, 71
+  orig: 27, 71
+  offset: 1, 0
+  index: -1
+AndrewAwakening_hair_17
+  rotate: false
+  xy: 975, 946
+  size: 36, 74
+  orig: 39, 74
+  offset: 1, 0
+  index: -1
+AndrewAwakening_hair_18
+  rotate: false
+  xy: 581, 845
+  size: 42, 34
+  orig: 42, 34
+  offset: 0, 0
+  index: -1
+AndrewAwakening_hair_19
+  rotate: false
+  xy: 562, 389
+  size: 62, 20
+  orig: 63, 20
+  offset: 1, 0
+  index: -1
+AndrewAwakening_hair_20
+  rotate: 270
+  xy: 934, 5
+  size: 72, 71
+  orig: 76, 71
+  offset: 4, 0
+  index: -1
+AndrewAwakening_hair_21
+  rotate: false
+  xy: 451, 440
+  size: 58, 47
+  orig: 60, 51
+  offset: 0, 4
+  index: -1
+AndrewAwakening_hair_22
+  rotate: false
+  xy: 307, 974
+  size: 116, 45
+  orig: 116, 47
+  offset: 0, 1
+  index: -1
+AndrewAwakening_hair_23
+  rotate: true
+  xy: 931, 362
+  size: 39, 67
+  orig: 39, 68
+  offset: 0, 1
+  index: -1
+AndrewAwakening_head
+  rotate: 180
+  xy: 2, 338
+  size: 150, 185
+  orig: 150, 185
+  offset: 0, 0
+  index: -1
+AndrewAwakening_hip
+  rotate: 180
+  xy: 786, 401
+  size: 222, 146
+  orig: 222, 146
+  offset: 0, 0
+  index: -1
+AndrewAwakening_jiandai_01
+  rotate: true
+  xy: 10, 213
+  size: 209, 249
+  orig: 209, 249
+  offset: 0, 0
+  index: -1
+AndrewAwakening_jiandai_02
+  rotate: false
+  xy: 193, 157
+  size: 366, 330
+  orig: 373, 330
+  offset: 0, 0
+  index: -1
+AndrewAwakening_jiandai_04
+  rotate: false
+  xy: 73, 29
+  size: 110, 113
+  orig: 110, 113
+  offset: 0, 0
+  index: -1
+AndrewAwakening_neck
+  rotate: true
+  xy: 624, 309
+  size: 167, 181
+  orig: 167, 184
+  offset: 0, 3
+  index: -1
+AndrewAwakening_noise_01
+  rotate: false
+  xy: 846, 309
+  size: 57, 47
+  orig: 61, 61
+  offset: 3, 5
+  index: -1
+AndrewAwakening_noise_02
+  rotate: false
+  xy: 2, 291
+  size: 61, 47
+  orig: 61, 61
+  offset: 0, 5
+  index: -1
+AndrewAwakening_noise_03
+  rotate: true
+  xy: 402, 3
+  size: 59, 47
+  orig: 61, 61
+  offset: 1, 5
+  index: -1
+AndrewAwakening_noise_04
+  rotate: false
+  xy: 833, 195
+  size: 58, 47
+  orig: 61, 61
+  offset: 1, 5
+  index: -1
+AndrewAwakening_noise_05
+  rotate: false
+  xy: 72, 525
+  size: 54, 45
+  orig: 61, 61
+  offset: 1, 6
+  index: -1
+AndrewAwakening_noise_06
+  rotate: true
+  xy: 261, 340
+  size: 54, 44
+  orig: 61, 61
+  offset: 3, 6
+  index: -1
+AndrewAwakening_noise_07
+  rotate: false
+  xy: 591, 24
+  size: 55, 44
+  orig: 61, 61
+  offset: 3, 5
+  index: -1
+AndrewAwakening_noise_08
+  rotate: true
+  xy: 742, 134
+  size: 54, 45
+  orig: 61, 61
+  offset: 2, 5
+  index: -1
+AndrewAwakening_smoke_01
+  rotate: false
+  xy: 2, 790
+  size: 243, 228
+  orig: 246, 246
+  offset: 3, 6
+  index: -1
+AndrewAwakening_yaobao_01
+  rotate: false
+  xy: 2, 28
+  size: 80, 72
+  orig: 80, 72
+  offset: 0, 0
+  index: -1
+AndrewAwakening_yaobao_02
+  rotate: true
+  xy: 367, 815
+  size: 31, 99
+  orig: 32, 100
+  offset: 0, 1
+  index: -1
+AndrewAwakening_yaodai_01
+  rotate: true
+  xy: 415, 22
+  size: 167, 95
+  orig: 179, 118
+  offset: 12, 0
+  index: -1
+AndrewAwakening_yaodai_02
+  rotate: false
+  xy: 2, 525
+  size: 69, 72
+  orig: 72, 72
+  offset: 0, 0
+  index: -1
+AndrewAwakening_yaodai_03
+  rotate: false
+  xy: 560, 122
+  size: 182, 209
+  orig: 182, 209
+  offset: 0, 0
+  index: -1
+Andrew_arm_L_01
+  rotate: false
+  xy: 2, 572
+  size: 226, 195
+  orig: 226, 197
+  offset: 0, 1
+  index: -1
+Andrew_arm_L_02
+  rotate: false
+  xy: 417, 664
+  size: 282, 182
+  orig: 283, 182
+  offset: 1, 0
+  index: -1
+Andrew_arm_R_01
+  rotate: true
+  xy: 826, 760
+  size: 87, 169
+  orig: 88, 171
+  offset: 0, 0
+  index: -1
+Andrew_arm_R_02
+  rotate: 180
+  xy: 529, 403
+  size: 294, 229
+  orig: 294, 229
+  offset: 0, 0
+  index: -1
+Andrew_body
+  rotate: true
+  xy: 184, 622
+  size: 201, 267
+  orig: 201, 267
+  offset: 0, 0
+  index: -1
+Andrew_body_01
+  rotate: true
+  xy: 2, 128
+  size: 121, 97
+  orig: 121, 98
+  offset: 0, 1
+  index: -1
+Andrew_collar_01
+  rotate: false
+  xy: 224, 593
+  size: 89, 48
+  orig: 89, 48
+  offset: 0, 0
+  index: -1
+Andrew_collar_02
+  rotate: 180
+  xy: 218, 206
+  size: 125, 132
+  orig: 125, 132
+  offset: 0, 0
+  index: -1
+Andrew_collar_03
+  rotate: false
+  xy: 954, 202
+  size: 52, 75
+  orig: 52, 75
+  offset: 0, 0
+  index: -1
+Andrew_collar_04
+  rotate: false
+  xy: 461, 621
+  size: 56, 70
+  orig: 57, 71
+  offset: 1, 0
+  index: -1
+Andrew_collar_05
+  rotate: false
+  xy: 183, 174
+  size: 41, 44
+  orig: 45, 44
+  offset: 2, 0
+  index: -1
+Andrew_eye_L_01
+  rotate: false
+  xy: 92, 775
+  size: 16, 14
+  orig: 16, 14
+  offset: 0, 0
+  index: -1
+Andrew_eye_L_02
+  rotate: false
+  xy: 467, 809
+  size: 31, 21
+  orig: 32, 22
+  offset: 1, 1
+  index: -1
+Andrew_eye_R_01
+  rotate: false
+  xy: 247, 972
+  size: 15, 12
+  orig: 15, 12
+  offset: 0, 0
+  index: -1
+Andrew_eye_R_02
+  rotate: false
+  xy: 2, 747
+  size: 36, 17
+  orig: 36, 17
+  offset: 0, 0
+  index: -1
+Andrew_finger_L_01
+  rotate: false
+  xy: 799, 241
+  size: 47, 90
+  orig: 48, 90
+  offset: 1, 0
+  index: -1
+Andrew_finger_L_02a
+  rotate: false
+  xy: 247, 985
+  size: 37, 35
+  orig: 37, 36
+  offset: 0, 1
+  index: -1
+Andrew_finger_L_02b
+  rotate: false
+  xy: 750, 631
+  size: 66, 38
+  orig: 68, 38
+  offset: 0, 0
+  index: -1
+Andrew_finger_L_03
+  rotate: false
+  xy: 882, 830
+  size: 122, 55
+  orig: 122, 55
+  offset: 0, 0
+  index: -1
+Andrew_finger_L_04
+  rotate: false
+  xy: 473, 62
+  size: 109, 63
+  orig: 109, 63
+  offset: 0, 0
+  index: -1
+Andrew_finger_L_05
+  rotate: false
+  xy: 504, 20
+  size: 86, 52
+  orig: 86, 52
+  offset: 0, 0
+  index: -1
+Andrew_finger_R_01
+  rotate: false
+  xy: 540, 987
+  size: 37, 32
+  orig: 37, 33
+  offset: 0, 0
+  index: -1
+Andrew_finger_R_02
+  rotate: true
+  xy: 425, 984
+  size: 36, 58
+  orig: 36, 58
+  offset: 0, 0
+  index: -1
+Andrew_finger_R_03
+  rotate: 180
+  xy: 900, 192
+  size: 54, 65
+  orig: 54, 65
+  offset: 0, 0
+  index: -1
+Andrew_finger_R_04
+  rotate: false
+  xy: 688, 770
+  size: 59, 63
+  orig: 59, 64
+  offset: 0, 0
+  index: -1
+Andrew_finger_R_05
+  rotate: 180
+  xy: 212, 284
+  size: 53, 57
+  orig: 62, 57
+  offset: 9, 0
+  index: -1
+Andrew_gun
+  rotate: false
+  xy: 128, 403
+  size: 194, 192
+  orig: 194, 192
+  offset: 0, 0
+  index: -1
+Andrew_hair_01
+  rotate: 180
+  xy: 325, 92
+  size: 219, 164
+  orig: 249, 165
+  offset: 30, 1
+  index: -1
+Andrew_hair_02
+  rotate: false
+  xy: 732, 92
+  size: 101, 240
+  orig: 101, 240
+  offset: 0, 0
+  index: -1
+Andrew_hair_03
+  rotate: false
+  xy: 800, 31
+  size: 99, 79
+  orig: 99, 80
+  offset: 0, 0
+  index: -1
+Andrew_hair_04
+  rotate: true
+  xy: 721, 4
+  size: 78, 91
+  orig: 78, 91
+  offset: 0, 0
+  index: -1
+Andrew_hair_05
+  rotate: false
+  xy: 622, 5
+  size: 62, 148
+  orig: 63, 148
+  offset: 1, 0
+  index: -1
+Andrew_hair_06
+  rotate: true
+  xy: 90, 5
+  size: 32, 168
+  orig: 36, 169
+  offset: 1, 1
+  index: -1
+Andrew_hair_07
+  rotate: false
+  xy: 897, 304
+  size: 106, 97
+  orig: 107, 98
+  offset: 0, 1
+  index: -1
+Andrew_hair_08
+  rotate: false
+  xy: 808, 5
+  size: 94, 71
+  orig: 94, 72
+  offset: 0, 0
+  index: -1
+Andrew_hair_09
+  rotate: true
+  xy: 2, 4
+  size: 24, 89
+  orig: 24, 89
+  offset: 0, 0
+  index: -1
+Andrew_hair_10
+  rotate: true
+  xy: 746, 13
+  size: 42, 77
+  orig: 42, 77
+  offset: 0, 0
+  index: -1
+Andrew_hair_11
+  rotate: false
+  xy: 745, 755
+  size: 105, 89
+  orig: 105, 90
+  offset: 0, 1
+  index: -1
+Andrew_hair_12
+  rotate: false
+  xy: 120, 739
+  size: 71, 51
+  orig: 71, 51
+  offset: 0, 0
+  index: -1
+Andrew_hair_13
+  rotate: false
+  xy: 905, 285
+  size: 69, 61
+  orig: 72, 62
+  offset: 3, 1
+  index: -1
+Andrew_hair_14
+  rotate: 180
+  xy: 493, 90
+  size: 157, 184
+  orig: 157, 184
+  offset: 0, 0
+  index: -1
+Andrew_head
+  rotate: true
+  xy: 306, 343
+  size: 144, 182
+  orig: 150, 192
+  offset: 6, 6
+  index: -1
+Andrew_hip
+  rotate: 180
+  xy: 310, 488
+  size: 221, 163
+  orig: 221, 163
+  offset: 0, 0
+  index: -1
+Andrew_neck
+  rotate: 270
+  xy: 824, 882
+  size: 136, 159
+  orig: 136, 160
+  offset: 0, 0
+  index: -1
+Andrew_yanpi_L
+  rotate: false
+  xy: 476, 609
+  size: 35, 25
+  orig: 36, 26
+  offset: 1, 0
+  index: -1
+Andrew_yanpi_R
+  rotate: false
+  xy: 186, 569
+  size: 42, 25
+  orig: 42, 26
+  offset: 0, 1
+  index: -1
