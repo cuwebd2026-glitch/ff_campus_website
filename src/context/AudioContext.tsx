@@ -8,7 +8,7 @@ interface AudioContextType {
 }
 
 const AudioContext = createContext<AudioContextType>({
-  isPlaying: false,
+  isPlaying: true,
   toggleMusic: () => {},
   currentTrackName: "",
 });
@@ -19,46 +19,67 @@ const WINTERLANDS_TRACK = "/audio/03. Free Fire Lobby - Winterlands I.mp3";
 export function AudioProvider({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const isPlayingRef = useRef<boolean>(false);
+
+  // Default music to ON unless explicitly disabled by user
+  const [isPlaying, setIsPlaying] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("ff_music_pref") !== "off";
+    }
+    return true;
+  });
+
+  const isPlayingRef = useRef<boolean>(isPlaying);
 
   const isRegisterPage = location.pathname === "/register";
   const targetTrack = isRegisterPage ? WINTERLANDS_TRACK : WORLD_CUP_TRACK;
   const currentTrackName = isRegisterPage ? "Winterlands I" : "World Cup I";
 
-  // Keep ref in sync
   useEffect(() => {
     isPlayingRef.current = isPlaying;
   }, [isPlaying]);
 
-  // Initialize single persistent Audio element
+  // Initialize single persistent Audio element with Default ON
   useEffect(() => {
     const audio = new Audio(targetTrack);
     audio.loop = true;
     audio.volume = 0.35;
     audioRef.current = audio;
 
+    // Attempt immediate playback on initial load
+    if (isPlayingRef.current) {
+      audio
+        .play()
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch(() => {
+          // Browser autoplay restriction: will automatically start on first user interaction
+        });
+    }
+
     const startOnFirstInteraction = () => {
-      if (audioRef.current && audioRef.current.paused) {
+      if (audioRef.current && isPlayingRef.current && audioRef.current.paused) {
         audioRef.current
           .play()
           .then(() => {
             setIsPlaying(true);
           })
-          .catch(() => {
-            // Autoplay blocked by browser policy
-          });
+          .catch(() => {});
       }
     };
 
+    window.addEventListener("pointerdown", startOnFirstInteraction, { once: true });
     window.addEventListener("click", startOnFirstInteraction, { once: true });
     window.addEventListener("keydown", startOnFirstInteraction, { once: true });
     window.addEventListener("touchstart", startOnFirstInteraction, { once: true });
+    window.addEventListener("scroll", startOnFirstInteraction, { once: true });
 
     return () => {
+      window.removeEventListener("pointerdown", startOnFirstInteraction);
       window.removeEventListener("click", startOnFirstInteraction);
       window.removeEventListener("keydown", startOnFirstInteraction);
       window.removeEventListener("touchstart", startOnFirstInteraction);
+      window.removeEventListener("scroll", startOnFirstInteraction);
       audio.pause();
       audio.src = "";
     };
@@ -91,11 +112,13 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
     if (isPlaying) {
       audioRef.current.pause();
       setIsPlaying(false);
+      localStorage.setItem("ff_music_pref", "off");
     } else {
       audioRef.current
         .play()
         .then(() => {
           setIsPlaying(true);
+          localStorage.setItem("ff_music_pref", "on");
         })
         .catch((err) => {
           console.warn("Playback error:", err);
