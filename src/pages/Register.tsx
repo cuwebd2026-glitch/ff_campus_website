@@ -1,14 +1,7 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
-  Flame,
-  Radio,
-  Play,
-  Pause,
-  Volume2,
-  VolumeX,
-  Crosshair,
   Trophy,
   Users,
   MapPin,
@@ -25,8 +18,6 @@ export function Register() {
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState<boolean>(true);
-  const [isMuted, setIsMuted] = useState<boolean>(true);
 
   useGSAP(
     () => {
@@ -59,25 +50,6 @@ export function Register() {
     },
     { scope: containerRef },
   );
-
-  const toggleVideoPlay = () => {
-    if (videoRef.current) {
-      if (videoRef.current.paused) {
-        videoRef.current.play();
-        setIsPlaying(true);
-      } else {
-        videoRef.current.pause();
-        setIsPlaying(false);
-      }
-    }
-  };
-
-  const toggleVideoMute = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = !videoRef.current.muted;
-      setIsMuted(videoRef.current.muted);
-    }
-  };
 
   return (
     <main className="cc-site relative min-h-screen bg-[var(--color-ff-bg)] text-foreground overflow-x-hidden selection:bg-primary/30 selection:text-white">
@@ -122,7 +94,7 @@ export function Register() {
         className="relative z-20 pt-28 sm:pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-[1080px] mx-auto"
       >
         {/* Top Navigation Row */}
-        <div className="flex items-center justify-between gap-4 mb-6">
+        <div className="flex items-center justify-start gap-4 mb-6">
           <button
             type="button"
             onClick={() => navigate(-1)}
@@ -131,13 +103,6 @@ export function Register() {
             <ArrowLeft className="h-4 w-4 text-primary" />
             <span>BACK TO HOME</span>
           </button>
-
-          {/* Live Tournament Uplink Status */}
-          <div className="flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-[10px] font-mono font-semibold text-primary">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="hidden sm:inline">SERVER: SOUTH ASIA //</span>
-            <span>CHANDIGARH QUALIFIER S2</span>
-          </div>
         </div>
 
         {/* ── Cinematic Free Fire Battle Action Showcase Banner ── */}
@@ -151,8 +116,8 @@ export function Register() {
           {/* Holographic Laser Scanline */}
           <div className="cc-scanline-laser opacity-40 z-20" />
 
-          {/* Battle Video Container with Artwork Fallback */}
-          <div className="relative w-full min-h-[320px] sm:min-h-[340px] md:min-h-[380px] bg-black overflow-hidden group flex flex-col justify-between p-4 sm:p-6">
+          {/* Battle Video Container */}
+          <div className="relative w-full min-h-[320px] sm:min-h-[340px] md:min-h-[380px] bg-black overflow-hidden group flex flex-col justify-end p-4 sm:p-6">
             {/* Free Fire Battle Video Loop */}
             <video
               ref={videoRef}
@@ -169,44 +134,10 @@ export function Register() {
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/30 pointer-events-none" />
             <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-transparent to-black/60 pointer-events-none" />
 
-            {/* Top HUD Telemetry Bar */}
-            <div className="relative flex items-center justify-between z-10 mb-6 sm:mb-8 pointer-events-none">
-              <div className="flex items-center gap-2">
-                <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-xs bg-black/70 border border-red-500/40 text-[10px] font-mono font-bold text-red-400 uppercase tracking-widest backdrop-blur-md">
-                  <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
-                  REC // BATTLE ROYALE
-                </span>
-                <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-xs bg-black/70 border border-primary/40 text-[10px] font-mono text-amber tracking-wider backdrop-blur-md">
-                  <Crosshair className="w-3 h-3 text-primary animate-spin [animation-duration:10s]" />
-                  MAP: BERMUDA & PURGATORY
-                </span>
-              </div>
-
-              {/* Video Playback & Sound Controls */}
-              <div className="flex items-center gap-2 pointer-events-auto">
-                <button
-                  type="button"
-                  onClick={toggleVideoMute}
-                  className="p-1.5 sm:p-2 rounded-xs bg-black/70 border border-white/20 text-white hover:border-primary hover:text-primary transition-colors cursor-pointer backdrop-blur-md"
-                  title={isMuted ? "Unmute battle audio" : "Mute audio"}
-                >
-                  {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-primary" />}
-                </button>
-                <button
-                  type="button"
-                  onClick={toggleVideoPlay}
-                  className="p-1.5 sm:p-2 rounded-xs bg-black/70 border border-white/20 text-white hover:border-primary hover:text-primary transition-colors cursor-pointer backdrop-blur-md"
-                  title={isPlaying ? "Pause video" : "Play video"}
-                >
-                  {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 text-primary" />}
-                </button>
-              </div>
-            </div>
-
             {/* Bottom Content Area */}
-            <div className="relative flex flex-col sm:flex-row sm:items-end justify-between gap-4 z-10">
+            <div className="relative flex flex-col sm:flex-row sm:items-end justify-between gap-4 z-10 pt-8">
               <div className="flex flex-col items-start gap-2.5">
-                {/* Official Campus Cup Season 2 Graphic Shield Logo (Stacked Above Text) */}
+                {/* Official Campus Cup Season 2 Graphic Shield Logo */}
                 <img
                   src="/cc-s2-logo.png"
                   alt="Campus Cup Season 2"
@@ -214,16 +145,6 @@ export function Register() {
                 />
 
                 <div>
-                  {/* Tactical Badges */}
-                  <div className="flex flex-wrap items-center gap-2 mb-1.5">
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 border border-primary/50 bg-primary/20 text-primary font-display text-[10px] font-black uppercase tracking-widest backdrop-blur-sm">
-                      <Flame className="w-3 h-3 fill-primary" /> OFFICIAL GARENA QUALIFIER
-                    </span>
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 border border-white/20 bg-black/60 text-white font-mono text-[10px] uppercase backdrop-blur-sm">
-                      <Radio className="w-3 h-3 text-amber" /> 4-PLAYER CORE + 1 SUB
-                    </span>
-                  </div>
-
                   <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black italic uppercase tracking-tight text-white leading-none drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
                     CAMPUS CUP CLASH{" "}
                     <span className="text-primary drop-shadow-[0_0_20px_rgba(255,107,0,0.7)]">
@@ -256,9 +177,9 @@ export function Register() {
           {/* Battle Metrics Strip */}
           <div className="grid grid-cols-2 sm:grid-cols-4 border-t border-white/10 bg-black/80 divide-x divide-white/10 text-center py-2.5">
             <div className="px-2">
-              <span className="font-mono text-[9px] uppercase text-muted-foreground block">PRIZE POOL</span>
+              <span className="font-mono text-[9px] uppercase text-muted-foreground block">Total Price pool</span>
               <strong className="font-display text-sm sm:text-base font-black text-amber flex items-center justify-center gap-1">
-                <Trophy className="w-3.5 h-3.5 text-amber" /> ₹1,00,000 INR
+                <Trophy className="w-3.5 h-3.5 text-amber" /> 500000 INR
               </strong>
             </div>
             <div className="px-2">

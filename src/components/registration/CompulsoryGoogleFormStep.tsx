@@ -36,7 +36,7 @@ export function CompulsoryGoogleFormStep({
 
   return (
     <div className="space-y-6">
-      <div className="relative ff-glass-card rounded-md p-6 sm:p-8 border-2 border-primary/60 shadow-[0_0_40px_rgba(255,107,0,0.2)] overflow-hidden">
+      <div className="relative ff-glass-card rounded-md p-6 sm:p-8 border-2 border-primary/60 shadow-[0_0_40px_rgba(255,107,0,0.2)] overflow-hidden bg-black/40 backdrop-blur-md">
         <div className="cc-scanline-laser opacity-40 pointer-events-none" />
 
         <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-primary" />
@@ -61,12 +61,12 @@ export function CompulsoryGoogleFormStep({
           </span>
         </h3>
 
-        <p className="font-body text-xs sm:text-sm text-zinc-300 leading-relaxed max-w-2xl mb-6">
+        <p className="font-sans text-xs sm:text-sm text-zinc-300 leading-relaxed max-w-2xl mb-6">
           To complete your tournament entry for{" "}
           <strong className="text-amber uppercase">{teamName}</strong>, Garena Free Fire regulations require all squad members to be officially recorded via their verified Google Form. Squads that do not submit the Google Form cannot be allotted a match lobby slot.
         </p>
 
-        <div className="bg-black/60 rounded-md p-5 border border-primary/40 mb-6 shadow-inner">
+        <div className="bg-black/60 rounded-md p-5 border border-primary/40 mb-6 shadow-inner backdrop-blur-sm">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <span className="text-[11px] font-mono text-primary uppercase font-bold tracking-wider block mb-1 flex items-center gap-1.5">
@@ -88,20 +88,20 @@ export function CompulsoryGoogleFormStep({
           </div>
 
           {hasOpenedForm ? (
-            <div className="mt-3 pt-3 border-t border-white/10 flex items-center gap-2 text-xs font-mono text-emerald-400">
+            <div className="mt-3 pt-3 border-t border-white/20 flex items-center gap-2 text-xs font-mono text-emerald-400 font-bold">
               <CheckCircle2 className="w-4 h-4" />
               <span>Google Form opened in new tab. Please complete and submit it.</span>
             </div>
           ) : (
-            <div className="mt-3 pt-3 border-t border-white/10 text-[11px] font-mono text-muted-foreground">
+            <div className="mt-3 pt-3 border-t border-white/20 text-[11px] font-mono text-zinc-400">
               * Click the button above to open the form in a new tab.
             </div>
           )}
         </div>
 
-        <div className="rounded-md border border-white/10 bg-black/40 p-4 mb-6">
-          <div className="flex items-center justify-between border-b border-white/10 pb-2.5 mb-3">
-            <span className="font-display text-xs font-bold uppercase tracking-wider text-steel flex items-center gap-1.5">
+        <div className="rounded-md border border-white/20 bg-black/60 p-4 mb-6 backdrop-blur-sm">
+          <div className="flex items-center justify-between border-b border-white/20 pb-2.5 mb-3">
+            <span className="font-display text-xs font-bold uppercase tracking-wider text-zinc-300 flex items-center gap-1.5">
               <Users className="w-3.5 h-3.5 text-primary" />
               SQUAD ROSTER SUMMARY
             </span>
@@ -114,16 +114,16 @@ export function CompulsoryGoogleFormStep({
             {members.map((m, i) => (
               <div
                 key={m.id || i}
-                className="p-2.5 rounded-xs border border-white/10 bg-white/5 flex flex-col justify-between"
+                className="p-2.5 rounded-xs border border-white/20 bg-black/40 flex flex-col justify-between"
               >
-                <div className="flex items-center justify-between text-steel text-[10px] uppercase font-bold mb-1">
+                <div className="flex items-center justify-between text-zinc-300 text-[10px] uppercase font-bold mb-1">
                   <span>{i === 0 ? "IGL" : `PLAYER 0${i + 1}`}</span>
                   <span className="text-amber">{m.section || "SEC"}</span>
                 </div>
-                <strong className="text-white font-body text-xs font-bold truncate">
+                <strong className="text-white font-sans text-xs font-bold truncate">
                   {m.full_name || "Unnamed"}
                 </strong>
-                <span className="text-[11px] text-muted-foreground mt-0.5">
+                <span className="text-[11px] text-zinc-400 mt-0.5">
                   UID: {m.college_uid || "N/A"}
                 </span>
               </div>
@@ -131,15 +131,15 @@ export function CompulsoryGoogleFormStep({
           </div>
         </div>
 
-        <label className="flex items-start gap-3 p-3.5 rounded-sm border border-white/15 bg-white/5 cursor-pointer hover:border-primary/50 transition-colors">
+        <label className="flex items-start gap-3 p-3.5 rounded-sm border border-white/20 bg-black/60 cursor-pointer hover:border-primary/50 transition-colors backdrop-blur-sm">
           <input
             type="checkbox"
             checked={hasOpenedForm}
             onChange={(e) => setHasOpenedForm(e.target.checked)}
             className="mt-0.5 h-4 w-4 rounded accent-primary cursor-pointer"
           />
-          <div className="text-xs font-body text-zinc-300">
-            <strong className="text-white block font-display text-xs uppercase tracking-wider">
+          <div className="text-xs font-sans text-zinc-300">
+            <strong className="text-white block font-display text-xs uppercase tracking-wider mb-1">
               I UNDERSTAND & CONFIRM
             </strong>
             <span>
@@ -155,7 +155,7 @@ export function CompulsoryGoogleFormStep({
           type="button"
           onClick={onBack}
           disabled={submitting}
-          className="cc-button-secondary inline-flex items-center gap-2 cursor-pointer disabled:opacity-40"
+          className="cc-button-secondary inline-flex items-center gap-2 cursor-pointer disabled:opacity-40 font-display"
         >
           <span>EDIT ROSTER</span>
         </button>
