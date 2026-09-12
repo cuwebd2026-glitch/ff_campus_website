@@ -152,7 +152,7 @@ export function Register() {
           <div className="cc-scanline-laser opacity-40 z-20" />
 
           {/* Battle Video Container with Artwork Fallback */}
-          <div className="relative w-full h-[250px] sm:h-[300px] md:h-[360px] bg-black overflow-hidden group">
+          <div className="relative w-full min-h-[320px] sm:min-h-[340px] md:min-h-[380px] bg-black overflow-hidden group flex flex-col justify-between p-4 sm:p-6">
             {/* Free Fire Battle Video Loop */}
             <video
               ref={videoRef}
@@ -162,15 +162,15 @@ export function Register() {
               muted
               loop
               playsInline
-              className="w-full h-full object-cover object-center filter brightness-90 contrast-110 transition-transform duration-700 group-hover:scale-[1.02]"
+              className="absolute inset-0 w-full h-full object-cover object-center filter brightness-90 contrast-110 transition-transform duration-700 group-hover:scale-[1.02]"
             />
 
             {/* Dark Gradient Overlay for Readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/60 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/30 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-transparent to-black/60 pointer-events-none" />
 
             {/* Top HUD Telemetry Bar */}
-            <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+            <div className="relative flex items-center justify-between z-10 mb-6 sm:mb-8 pointer-events-none">
               <div className="flex items-center gap-2">
                 <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-xs bg-black/70 border border-red-500/40 text-[10px] font-mono font-bold text-red-400 uppercase tracking-widest backdrop-blur-md">
                   <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
@@ -204,13 +204,13 @@ export function Register() {
             </div>
 
             {/* Bottom Content Area */}
-            <div className="absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-6 sm:right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4 z-10">
-              <div className="flex items-center gap-3 sm:gap-4 md:gap-5">
-                {/* Official Campus Cup Season 2 Graphic Shield Logo */}
+            <div className="relative flex flex-col sm:flex-row sm:items-end justify-between gap-4 z-10">
+              <div className="flex flex-col items-start gap-2.5">
+                {/* Official Campus Cup Season 2 Graphic Shield Logo (Stacked Above Text) */}
                 <img
                   src="/cc-s2-logo.png"
                   alt="Campus Cup Season 2"
-                  className="h-16 sm:h-20 md:h-24 w-auto object-contain shrink-0 drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)] hover:scale-105 transition-transform duration-300"
+                  className="h-16 sm:h-20 md:h-24 w-auto object-contain drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)] hover:scale-105 transition-transform duration-300"
                 />
 
                 <div>
