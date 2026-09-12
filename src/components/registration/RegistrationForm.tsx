@@ -52,7 +52,6 @@ export function RegistrationForm() {
   const victoryCardRef = useRef<HTMLDivElement>(null);
   const prevStepRef = useRef<number>(step);
 
-  // Trigger ember burst and step transition when step changes
   useGSAP(
     () => {
       if (prevStepRef.current !== step) {
@@ -71,7 +70,6 @@ export function RegistrationForm() {
     { dependencies: [step], scope: formCardRef },
   );
 
-  // Victory screen animation
   useGSAP(
     () => {
       if (successRegId && victoryCardRef.current) {
@@ -128,7 +126,6 @@ export function RegistrationForm() {
     { dependencies: [successRegId], scope: victoryCardRef },
   );
 
-  // Animate error message entrance
   useEffect(() => {
     if (errorMsg) {
       gsap.fromTo(
@@ -139,20 +136,17 @@ export function RegistrationForm() {
     }
   }, [errorMsg]);
 
-  // ── SUCCESS SCREEN: Official Registration Pass ──
   if (successRegId) {
     return (
       <div
         ref={victoryCardRef}
         className="relative border border-amber/40 bg-card p-6 md:p-12 text-center overflow-hidden shadow-[0_0_50px_rgba(230,120,20,0.2)] cc-ember-pulse rounded-md"
       >
-        {/* Tactical Corner Brackets */}
         <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-amber" />
         <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-amber" />
         <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-amber" />
         <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-amber" />
 
-        {/* Background ambient flare */}
         <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-primary/20 blur-3xl pointer-events-none" />
         <div className="absolute -left-16 -bottom-16 h-64 w-64 rounded-full bg-amber/20 blur-3xl pointer-events-none" />
 
@@ -182,7 +176,6 @@ export function RegistrationForm() {
             </p>
           </div>
 
-          {/* Registration Identifier Pass */}
           <div className="victory-ticket relative border-2 border-amber/70 bg-surface-deep p-6 text-center cc-ticket-shimmer shadow-[0_0_30px_rgba(230,170,40,0.2)] rounded-sm">
             <div className="cc-scanline-laser opacity-40" />
             <span className="font-display text-[11px] font-bold uppercase tracking-widest text-steel block mb-2">
@@ -216,7 +209,6 @@ export function RegistrationForm() {
             </p>
           </div>
 
-          {/* Compulsory Form Reminder Notice */}
           <div className="victory-directive border border-primary/40 bg-primary/10 p-4 text-left font-body text-xs text-zinc-300 space-y-2 rounded-sm">
             <div className="flex items-center gap-2 font-display text-xs font-bold uppercase tracking-wider text-amber">
               <Flame className="h-4 w-4 fill-amber" /> COMPULSORY NEXT STEP
@@ -235,17 +227,15 @@ export function RegistrationForm() {
             </a>
           </div>
 
-          {/* Directives */}
           <div className="victory-directive border border-border/80 bg-background/60 p-4 text-left font-body text-xs text-muted-foreground space-y-1.5 rounded-sm">
             <div className="flex items-center gap-2 font-display text-xs font-bold uppercase tracking-wider text-amber">
               <Trophy className="h-3.5 w-3.5 text-amber" /> QUALIFIER DIRECTIVES
             </div>
-            <p>1. Captains will receive lobby slots and discord access at <strong className="text-white">{members[0]?.email}</strong>.</p>
-            <p>2. Keep WhatsApp notifications active on <strong className="text-white">+91 {members[0]?.phone}</strong>.</p>
+            <p>1. Captains will receive lobby slots and discord access at <strong className="text-white">{members[0]?.personal_email}</strong>.</p>
+            <p>2. Keep WhatsApp notifications active on <strong className="text-white">+91 {members[0]?.phone_number}</strong>.</p>
             <p>3. Captains must report to the lobby 30 minutes prior to scheduled match timings.</p>
           </div>
 
-          {/* Action Buttons */}
           <div className="victory-actions flex flex-col sm:flex-row gap-3 pt-2">
             <Link
               to="/rules"
@@ -268,22 +258,18 @@ export function RegistrationForm() {
     );
   }
 
-  // ── ACTIVE WIZARD TERMINAL ──
   return (
     <div
       ref={formCardRef}
       className="relative ff-glass-card rounded-md p-6 sm:p-8 md:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_50px_rgba(255,107,0,0.1)] overflow-hidden border border-white/15"
     >
-      {/* Tactical Corner Brackets */}
       <div className="absolute top-0 left-0 w-3.5 h-3.5 border-t-2 border-l-2 border-primary z-20" />
       <div className="absolute top-0 right-0 w-3.5 h-3.5 border-t-2 border-r-2 border-primary z-20" />
       <div className="absolute bottom-0 left-0 w-3.5 h-3.5 border-b-2 border-l-2 border-primary z-20" />
       <div className="absolute bottom-0 right-0 w-3.5 h-3.5 border-b-2 border-r-2 border-primary z-20" />
 
-      {/* Cyber Scanning Laser Line */}
       <div className="cc-scanline-laser opacity-40" />
 
-      {/* Form Header */}
       <div className="mb-6 border-b border-white/10 pb-6 text-center sm:text-left flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="inline-flex items-center gap-2 px-2 py-0.5 border border-primary/40 bg-primary/10 text-primary font-display text-[10px] font-black uppercase tracking-widest mb-2">
@@ -293,11 +279,10 @@ export function RegistrationForm() {
             SQUAD ENTRY <span className="text-primary drop-shadow-[0_0_15px_rgba(255,107,0,0.5)]">TERMINAL</span>
           </h2>
           <p className="mt-1 font-body text-xs text-muted-foreground">
-            Configure squad name and participant details (Participant Name, UID, Phone, Email, Section, Block).
+            Configure squad name and participant details.
           </p>
         </div>
 
-        {/* Tactical Stage Indicator */}
         <div className="flex sm:flex-col items-center sm:items-end justify-center gap-1 shrink-0">
           <span className="font-mono text-[10px] uppercase text-muted-foreground">REGISTRATION PHASE</span>
           <span className="font-display text-2xl font-black text-amber italic tracking-wider">
@@ -306,7 +291,6 @@ export function RegistrationForm() {
         </div>
       </div>
 
-      {/* Flame Progress Bar */}
       <div className="relative w-full h-1.5 bg-black/50 border border-white/10 rounded-full mb-6 overflow-hidden">
         <div
           className="ff-flame-bar h-full transition-all duration-500 rounded-full"
@@ -314,7 +298,6 @@ export function RegistrationForm() {
         />
       </div>
 
-      {/* Tactical Stepper HUD */}
       <div className="mb-8 grid grid-cols-2 gap-3 border-b border-white/10 pb-6">
         {[
           { num: 1, label: "01 // SQUAD & ROSTER DETAILS", desc: "Team Name & Member Profiles" },
@@ -365,7 +348,6 @@ export function RegistrationForm() {
         })}
       </div>
 
-      {/* Error Alert Banner */}
       {errorMsg && (
         <div className="reg-error-banner mb-6 flex items-center gap-3 border border-destructive/60 bg-destructive/15 p-4 text-destructive-foreground rounded-sm">
           <AlertCircle className="h-5 w-5 shrink-0 text-primary animate-pulse" />
@@ -373,40 +355,41 @@ export function RegistrationForm() {
         </div>
       )}
 
-      {/* Animated Step Container */}
       <div ref={stepContainerRef}>
         {step === 1 ? (
           <div className="space-y-6">
-            {/* ── Squad / Team Name Section ── */}
+            {/* Team Name */}
             <div className="ff-glass-card rounded-md p-5 sm:p-6 border border-primary/30 shadow-md">
-              <label className="block font-display text-sm font-bold uppercase tracking-wider text-white mb-2 flex items-center gap-2">
+              <label
+                htmlFor="team_name"
+                className="block font-display text-sm font-bold uppercase tracking-wider text-white mb-2 flex items-center gap-2"
+              >
                 <Shield className="w-4 h-4 text-primary" />
                 <span>
-                  SQUAD / TEAM NAME <span className="text-primary">*</span>
+                  Team Name <span className="text-primary">*</span>
                 </span>
               </label>
               <input
                 type="text"
+                id="team_name"
+                name="team_name"
                 required
                 value={teamName}
                 onChange={(e) => setTeamName(e.target.value)}
-                placeholder="e.g. TOTAL GAMING // SQUAD APEX"
+                placeholder="e.g. Team Apex Gaming"
                 className="ff-input-terminal w-full rounded-sm px-4 py-3 font-display text-lg font-bold uppercase tracking-wider text-white placeholder:text-muted-foreground/40 focus:outline-none"
               />
-              <p className="mt-2 text-[11px] font-mono text-muted-foreground">
-                * Official competitive squad name used for tournament rosters and match brackets.
+              <p className="mt-2 text-[11px] font-mono text-muted-foreground leading-relaxed">
+                Team Name must not contain any vulgar, offensive, abusive, discriminatory, political, religious, regional, or copyrighted terms. The organizer reserves the right to modify or reject any team name that violates this rule.
               </p>
             </div>
 
-            {/* ── Dynamic Member Cards List ── */}
+            {/* Dynamic Member Cards List */}
             <div className="space-y-4">
               <div className="flex items-center justify-between pb-1">
                 <span className="font-display text-sm font-black uppercase tracking-wider text-white flex items-center gap-2">
                   <Users className="w-4 h-4 text-primary" />
                   <span>SQUAD MEMBERS ({members.length} / 5)</span>
-                </span>
-                <span className="text-[11px] font-mono text-amber">
-                  Required: Name, UID, Phone, Email, Section, Block
                 </span>
               </div>
 
@@ -422,7 +405,6 @@ export function RegistrationForm() {
               ))}
             </div>
 
-            {/* ── Add Member Button Area ── */}
             <div className="pt-2">
               {members.length < 5 ? (
                 <button
@@ -442,7 +424,6 @@ export function RegistrationForm() {
               )}
             </div>
 
-            {/* Stage 1 Footer Navigation */}
             <div className="mt-8 flex items-center justify-between border-t border-border/80 pt-6">
               <button
                 type="button"

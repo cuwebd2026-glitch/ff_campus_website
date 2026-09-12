@@ -3,10 +3,11 @@ import { MemberData, RegistrationPayload, RegistrationResponse } from "../types/
 
 export const createEmptyMember = (): MemberData => ({
   id: `mem_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
-  name: "",
-  uid: "",
-  phone: "",
-  email: "",
+  full_name: "",
+  college_uid: "",
+  phone_number: "",
+  personal_email: "",
+  official_email: "",
   section: "",
   block: "",
 });
@@ -22,7 +23,6 @@ export function useRegistrationForm() {
   const [successRegId, setSuccessRegId] = useState<string>("");
   const [copied, setCopied] = useState<boolean>(false);
 
-  // Add Member (up to 5 maximum)
   const addMember = () => {
     if (members.length >= 5) {
       setErrorMsg("Maximum 5 members allowed per squad (4 Core + 1 Substitute).");
@@ -32,14 +32,12 @@ export function useRegistrationForm() {
     setMembers((prev) => [...prev, createEmptyMember()]);
   };
 
-  // Remove Member (only members 2-5 can be removed)
   const removeMember = (index: number) => {
     if (index === 0) return;
     setErrorMsg("");
     setMembers((prev) => prev.filter((_, i) => i !== index));
   };
 
-  // Update specific field of a member
   const updateMember = (index: number, field: keyof MemberData, value: string) => {
     setErrorMsg("");
     setMembers((prev) => {
@@ -49,10 +47,9 @@ export function useRegistrationForm() {
     });
   };
 
-  // Validation for Step 1 (Roster)
   const validateStep1 = (): boolean => {
     if (!teamName.trim()) {
-      setErrorMsg("Please enter your Squad / Team Name.");
+      setErrorMsg("Please enter your Team Name.");
       return false;
     }
 
@@ -61,24 +58,36 @@ export function useRegistrationForm() {
       return false;
     }
 
+    const nameRegex = /^[^0-9]+$/;
+    const phoneRegex = /^\d{10}$/;
+    const emailRegex = /\S+@\S+\.\S+/;
+
     for (let i = 0; i < members.length; i++) {
       const m = members[i];
-      const memberLabel = i === 0 ? "Member 1 (Captain)" : `Member ${i + 1}`;
+      const memberLabel = i === 0 ? "In-Game Leader [IGL]" : `Player ${i + 1}`;
 
-      if (!m.name.trim()) {
-        setErrorMsg(`${memberLabel}: Participant Name is required.`);
+      if (!m.full_name.trim()) {
+        setErrorMsg(`${memberLabel}: Full Name is required.`);
         return false;
       }
-      if (!m.uid.trim()) {
-        setErrorMsg(`${memberLabel}: UID (Free Fire / Student) is required.`);
+      if (!nameRegex.test(m.full_name.trim())) {
+        setErrorMsg(`${memberLabel}: Full Name must not contain numbers.`);
         return false;
       }
-      if (!m.phone.trim() || m.phone.length !== 10) {
+      if (!m.college_uid.trim()) {
+        setErrorMsg(`${memberLabel}: College UID is required.`);
+        return false;
+      }
+      if (!m.phone_number.trim() || !phoneRegex.test(m.phone_number.trim())) {
         setErrorMsg(`${memberLabel}: Phone Number must be exactly 10 digits.`);
         return false;
       }
-      if (!m.email.trim() || !/\S+@\S+\.\S+/.test(m.email)) {
-        setErrorMsg(`${memberLabel}: Valid Email ID is required.`);
+      if (!m.personal_email.trim() || !emailRegex.test(m.personal_email.trim())) {
+        setErrorMsg(`${memberLabel}: Valid Personal Email is required.`);
+        return false;
+      }
+      if (!m.official_email.trim() || !emailRegex.test(m.official_email.trim())) {
+        setErrorMsg(`${memberLabel}: Valid Official/College Email is required.`);
         return false;
       }
       if (!m.section.trim()) {
@@ -86,7 +95,7 @@ export function useRegistrationForm() {
         return false;
       }
       if (!m.block.trim()) {
-        setErrorMsg(`${memberLabel}: Campus Block is required.`);
+        setErrorMsg(`${memberLabel}: Block is required.`);
         return false;
       }
     }
@@ -108,7 +117,6 @@ export function useRegistrationForm() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Final Submit to Google Apps Script Endpoint
   const handleSubmit = async () => {
     if (!validateStep1()) {
       setStep(1);
@@ -131,25 +139,22 @@ export function useRegistrationForm() {
     try {
       const captain = members[0];
       const processedPlayers = members.map((m, idx) => ({
-        player_name: m.name.trim(),
-        student_uid: m.uid.trim(),
-        department: `${m.section.trim()} / ${m.block.trim()}`,
-        year: idx === 0 ? "Captain (IGL)" : idx === 4 ? "Substitute" : "Core Player",
-        ff_uid: m.uid.trim(),
-        ign: m.name.trim(),
-        phone: m.phone.trim(),
-        email: m.email.trim(),
+        role: idx === 0 ? "In-Game Leader [IGL]" : `Player ${idx + 1}`,
+        full_name: m.full_name.trim(),
+        college_uid: m.college_uid.trim(),
+        phone_number: m.phone_number.trim(),
+        personal_email: m.personal_email.trim(),
+        official_email: m.official_email.trim(),
         section: m.section.trim(),
         block: m.block.trim(),
-        id_card_base64: "",
-        ff_profile_base64: "",
       }));
 
       const payload: RegistrationPayload = {
         secret_key: secretKey,
         team_name: teamName.trim(),
-        igl_email: captain.email.trim(),
-        igl_phone: captain.phone.trim(),
+        igl_personal_email: captain.personal_email.trim(),
+        igl_official_email: captain.official_email.trim(),
+        igl_phone_number: captain.phone_number.trim(),
         players: processedPlayers,
       };
 

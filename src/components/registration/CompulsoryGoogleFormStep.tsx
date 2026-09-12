@@ -5,7 +5,6 @@ import {
   AlertTriangle,
   CheckCircle2,
   Users,
-  ShieldCheck,
   Sparkles,
   Loader2,
 } from "lucide-react";
@@ -29,7 +28,6 @@ export function CompulsoryGoogleFormStep({
   onBack,
 }: CompulsoryGoogleFormStepProps) {
   const [hasOpenedForm, setHasOpenedForm] = useState<boolean>(false);
-  const captain = members[0];
 
   const handleOpenGoogleForm = () => {
     setHasOpenedForm(true);
@@ -38,18 +36,14 @@ export function CompulsoryGoogleFormStep({
 
   return (
     <div className="space-y-6">
-      {/* ── Compulsory Verification Alert Card ── */}
       <div className="relative ff-glass-card rounded-md p-6 sm:p-8 border-2 border-primary/60 shadow-[0_0_40px_rgba(255,107,0,0.2)] overflow-hidden">
-        {/* Holographic Scanline */}
         <div className="cc-scanline-laser opacity-40 pointer-events-none" />
 
-        {/* Tactical Corner Brackets */}
         <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-primary" />
         <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-primary" />
         <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-primary" />
         <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-primary" />
 
-        {/* Warning Badge Header */}
         <div className="flex items-center gap-2 mb-4">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xs bg-red-600/20 border border-red-500/60 text-red-400 font-display text-xs font-black uppercase tracking-widest animate-pulse">
             <AlertTriangle className="w-4 h-4" />
@@ -72,7 +66,6 @@ export function CompulsoryGoogleFormStep({
           <strong className="text-amber uppercase">{teamName}</strong>, Garena Free Fire regulations require all squad members to be officially recorded via their verified Google Form. Squads that do not submit the Google Form cannot be allotted a match lobby slot.
         </p>
 
-        {/* Direct Google Form Call to Action Button */}
         <div className="bg-black/60 rounded-md p-5 border border-primary/40 mb-6 shadow-inner">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
@@ -106,7 +99,6 @@ export function CompulsoryGoogleFormStep({
           )}
         </div>
 
-        {/* Verified Squad Roster Summary */}
         <div className="rounded-md border border-white/10 bg-black/40 p-4 mb-6">
           <div className="flex items-center justify-between border-b border-white/10 pb-2.5 mb-3">
             <span className="font-display text-xs font-bold uppercase tracking-wider text-steel flex items-center gap-1.5">
@@ -125,21 +117,20 @@ export function CompulsoryGoogleFormStep({
                 className="p-2.5 rounded-xs border border-white/10 bg-white/5 flex flex-col justify-between"
               >
                 <div className="flex items-center justify-between text-steel text-[10px] uppercase font-bold mb-1">
-                  <span>{i === 0 ? "CAPTAIN (IGL)" : `MEMBER 0${i + 1}`}</span>
+                  <span>{i === 0 ? "IGL" : `PLAYER 0${i + 1}`}</span>
                   <span className="text-amber">{m.section || "SEC"}</span>
                 </div>
                 <strong className="text-white font-body text-xs font-bold truncate">
-                  {m.name || "Unnamed"}
+                  {m.full_name || "Unnamed"}
                 </strong>
                 <span className="text-[11px] text-muted-foreground mt-0.5">
-                  UID: {m.uid || "N/A"}
+                  UID: {m.college_uid || "N/A"}
                 </span>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Checkbox Acknowledgment */}
         <label className="flex items-start gap-3 p-3.5 rounded-sm border border-white/15 bg-white/5 cursor-pointer hover:border-primary/50 transition-colors">
           <input
             type="checkbox"
@@ -159,7 +150,6 @@ export function CompulsoryGoogleFormStep({
         </label>
       </div>
 
-      {/* Navigation Buttons */}
       <div className="flex items-center justify-between pt-2">
         <button
           type="button"
