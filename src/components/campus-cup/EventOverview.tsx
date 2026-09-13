@@ -44,7 +44,7 @@ const overviewItems: OverviewItem[] = [
       { text: "Valid, personally-owned Free Fire MAX account" },
       { text: "Minimum account level 20" },
       { text: "One player = one team, one college" },
-      { text: "Must be enrolled at the registered college" },
+      { text: "Must carry CU Identity Card" },
     ],
   },
   {
