@@ -5,13 +5,12 @@ import { Link } from "react-router-dom";
 export function Hero() {
   const heroRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const hudRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
@@ -84,7 +83,7 @@ export function Hero() {
         </div>
 
         {/* FF-style title with outline text */}
-        <h1 className="ff-hero-title relative">
+        <h1 className="ff-hero-title relative !mb-2">
           CAMPUS CUP{" "}
           <span
             className="ff-hero-title-accent"
@@ -98,33 +97,33 @@ export function Hero() {
           </span>
         </h1>
 
-        {/* FF-style tag line with HUD dashes */}
-        <div className="flex items-center gap-3 justify-center mb-4">
-          <div className="flex gap-1">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="w-4 h-px bg-[var(--color-ff-orange)] opacity-60"
-              />
-            ))}
-          </div>
-          <span className="font-sans text-xs tracking-[0.3em] text-[var(--color-ff-orange)] uppercase opacity-80">
-            GARENA FREE FIRE
-          </span>
-          <div className="flex gap-1">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="w-4 h-px bg-[var(--color-ff-orange)] opacity-60"
-              />
-            ))}
-          </div>
+        {/* Free Fire Max Logo (Equalized top and bottom spacing) */}
+        <div className="flex justify-center mt-3 mb-7">
+          <img
+            src="/FREE_FIRE_MAX_LOGO.png"
+            alt="Free Fire Max Logo"
+            className="h-9 md:h-12 w-auto object-contain drop-shadow-[0_0_12px_rgba(255,107,0,0.5)]"
+          />
         </div>
 
         <p className="ff-hero-subtitle">
           THE ULTIMATE COLLEGE QUALIFIER AT CHANDIGARH UNIVERSITY. ORGANIZED BY
-          GFG COMMUNITY.
+          GeeksforGeeks Campus Body CU.
         </p>
+
+        {/* Department Kicker */}
+        <div className="ff-hero-kicker mb-6">
+          <span className="ff-hero-kicker-line" />
+          <span
+            className="ff-hero-kicker-text text-sm md:text-base font-bold text-[var(--color-ff-orange)] tracking-widest"
+            style={{
+              textShadow: "0 0 15px rgba(255, 107, 0, 0.8), 0 0 25px rgba(255, 107, 0, 0.4)",
+            }}
+          >
+            DEPARTMENT OF CSE TAKSHASHILLA
+          </span>
+          <span className="ff-hero-kicker-line" />
+        </div>
 
         <div className="ff-hero-actions">
           <Link to="/register" className="no-underline">
