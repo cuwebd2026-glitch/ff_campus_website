@@ -24,6 +24,7 @@ export function Home() {
       <div id="rules">
         <RulesSection />
       </div>
+      <SectionDivider variant="alt" />
       <div id="prizes">
         <PrizeSection />
       </div>
