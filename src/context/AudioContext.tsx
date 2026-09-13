@@ -7,7 +7,7 @@ interface AudioContextType {
 }
 
 const AudioContext = createContext<AudioContextType>({
-  isPlaying: true,
+  isPlaying: false,
   toggleMusic: () => {},
   currentTrackName: "Free Fire World Cup Theme",
 });
@@ -17,63 +17,18 @@ const TRACK_NAME = "Free Fire World Cup Theme";
 
 export function AudioProvider({ children }: { children: React.ReactNode }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
-  // Default music to ON unless explicitly disabled by user
-  const [isPlaying, setIsPlaying] = useState<boolean>(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("ff_music_pref") !== "off";
-    }
-    return true;
-  });
-
-  const isPlayingRef = useRef<boolean>(isPlaying);
-
-  useEffect(() => {
-    isPlayingRef.current = isPlaying;
-  }, [isPlaying]);
-
-  // Initialize single persistent Audio element playing across entire website
+  // Set up the audio element on mount. Do NOT attempt to play it here —
+  // playback should only ever start from an explicit click on the music
+  // button (toggleMusic), never from autoplay or any other page interaction.
   useEffect(() => {
     const audio = new Audio(FREE_FIRE_THEME_TRACK);
     audio.loop = true;
     audio.volume = 0.35;
     audioRef.current = audio;
 
-    // Attempt immediate playback on initial load
-    if (isPlayingRef.current) {
-      audio
-        .play()
-        .then(() => {
-          setIsPlaying(true);
-        })
-        .catch(() => {
-          // Browser autoplay restriction: will automatically start on first user interaction
-        });
-    }
-
-    const startOnFirstInteraction = () => {
-      if (audioRef.current && isPlayingRef.current && audioRef.current.paused) {
-        audioRef.current
-          .play()
-          .then(() => {
-            setIsPlaying(true);
-          })
-          .catch(() => {});
-      }
-    };
-
-    window.addEventListener("pointerdown", startOnFirstInteraction, { once: true });
-    window.addEventListener("click", startOnFirstInteraction, { once: true });
-    window.addEventListener("keydown", startOnFirstInteraction, { once: true });
-    window.addEventListener("touchstart", startOnFirstInteraction, { once: true });
-    window.addEventListener("scroll", startOnFirstInteraction, { once: true });
-
     return () => {
-      window.removeEventListener("pointerdown", startOnFirstInteraction);
-      window.removeEventListener("click", startOnFirstInteraction);
-      window.removeEventListener("keydown", startOnFirstInteraction);
-      window.removeEventListener("touchstart", startOnFirstInteraction);
-      window.removeEventListener("scroll", startOnFirstInteraction);
       audio.pause();
       audio.src = "";
     };

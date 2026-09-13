@@ -30,8 +30,8 @@ const overviewItems: OverviewItem[] = [
   {
     icon: UserRoundCheck,
     code: "ORGANIZER",
-    value: "GFG COMMUNITY",
-    note: "Chandigarh University Chapter",
+    value: "Department of CSE Takshashilla",
+    note: "GFG Campus Body - Chandigarh University",
     confirmed: true,
   },
   {
@@ -87,34 +87,24 @@ export function EventOverview() {
       const pinned = pinnedRef.current;
       if (!track || !pinned) return;
 
-      const mm = gsap.matchMedia();
+      // Amount to scroll = total track width minus one viewport width
+      const totalScrollWidth = track.scrollWidth - pinned.offsetWidth;
 
-      mm.add("(min-width: 768px)", () => {
-        // Dynamically calculate the amount to scroll so it updates on resize/refresh
-        const getScrollAmount = () => {
-          if (!track || !pinned) return 0;
-          // Adding a small buffer (e.g., 32px) for padding so the last card doesn't hug the edge
-          return track.scrollWidth - pinned.offsetWidth + 32;
-        };
-
-        gsap.to(track, {
-          x: () => -getScrollAmount(),
-          ease: "none",
-          scrollTrigger: {
-            trigger: pinned,
-            start: "top top",
-            end: () => `+=${getScrollAmount()}`,
-            scrub: 1.2,
-            pin: true,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-          },
-        });
+      gsap.to(track, {
+        x: () => -totalScrollWidth,
+        ease: "none",
+        scrollTrigger: {
+          trigger: pinned,
+          start: "top top",
+          end: () => `+=${totalScrollWidth}`,
+          scrub: 1.2,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
       });
 
-      return () => mm.revert();
     }, sectionRef);
-    
     return () => ctx.revert();
   }, []);
 
@@ -127,7 +117,7 @@ export function EventOverview() {
       <div className="absolute -left-32 top-1/3 w-[600px] h-[600px] rounded-full bg-[var(--color-ff-orange)] blur-[180px] opacity-[0.06] pointer-events-none" />
 
       {/* ── Pinned fullscreen section (heading + cards together, no gap) ── */}
-      <div ref={pinnedRef} className="relative md:h-screen flex flex-col md:overflow-hidden py-10 md:py-0">
+      <div ref={pinnedRef} className="relative h-screen flex flex-col overflow-hidden">
 
         {/* Heading - compact */}
         <div className="shrink-0 px-8 pt-10 pb-6 relative z-10">
@@ -147,16 +137,18 @@ export function EventOverview() {
         </div>
 
         {/* Cards track — fills remaining height */}
-        <div className="flex-1 overflow-x-auto md:overflow-visible flex items-center snap-x snap-mandatory pb-6 md:pb-0 scrollbar-hide">
+        <div className="flex-1 overflow-visible flex items-center">
           <div
             ref={trackRef}
-            className="flex gap-4 px-8 w-max md:w-auto"
+            className="flex gap-4 px-8"
             style={{ willChange: "transform" }}
           >
             {overviewItems.map((item, i) => (
               <div
                 key={i}
-                className="shrink-0 relative group w-[85vw] sm:w-[45vw] md:w-[calc((100vw-64px-16px)/3)] snap-center"
+                className="shrink-0 relative group"
+                // Each card = 1/3 viewport minus gaps
+                style={{ width: "calc((100vw - 64px - 16px) / 3)" }}
               >
                 {/* Card body */}
                 <div
@@ -193,34 +185,28 @@ export function EventOverview() {
                   </div>
 
                   {/* Content */}
-                  <div className={`relative z-10 p-8 flex flex-col h-full ${item.detail ? "pt-10" : "pt-12"}`}>
+                  <div className="relative z-10 p-8 pt-10 flex flex-col h-full">
 
                     {/* Icon hex */}
                     <div
-                      className={`flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shrink-0 ${
-                        item.detail ? "w-14 h-14 mb-4" : "w-16 h-16 mb-6"
-                      }`}
+                      className="flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shrink-0 w-14 h-14 mb-4"
                       style={{
                         clipPath: "polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)",
                         background: item.confirmed ? "rgba(255,107,0,0.15)" : "rgba(255,255,255,0.03)",
                       }}
                     >
-                      <item.icon className={`${item.detail ? "w-6 h-6" : "w-7 h-7"} ${item.confirmed ? "text-[var(--color-ff-orange)]" : "text-white/15"}`} />
+                      <item.icon className={`w-6 h-6 ${item.confirmed ? "text-[var(--color-ff-orange)]" : "text-white/15"}`} />
                     </div>
 
                     {/* Code label */}
-                    <p className={`font-sans text-[10px] tracking-[0.4em] uppercase font-bold shrink-0 ${
-                      item.detail ? "mb-2" : "mb-3"
-                    } ${
+                    <p className={`font-sans text-[10px] tracking-[0.4em] uppercase font-bold shrink-0 mb-2 ${
                       item.confirmed ? "text-[var(--color-ff-orange)]" : "text-white/20"
                     }`}>
                       {item.code}
                     </p>
 
                     {/* Value */}
-                    <h3 className={`font-display uppercase tracking-wide leading-tight shrink-0 ${
-                      item.detail ? "text-xl md:text-2xl mb-3" : "text-3xl md:text-4xl mb-3"
-                    } ${
+                    <h3 className={`font-display uppercase tracking-wide leading-tight shrink-0 text-xl md:text-2xl mb-3 ${
                       item.confirmed ? "text-white" : "text-white/25"
                     }`}>
                       {item.value}

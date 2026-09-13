@@ -18,14 +18,25 @@ export function Home() {
       <Hero />
       <CharacterReveal />
       <SectionDivider />
-      <TournamentIntro />
-      <RulesSection />
-      <SectionDivider />
-      <PrizeSection />
-      <EventOverview />
-      <ScheduleTimeline />
+      <div id="tournament">
+        <TournamentIntro />
+      </div>
+      <div id="rules">
+        <RulesSection />
+      </div>
+      <div id="prizes">
+        <PrizeSection />
+      </div>
+      <div id="overview">
+        <EventOverview />
+      </div>
+      <div id="timeline">
+        <ScheduleTimeline />
+      </div>
       <SectionDivider flipY />
-      <FAQAccordion />
+      <div id="faq">
+        <FAQAccordion />
+      </div>
       {/* <RegistrationCTA /> */}
       <Footer />
     </main>

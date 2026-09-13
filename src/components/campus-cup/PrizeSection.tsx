@@ -347,7 +347,7 @@ export function PrizeSection() {
             style={{ textShadow: "0 0 18px rgba(255,107,0,0.6)" }}
           >
             <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-[var(--color-ff-orange)] shrink-0" />
-            Split Among The Top 3 Champions
+            Split Among The Top 3 Teams
             <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-[var(--color-ff-orange)] shrink-0" />
           </p>
 
