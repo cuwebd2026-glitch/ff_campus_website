@@ -50,17 +50,17 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 mb-12 items-start">
           {/* 1. Left Column: Event Identity */}
           <div className="md:col-span-5 lg:col-span-4">
-            <div className="flex items-center gap-3.5 md:gap-4 mb-6">
+            <div className="flex items-center gap-4 md:gap-5 mb-6">
               <img
                 src="/gfgcu_light.png"
                 alt="GFG Community"
-                className="h-10 md:h-12 w-auto object-contain"
+                className="h-40 md:h-42 w-auto object-contain"
               />
               <X className="text-[var(--color-ff-orange)] w-4 h-4 opacity-50 shrink-0" />
               <img
                 src="/cu_logo.png"
                 alt="Chandigarh University"
-                className="h-9 md:h-11 w-auto object-contain"
+                className="h-10 md:h-11 w-auto object-contain"
               />
             </div>
             <p className="font-sans text-sm text-white/50 leading-relaxed max-w-sm mb-6">
