@@ -30,6 +30,34 @@ export function Header() {
     setOpen(false);
   }, [location]);
 
+  // Handle Autoplay & First User Interaction Fallback
+  useEffect(() => {
+    if (isPlaying) return;
+
+    const startAudio = () => {
+      toggleMusic();
+      removeListeners();
+    };
+
+    const removeListeners = () => {
+      window.removeEventListener("click", startAudio);
+      window.removeEventListener("keydown", startAudio);
+      window.removeEventListener("touchstart", startAudio);
+      window.removeEventListener("scroll", startAudio);
+    };
+
+    // Try playing immediately
+    startAudio();
+
+    // Attach listeners in case browser autoplay policy blocks immediate play
+    window.addEventListener("click", startAudio, { once: true });
+    window.addEventListener("keydown", startAudio, { once: true });
+    window.addEventListener("touchstart", startAudio, { once: true });
+    window.addEventListener("scroll", startAudio, { once: true });
+
+    return removeListeners;
+  }, []);
+
   return (
     <header className={cn("ff-header", compact && "is-compact")}>
       <div className="ff-header-inner !max-w-[1550px] !w-[96%] !px-4 md:!px-8 flex items-center justify-between gap-4">

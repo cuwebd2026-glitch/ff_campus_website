@@ -51,6 +51,8 @@ export function RegistrationForm() {
   const stepContainerRef = useRef<HTMLDivElement>(null);
   const victoryCardRef = useRef<HTMLDivElement>(null);
   const prevStepRef = useRef<number>(step);
+  const memberRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const prevMembersLengthRef = useRef<number>(members.length);
 
   useGSAP(
     () => {
@@ -135,6 +137,23 @@ export function RegistrationForm() {
       );
     }
   }, [errorMsg]);
+
+  // Scroll the newly added member card into the center of the viewport.
+  useEffect(() => {
+    if (members.length > prevMembersLengthRef.current) {
+      const lastMember = members[members.length - 1];
+      const node = lastMember ? memberRefs.current[lastMember.id] : null;
+
+      if (node) {
+        // Wait a tick so the card has actually mounted/laid out before scrolling.
+        requestAnimationFrame(() => {
+          node.scrollIntoView({ behavior: "smooth", block: "center" });
+        });
+      }
+    }
+
+    prevMembersLengthRef.current = members.length;
+  }, [members.length, members]);
 
   if (successRegId) {
     return (
@@ -394,14 +413,20 @@ export function RegistrationForm() {
               </div>
 
               {members.map((member, index) => (
-                <MemberCard
+                <div
                   key={member.id}
-                  member={member}
-                  index={index}
-                  totalMembers={members.length}
-                  onChange={updateMember}
-                  onRemove={removeMember}
-                />
+                  ref={(el) => {
+                    memberRefs.current[member.id] = el;
+                  }}
+                >
+                  <MemberCard
+                    member={member}
+                    index={index}
+                    totalMembers={members.length}
+                    onChange={updateMember}
+                    onRemove={removeMember}
+                  />
+                </div>
               ))}
             </div>
 

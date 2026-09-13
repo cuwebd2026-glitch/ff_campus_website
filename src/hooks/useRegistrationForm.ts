@@ -12,6 +12,15 @@ export const createEmptyMember = (): MemberData => ({
   block: "",
 });
 
+const isMemberEmpty = (m: MemberData): boolean =>
+  !m.full_name.trim() &&
+  !m.college_uid.trim() &&
+  !m.phone_number.trim() &&
+  !m.personal_email.trim() &&
+  !m.official_email.trim() &&
+  !m.section.trim() &&
+  !m.block.trim();
+
 export function useRegistrationForm() {
   const [step, setStep] = useState<number>(1);
   const [teamName, setTeamName] = useState<string>("");
@@ -59,8 +68,8 @@ export function useRegistrationForm() {
       return false;
     }
 
-    if (members.length === 0) {
-      triggerError("At least one member is required.");
+    if (members.length < 4) {
+      triggerError("At least 4 squad members (4 Core) are required. The 5th slot is an optional Substitute.");
       return false;
     }
 
@@ -70,6 +79,13 @@ export function useRegistrationForm() {
 
     for (let i = 0; i < members.length; i++) {
       const m = members[i];
+      const isOptionalSub = i === 4;
+
+      // The 5th member (index 4) is an optional Substitute — skip validation entirely if left blank.
+      if (isOptionalSub && isMemberEmpty(m)) {
+        continue;
+      }
+
       const memberLabel = i === 0 ? "In-Game Leader [IGL]" : `Player ${i + 1}`;
 
       if (!m.full_name.trim()) {
@@ -144,7 +160,11 @@ export function useRegistrationForm() {
 
     try {
       const captain = members[0];
-      const processedPlayers = members.map((m, idx) => ({
+
+      // Drop the 5th (optional Substitute) slot from the payload if it was left blank.
+      const effectiveMembers = members.filter((m, idx) => idx < 4 || !isMemberEmpty(m));
+
+      const processedPlayers = effectiveMembers.map((m, idx) => ({
         role: idx === 0 ? "In-Game Leader [IGL]" : `Player ${idx + 1}`,
         full_name: m.full_name.trim(),
         college_uid: m.college_uid.trim(),
