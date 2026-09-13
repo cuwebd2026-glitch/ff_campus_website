@@ -1,17 +1,79 @@
 import { useEffect, useRef } from "react";
-import { CalendarDays, Gamepad2, ShieldCheck, Swords, UserRoundCheck, UsersRound, Check, AlertTriangle } from "lucide-react";
+import { CalendarDays, Gamepad2, UsersRound, Swords, UserRoundCheck, Check, AlertTriangle, type LucideIcon } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const overviewItems = [
-  { icon: CalendarDays,   code: "DATE",        value: "14 SEP 2026",   note: "Confirmed event date",          confirmed: true  },
-  { icon: UserRoundCheck, code: "ORGANIZER",   value: "GFG COMMUNITY", note: "Chandigarh University Chapter", confirmed: true  },
-  { icon: UsersRound,     code: "ELIGIBILITY", value: "TBA",           note: "Awaiting organizer details",    confirmed: false },
-  { icon: Gamepad2,       code: "TEAM INFO",   value: "TBA",           note: "Roster & squad details pending",confirmed: false },
-  { icon: Swords,         code: "FORMAT",      value: "TBA",           note: "Match format pending",          confirmed: false },
-  { icon: ShieldCheck,    code: "STATUS",      value: "PENDING",       note: "Check back soon",               confirmed: false },
+interface DetailLine {
+  heading?: string;
+  text?: string;
+}
+
+interface OverviewItem {
+  icon: LucideIcon;
+  code: string;
+  value: string;
+  note?: string;
+  detail?: DetailLine[];
+  confirmed: boolean;
+}
+
+const overviewItems: OverviewItem[] = [
+  {
+    icon: CalendarDays,
+    code: "DATE",
+    value: "16 SEP 2026",
+    note: "Confirmed event date",
+    confirmed: true,
+  },
+  {
+    icon: UserRoundCheck,
+    code: "ORGANIZER",
+    value: "GFG COMMUNITY",
+    note: "Chandigarh University Chapter",
+    confirmed: true,
+  },
+  {
+    icon: UsersRound,
+    code: "ELIGIBILITY",
+    value: "PLAYER RULES",
+    confirmed: true,
+    detail: [
+      { text: "Indian citizens only" },
+      { text: "Valid, personally-owned Free Fire MAX account" },
+      { text: "Minimum account level 20" },
+      { text: "One player = one team, one college" },
+      { text: "Must be enrolled at the registered college" },
+    ],
+  },
+  {
+    icon: Gamepad2,
+    code: "TEAM INFO",
+    value: "4–5 PLAYERS",
+    confirmed: true,
+    detail: [
+      { text: "4 core members + 1 optional substitute" },
+      { text: "Team must nominate a Captain / IGL" },
+      { text: "One college qualifier per team only" },
+    ],
+  },
+  {
+    icon: Swords,
+    code: "FORMAT",
+    value: "GROUP → FINALS",
+    confirmed: true,
+    detail: [
+      { heading: "GROUP STAGE" },
+      { text: "36 teams • 3 groups" },
+      { text: "2 matches per group" },
+      { text: "Top 4 advance" },
+      { heading: "GRAND FINALS" },
+      { text: "12 teams • 4 matches" },
+      { text: "Top 3 win prizes" },
+      { text: "Top 1 qualifies further" },
+    ],
+  },
 ];
 
 export function EventOverview() {
@@ -59,9 +121,6 @@ export function EventOverview() {
 
         {/* Heading - compact */}
         <div className="shrink-0 px-8 pt-10 pb-6 relative z-10">
-          <p className="font-sans text-[var(--color-ff-orange)] tracking-[0.35em] text-xs uppercase font-bold mb-3">
-            02 <span className="text-white/20 mx-2">/</span> CHANDIGARH UNIVERSITY
-          </p>
           <div className="flex flex-wrap items-baseline gap-x-5">
             <span className="font-display text-4xl md:text-6xl uppercase text-white leading-none tracking-tight">YOUR CAMPUS.</span>
             <span
@@ -126,42 +185,70 @@ export function EventOverview() {
                   </div>
 
                   {/* Content */}
-                  <div className="relative z-10 p-8 pt-12 flex flex-col h-full">
+                  <div className={`relative z-10 p-8 flex flex-col h-full ${item.detail ? "pt-10" : "pt-12"}`}>
 
                     {/* Icon hex */}
                     <div
-                      className="w-16 h-16 flex items-center justify-center mb-8 transition-transform duration-300 group-hover:scale-110 shrink-0"
+                      className={`flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shrink-0 ${
+                        item.detail ? "w-14 h-14 mb-4" : "w-16 h-16 mb-6"
+                      }`}
                       style={{
                         clipPath: "polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)",
                         background: item.confirmed ? "rgba(255,107,0,0.15)" : "rgba(255,255,255,0.03)",
                       }}
                     >
-                      <item.icon className={`w-7 h-7 ${item.confirmed ? "text-[var(--color-ff-orange)]" : "text-white/15"}`} />
+                      <item.icon className={`${item.detail ? "w-6 h-6" : "w-7 h-7"} ${item.confirmed ? "text-[var(--color-ff-orange)]" : "text-white/15"}`} />
                     </div>
 
                     {/* Code label */}
-                    <p className={`font-sans text-[10px] tracking-[0.4em] uppercase font-bold mb-3 ${
+                    <p className={`font-sans text-[10px] tracking-[0.4em] uppercase font-bold shrink-0 ${
+                      item.detail ? "mb-2" : "mb-3"
+                    } ${
                       item.confirmed ? "text-[var(--color-ff-orange)]" : "text-white/20"
                     }`}>
                       {item.code}
                     </p>
 
                     {/* Value */}
-                    <h3 className={`font-display text-3xl md:text-4xl uppercase tracking-wide mb-3 leading-tight ${
+                    <h3 className={`font-display uppercase tracking-wide leading-tight shrink-0 ${
+                      item.detail ? "text-xl md:text-2xl mb-3" : "text-3xl md:text-4xl mb-3"
+                    } ${
                       item.confirmed ? "text-white" : "text-white/25"
                     }`}>
                       {item.value}
                     </h3>
 
-                    {/* Note */}
-                    <p className="font-sans text-sm text-white/25 mb-auto">{item.note}</p>
+                    {/* Note (simple items) or structured Detail (multi-line cards) */}
+                    {item.detail ? (
+                      <div className="flex-1 min-h-0 overflow-y-auto pr-1 space-y-2.5">
+                        {item.detail.map((line, idx) =>
+                          line.heading ? (
+                            <p
+                              key={idx}
+                              className="font-sans text-xs tracking-[0.2em] uppercase font-bold text-[var(--color-ff-orange)] mt-4 first:mt-0"
+                            >
+                              {line.heading}
+                            </p>
+                          ) : (
+                            <p
+                              key={idx}
+                              className="font-sans text-sm text-white/60 leading-snug pl-3 border-l border-white/10"
+                            >
+                              {line.text}
+                            </p>
+                          )
+                        )}
+                      </div>
+                    ) : (
+                      <p className="font-sans text-sm text-white/25 mb-auto">{item.note}</p>
+                    )}
 
                     {/* Status */}
                     {item.confirmed
-                      ? <span className="inline-flex items-center gap-2 text-[9px] font-bold text-[var(--color-ff-orange)] tracking-widest border border-[var(--color-ff-orange)]/40 px-3 py-1.5 w-fit mt-6">
+                      ? <span className="inline-flex items-center gap-2 text-[9px] font-bold text-[var(--color-ff-orange)] tracking-widest border border-[var(--color-ff-orange)]/40 px-3 py-1.5 w-fit mt-4 shrink-0">
                           <Check className="w-3 h-3" /> CONFIRMED
                         </span>
-                      : <span className="inline-flex items-center gap-2 text-[9px] font-bold text-white/20 tracking-widest border border-white/5 px-3 py-1.5 w-fit mt-6">
+                      : <span className="inline-flex items-center gap-2 text-[9px] font-bold text-white/20 tracking-widest border border-white/5 px-3 py-1.5 w-fit mt-4 shrink-0">
                           <AlertTriangle className="w-3 h-3" /> PENDING
                         </span>
                     }

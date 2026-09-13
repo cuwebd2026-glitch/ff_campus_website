@@ -19,11 +19,11 @@ export function Home() {
       <CharacterReveal />
       <SectionDivider />
       <TournamentIntro />
-      <EventOverview />
-      <PrizeSection />
       <RulesSection />
-      <SectionDivider flipY />
+      <PrizeSection />
+      <EventOverview />
       <ScheduleTimeline />
+      <SectionDivider flipY />
       <FAQAccordion />
       {/* <RegistrationCTA /> */}
       <Footer />

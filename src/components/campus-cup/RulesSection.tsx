@@ -8,14 +8,51 @@ import { Spine } from "@pixi-spine/all-3.8";
 gsap.registerPlugin(ScrollTrigger);
 
 const ruleGroups = [
-  { icon: UsersRound,  title: "Squad & Eligibility",  label: "ENTRY PROTOCOL",
-    body: "Eligibility, roster size, substitutions, and student verification requirements are awaiting organizer confirmation." },
-  { icon: ShieldCheck, title: "Fair Play Standards",   label: "COMPETITION CODE",
-    body: "Official conduct, device, account, and anti-cheat requirements will be published after organizer confirmation." },
-  { icon: Swords,      title: "Match Procedure",       label: "BATTLE FORMAT",
-    body: "Lobby timing, map rotation, scoring, and tie-break procedures are not yet confirmed." },
-  { icon: FileText,    title: "Check-in & Reporting",  label: "PLAYER OPS",
-    body: "Check-in channels, reporting windows, and result submission instructions will be added to the official brief." },
+  {
+    icon: UsersRound,
+    title: "Squad & Eligibility",
+    label: "ENTRY PROTOCOL",
+    body:
+      "A team consists of 4 starting players and one optional substitute. " +
+      "Players must be Indian citizens, at least 16 years old (guardian consent " +
+      "required if aged 16–18), hold a personally-controlled Free Fire MAX account " +
+      "at level 20 or above, and may represent only one college and one team.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Fair Play Standards",
+    label: "COMPETITION CODE",
+    body:
+      "Unauthorized third-party software, scripts, macros, overlays, account " +
+      "sharing, and bug exploitation are strictly prohibited. Officials may run " +
+      "anti-cheat checks at any stage. Confirmed violations range from point " +
+      "deductions and match loss to stage or tournament disqualification, prize " +
+      "forfeiture, or a permanent ban — with zero tolerance (no warning) for " +
+      "hacking, match-fixing, or identity fraud.",
+  },
+  {
+    icon: Swords,
+    title: "Match Procedure",
+    label: "BATTLE FORMAT",
+    body:
+      "For 36 registered teams: 3 groups, 2 matches per group, with the top 4 " +
+      "teams from each group qualifying for the Grand Finals. For 12 registered " +
+      "teams: 4 matches, with the top 3 teams earning placement points and only " +
+      "the top 1 team qualifying further. (Procedure may vary according to the " +
+      "number of teams registered.)",
+  },
+  {
+    icon: FileText,
+    title: "Check-in & Reporting",
+    label: "PLAYER OPS",
+    body:
+      "Team captains must ensure all players complete check-in during the " +
+      "announced window — late check-in can mean slot forfeiture, match loss, " +
+      "or disqualification. Lobby IDs and room passwords are shared only with " +
+      "verified representatives. Technical issues must be reported immediately " +
+      "to the official channel with supporting evidence, or the complaint may " +
+      "be rejected.",
+  },
 ];
 
 export function RulesSection() {
@@ -168,9 +205,6 @@ export function RulesSection() {
           {/* ── LEFT: Rules ── */}
           <div>
             <div ref={titleRef} className="mb-14">
-              <p className="font-sans text-[var(--color-ff-orange)] tracking-[0.35em] text-xs uppercase font-bold mb-4">
-                04 <span className="text-white/20 mx-2">/</span> SCAN · OPEN · PREPARE
-              </p>
               <h2 className="font-display uppercase leading-[0.88] tracking-tight mb-8">
                 <span className="block text-white" style={{ fontSize: "clamp(3.5rem, 10vw, 7rem)" }}>
                   KNOW THE
@@ -217,11 +251,10 @@ export function RulesSection() {
                   </button>
 
                   <div className="rule-body overflow-hidden" style={{ height: 0, opacity: 0 }}>
-                    <div className="pb-6 pl-16 border-l-2 border-[var(--color-ff-orange)]/20 ml-4">
-                      <p className="font-sans text-white/50 leading-relaxed mb-4">{item.body}</p>
-                      <span className="inline-block font-sans text-[10px] tracking-[0.2em] text-[var(--color-ff-orange)] border border-[var(--color-ff-orange)]/30 px-3 py-1 uppercase">
-                        CONFIRMATION REQUIRED
-                      </span>
+                    <div className="pb-6 pl-16 pr-4 border-l-2 border-[var(--color-ff-orange)]/20 ml-4">
+                      <p className="font-sans text-sm md:text-base text-white/60 leading-relaxed mb-4">
+                        {item.body}
+                      </p>
                     </div>
                   </div>
                 </div>

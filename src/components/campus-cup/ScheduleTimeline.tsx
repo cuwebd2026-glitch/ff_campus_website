@@ -62,9 +62,6 @@ export function ScheduleTimeline() {
 
         {/* Heading */}
         <div ref={titleRef} className="mb-20">
-           <p className="font-sans text-[var(--color-ff-orange)] tracking-[0.35em] text-xs uppercase font-bold mb-4">
-            05 <span className="text-white/20 mx-2">/</span> 16 SEPTEMBER 2026
-          </p>
           <h2 className="font-display text-5xl md:text-7xl uppercase text-white tracking-tight leading-none">
             FROM ENTRY{" "}
             <span style={{ color: "transparent", WebkitTextStroke: "2px var(--color-ff-orange)", textShadow: "0 0 30px rgba(255,107,0,0.5)" }}>
