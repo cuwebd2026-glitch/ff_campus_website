@@ -260,28 +260,28 @@ export function RegistrationForm() {
               QUALIFIER DIRECTIVES
             </div>
 
-            <p>
-              1. The squad leader is the designated Point of Contact (POC)
-              for this registration. Please keep{" "}
-              <strong className="text-white">
-                {members[0]?.personal_email}
-              </strong>{" "}
-              active for lobby slot and Discord access communication.
-            </p>
+  <p>
+    1. The squad leader is the designated Point of Contact (POC)
+    for this registration. Please keep{" "}
+    <strong className="text-white">
+      {members[0]?.personal_email}
+    </strong>{" "}
+    active for lobby slot and Discord access communication.
+  </p>
 
-            <p>
-              2. Please keep WhatsApp notifications active on{" "}
-              <strong className="text-white">
-                +91 {members[0]?.phone_number}
-              </strong>{" "}
-              for match updates.
-            </p>
+  <p>
+    2. Please keep WhatsApp notifications active on{" "}
+    <strong className="text-white">
+      +91 {members[0]?.phone_number}
+    </strong>{" "}
+    for match updates.
+  </p>
 
-            <p>
-              3. Captains must report to the lobby 30 minutes prior to
-              scheduled match timings.
-            </p>
-          </div>
+  <p>
+    3. Captains must report to the lobby 30 minutes prior to
+    scheduled match timings.
+  </p>
+</div>
 
           <div className="victory-actions flex flex-col sm:flex-row gap-3.5 pt-2">
             <Link
