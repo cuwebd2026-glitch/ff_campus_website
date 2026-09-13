@@ -56,15 +56,17 @@ export function SectionHeading({
   title,
   side,
 }: {
-  code: string;
+  code?: string;
   title: ReactNode;
   side?: string;
 }) {
   return (
     <div className="ff-section-header">
-      <p className="font-sans text-[var(--color-ff-orange)] tracking-[0.2em] uppercase font-bold text-sm mb-4">
-        {code} <span className="text-white/30 mx-2">/</span> {side ?? "CAMPUS CUP"}
-      </p>
+      {code && (
+        <p className="font-sans text-[var(--color-ff-orange)] tracking-[0.2em] uppercase font-bold text-sm mb-4">
+          {code} <span className="text-white/30 mx-2">/</span> {side ?? "CAMPUS CUP"}
+        </p>
+      )}
       <h2 className="ff-section-title">{title}</h2>
     </div>
   );
