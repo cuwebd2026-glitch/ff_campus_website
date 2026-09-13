@@ -87,16 +87,20 @@ export function EventOverview() {
       const pinned = pinnedRef.current;
       if (!track || !pinned) return;
 
-      // Amount to scroll = total track width minus one viewport width
-      const totalScrollWidth = track.scrollWidth - pinned.offsetWidth;
+      // Dynamically calculate the amount to scroll so it updates on resize/refresh
+      const getScrollAmount = () => {
+        if (!track || !pinned) return 0;
+        // Adding a small buffer (e.g., 32px) for padding so the last card doesn't hug the edge
+        return track.scrollWidth - pinned.offsetWidth + 32;
+      };
 
       gsap.to(track, {
-        x: () => -totalScrollWidth,
+        x: () => -getScrollAmount(),
         ease: "none",
         scrollTrigger: {
           trigger: pinned,
           start: "top top",
-          end: () => `+=${totalScrollWidth}`,
+          end: () => `+=${getScrollAmount()}`,
           scrub: 1.2,
           pin: true,
           anticipatePin: 1,
@@ -146,9 +150,7 @@ export function EventOverview() {
             {overviewItems.map((item, i) => (
               <div
                 key={i}
-                className="shrink-0 relative group"
-                // Each card = 1/3 viewport minus gaps
-                style={{ width: "calc((100vw - 64px - 16px) / 3)" }}
+                className="shrink-0 relative group w-[85vw] sm:w-[45vw] md:w-[calc((100vw-64px-16px)/3)]"
               >
                 {/* Card body */}
                 <div
