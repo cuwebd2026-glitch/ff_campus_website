@@ -20,6 +20,7 @@ export function Home() {
       <SectionDivider />
       <TournamentIntro />
       <RulesSection />
+      <SectionDivider />
       <PrizeSection />
       <EventOverview />
       <ScheduleTimeline />

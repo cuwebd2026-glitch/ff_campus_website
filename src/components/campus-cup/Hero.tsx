@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { Link } from "react-router-dom";
 
@@ -6,6 +6,13 @@ export function Hero() {
   const heroRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const hudRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -44,8 +51,9 @@ export function Hero() {
     <section id="top" className="ff-hero" ref={heroRef}>
       {/* Background Video */}
       <video
+        key={isMobile ? "mobile-bg" : "desktop-bg"}
         className="ff-hero-video"
-        src="/bg.MP4"
+        src={isMobile ? "/comp_bg.MP4" : "/bg.MP4"}
         autoPlay
         muted
         loop

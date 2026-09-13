@@ -49,6 +49,10 @@ function useParticles(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
 
     let raf: number;
     const draw = () => {
+      if (canvas.offsetWidth === 0) {
+        raf = requestAnimationFrame(draw);
+        return;
+      }
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach(p => {
         p.x  += p.vx;
@@ -141,7 +145,7 @@ export function Footer() {
           style={{ backgroundImage: "radial-gradient(rgba(255,107,0,0.06) 1px, transparent 1px)", backgroundSize: "30px 30px" }} />
 
         {/* Particle canvas */}
-        <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 2 }} />
+        <canvas ref={canvasRef} className="hidden md:block absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 2 }} />
 
         {/* Strong ground glow */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none" style={{ width: "80%", height: "220px", background: "radial-gradient(ellipse at center bottom, rgba(255,107,0,0.22) 0%, rgba(255,107,0,0.06) 45%, transparent 70%)", zIndex: 3 }} />

@@ -182,7 +182,7 @@ export function RulesSection() {
   };
 
   return (
-    <section id="rules" ref={sectionRef} className="relative pt-20 pb-0 md:py-20 bg-[#050505]">
+    <section id="rules" ref={sectionRef} className="relative pt-20 pb-0 md:pt-20 md:pb-0 bg-[#050505]">
 
       {/* Background clip wrapper — keeps decorations from causing scroll */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
