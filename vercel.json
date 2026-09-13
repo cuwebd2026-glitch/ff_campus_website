@@ -2,8 +2,20 @@
   "redirects": [
     {
       "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "ff-campus-website-54ha.vercel.app"
+        }
+      ],
       "destination": "https://ff-campuscup-s2-cu.vercel.app/:path*",
       "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
