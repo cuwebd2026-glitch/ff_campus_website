@@ -42,6 +42,53 @@ export function useRegistrationForm() {
     createEmptyMember(),
   ]);
 
+  const fillDemoData = () => {
+    setTeamName("Apex Predators");
+    setMembers([
+      {
+        id: "mem_demo_1",
+        full_name: "Alex Hunter",
+        college_uid: "24BCS10564",
+        phone_number: "9876543210",
+        personal_email: "alex.hunter@gmail.com",
+        official_email: "24bcs10564@cuchd.in",
+        section: "24BCS_602-A",
+        block: "B1",
+      },
+      {
+        id: "mem_demo_2",
+        full_name: "Rohan Sharma",
+        college_uid: "24BCS10565",
+        phone_number: "9876543211",
+        personal_email: "rohan@gmail.com",
+        official_email: "24bcs10565@cuchd.in",
+        section: "24BCS_602-A",
+        block: "B1",
+      },
+      {
+        id: "mem_demo_3",
+        full_name: "Vikram Malhotra",
+        college_uid: "24BCS10566",
+        phone_number: "9876543212",
+        personal_email: "vikram@gmail.com",
+        official_email: "24bcs10566@cuchd.in",
+        section: "24BCS_602-A",
+        block: "B1",
+      },
+      {
+        id: "mem_demo_4",
+        full_name: "Karan Johar",
+        college_uid: "24BCS10567",
+        phone_number: "9876543213",
+        personal_email: "karan@gmail.com",
+        official_email: "24bcs10567@cuchd.in",
+        section: "24BCS_602-A",
+        block: "B1",
+      },
+    ]);
+    setErrorMsg("");
+  };
+
   const [submitting, setSubmitting] = useState<boolean>(false);
 
   const [submitStatus, setSubmitStatus] = useState<string>("");
@@ -380,6 +427,8 @@ export function useRegistrationForm() {
     handleSubmit,
 
     handleCopyRegId,
+
+    fillDemoData,
   };
 }
 

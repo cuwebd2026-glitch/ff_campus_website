@@ -762,24 +762,48 @@
 }
 
 .ff-glass-card {
-  background: rgba(12, 14, 20, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(14, 18, 26, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 107, 0, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 107, 0, 0.05);
+}
+
+.ff-terminal-card {
+  background: linear-gradient(180deg, #111520 0%, #0a0d14 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(245, 158, 11, 0.06);
 }
 
 .ff-input-terminal {
-  background: rgba(8, 10, 15, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  transition: all 0.25s ease-out;
+  background: #080b12;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  color: #f8fafc;
+  font-size: 16px !important; /* Critical: Prevents iOS Safari/Chrome zoom on input focus */
+  line-height: 1.5;
+  transition: all 0.2s ease;
+}
+
+.ff-input-terminal::placeholder {
+  color: #94a3b8;
+  font-size: 15px;
+}
+
+.ff-input-terminal:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  background: #0d111b;
 }
 
 .ff-input-terminal:focus-within,
 .ff-input-terminal:focus {
-  border-color: #ff6b00;
-  box-shadow: 0 0 16px rgba(255, 107, 0, 0.35), inset 0 0 8px rgba(255, 107, 0, 0.1);
-  background: rgba(18, 14, 12, 0.92);
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2), 0 0 16px rgba(245, 158, 11, 0.15);
+  background: #0f1422;
+  outline: none;
 }
+
+
 
 

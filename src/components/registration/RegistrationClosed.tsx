@@ -35,21 +35,21 @@ export function RegistrationClosed() {
           </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-3 pt-2">
+        <div className="flex flex-col sm:flex-row gap-3.5 pt-2">
           <Link
             to="/rules"
-            className="cc-button-secondary flex-1 inline-flex items-center justify-center gap-2 no-underline font-display"
+            className="flex-1 inline-flex items-center justify-center gap-2 no-underline font-display text-sm font-bold uppercase tracking-wider py-3.5 px-6 min-h-[48px] rounded-sm border-2 border-zinc-700 bg-zinc-800 text-zinc-200 hover:text-white hover:border-zinc-500 hover:bg-zinc-750 transition-colors"
           >
-            <BookOpen className="h-4 w-4 text-amber" />
+            <BookOpen className="h-4 w-4 text-amber-400" />
             <span>TOURNAMENT RULES</span>
           </Link>
           <button
             type="button"
             onClick={() => navigate("/")}
-            className="cc-button-primary flex-1 inline-flex items-center justify-center gap-2 cursor-pointer font-display"
+            className="flex-1 inline-flex items-center justify-center gap-2 cursor-pointer font-display text-base font-black uppercase tracking-wider py-3.5 px-6 min-h-[48px] rounded-sm bg-gradient-to-r from-amber-300 via-amber-400 to-orange-400 hover:from-amber-200 hover:to-orange-300 text-black border-2 border-amber-200 shadow-[0_0_20px_rgba(245,158,11,0.5)] transition-all active:scale-95"
           >
             <span>RETURN TO HOME</span>
-            <ArrowRight className="h-4 w-4" />
+            <ArrowRight className="h-4 w-4 stroke-[3]" />
           </button>
         </div>
       </div>

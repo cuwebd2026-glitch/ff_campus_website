@@ -47,6 +47,7 @@ export function RegistrationForm() {
     goBack,
     handleSubmit,
     handleCopyRegId,
+    fillDemoData,
   } = useRegistrationForm();
 
   const formCardRef = useRef<HTMLDivElement>(null);
@@ -314,22 +315,22 @@ export function RegistrationForm() {
             </p>
           </div>
 
-          <div className="victory-actions flex flex-col sm:flex-row gap-3 pt-2">
+          <div className="victory-actions flex flex-col sm:flex-row gap-3.5 pt-2">
             <Link
               to="/rules"
-              className="cc-button-secondary flex-1 inline-flex items-center justify-center gap-2 no-underline font-display"
+              className="flex-1 inline-flex items-center justify-center gap-2 no-underline font-display text-sm font-bold uppercase tracking-wider py-3.5 px-6 min-h-[48px] rounded-sm border-2 border-zinc-700 bg-zinc-800 text-zinc-200 hover:text-white hover:border-zinc-500 hover:bg-zinc-750 transition-colors"
             >
-              <BookOpen className="h-4 w-4 text-amber" />
+              <BookOpen className="h-4 w-4 text-amber-400" />
               <span>TOURNAMENT RULES</span>
             </Link>
 
             <button
               type="button"
               onClick={() => navigate("/")}
-              className="cc-button-primary flex-1 inline-flex items-center justify-center gap-2 cursor-pointer font-display"
+              className="flex-1 inline-flex items-center justify-center gap-2 cursor-pointer font-display text-base font-black uppercase tracking-wider py-3.5 px-6 min-h-[48px] rounded-sm bg-gradient-to-r from-amber-300 via-amber-400 to-orange-400 hover:from-amber-200 hover:to-orange-300 text-black border-2 border-amber-200 shadow-[0_0_20px_rgba(245,158,11,0.5)] transition-all active:scale-95"
             >
               <span>RETURN TO HOME</span>
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-4 w-4 stroke-[3]" />
             </button>
           </div>
         </div>
@@ -340,140 +341,149 @@ export function RegistrationForm() {
   return (
     <div
       ref={formCardRef}
-      className="relative ff-glass-card rounded-md p-6 sm:p-8 md:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_50px_rgba(255,107,0,0.1)] overflow-hidden border border-white/15 bg-black/40 backdrop-blur-md"
+      className="relative ff-terminal-card rounded-md p-4 sm:p-7 md:p-9 shadow-[0_20px_50px_rgba(0,0,0,0.7)] overflow-hidden border border-white/10"
     >
-      <div className="absolute top-0 left-0 w-3.5 h-3.5 border-t-2 border-l-2 border-primary z-20" />
-      <div className="absolute top-0 right-0 w-3.5 h-3.5 border-t-2 border-r-2 border-primary z-20" />
-      <div className="absolute bottom-0 left-0 w-3.5 h-3.5 border-b-2 border-l-2 border-primary z-20" />
-      <div className="absolute bottom-0 right-0 w-3.5 h-3.5 border-b-2 border-r-2 border-primary z-20" />
+      {/* Tactical Chamfer Corner Accents */}
+      <div className="absolute top-0 left-0 w-3.5 h-3.5 border-t-2 border-l-2 border-primary z-20 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-3.5 h-3.5 border-t-2 border-r-2 border-primary z-20 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-3.5 h-3.5 border-b-2 border-l-2 border-primary z-20 pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-3.5 h-3.5 border-b-2 border-r-2 border-primary z-20 pointer-events-none" />
 
-      <div className="cc-scanline-laser opacity-40" />
-
-      <div className="mb-6 border-b border-white/10 pb-6 text-center sm:text-left flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      {/* Clean Simplified Header */}
+      <div className="mb-6 border-b border-white/10 pb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <div className="inline-flex items-center gap-2 px-2 py-0.5 border border-primary/40 bg-primary/10 text-primary font-mono text-[10px] font-bold uppercase tracking-widest mb-2">
-            OFFICIAL TOURNAMENT REGISTRATION // CC-S2
-          </div>
-
-          <h2 className="font-display text-3xl sm:text-4xl font-black italic uppercase tracking-tight text-white leading-none">
-            SQUAD ENTRY{" "}
-            <span className="text-primary drop-shadow-[0_0_15px_rgba(255,107,0,0.5)]">
-              TERMINAL
-            </span>
+          <h2 className="font-display text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-black italic uppercase tracking-tight text-white leading-none">
+            SQUAD ENTRY <span className="text-primary">TERMINAL</span>
           </h2>
-
-          <p className="mt-1 font-sans text-xs text-zinc-400">
-            Configure squad name and participant details.
+          <p className="mt-1.5 text-xs sm:text-sm md:text-base font-sans text-zinc-300">
+            Register your squad roster for Free Fire Campus Cup Season 2.
           </p>
         </div>
 
-        <div className="flex sm:flex-col items-center sm:items-end justify-center gap-1 shrink-0">
-          <span className="font-mono text-[10px] uppercase text-zinc-400">
-            REGISTRATION PHASE
-          </span>
+        <div className="flex flex-wrap items-center gap-2.5 self-start sm:self-auto">
+          {step === 1 && (
+            <button
+              type="button"
+              onClick={fillDemoData}
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/50 text-amber-300 text-xs font-mono font-bold transition-all cursor-pointer active:scale-95"
+              title="Quickly fill test squad data to test Step 2 transition"
+            >
+              <span>⚡ Test-Fill Squad</span>
+            </button>
+          )}
 
-          <span className="font-display text-2xl font-black text-amber italic tracking-wider">
-            STAGE 0{step}
-            <span className="text-white/40 text-base font-normal">/02</span>
-          </span>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs sm:text-sm font-mono text-zinc-300">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+            <span>Step 0{step} of 02</span>
+          </div>
         </div>
       </div>
 
-      <div className="relative w-full h-1.5 bg-black/60 border border-white/20 rounded-full mb-6 overflow-hidden">
+      {/* Progress Flame Bar */}
+      <div className="relative w-full h-1.5 bg-black/60 border border-white/10 rounded-full mb-6 overflow-hidden">
         <div
           className="ff-flame-bar h-full transition-all duration-500 rounded-full"
           style={{ width: step === 1 ? "50%" : "100%" }}
         />
       </div>
 
-      <div className="mb-8 grid grid-cols-2 gap-3 border-b border-white/10 pb-6">
+      {/* Clean Eye-Comfortable Stepper Tabs */}
+      <div className="mb-6 sm:mb-8 grid grid-cols-1 sm:grid-cols-2 gap-3.5 border-b border-white/10 pb-6">
         {[
           {
             num: 1,
-            label: "01 // SQUAD & ROSTER DETAILS",
-            desc: "Team Name & Member Profiles",
+            label: "Squad & Roster Details",
+            desc: "Team Name & Player Profiles (4 Core + 1 Sub)",
           },
           {
             num: 2,
-            label: "02 // GOOGLE FORM CLEARANCE",
-            desc: "Compulsory Verification & Pass",
+            label: "Google Form Clearance",
+            desc: "Compulsory Verification & Official Pass",
           },
         ].map((s) => {
           const isActive = step === s.num;
           const isDone = step > s.num;
 
           return (
-            <div
+            <button
               key={s.num}
-              className={`relative flex flex-col items-center sm:items-start p-2.5 sm:p-3 border transition-all duration-300 rounded-sm ${
+              type="button"
+              onClick={() => {
+                if (s.num === 2) {
+                  goNext();
+                } else {
+                  goBack();
+                }
+              }}
+              className={`relative flex items-center gap-3.5 p-3.5 sm:p-4 rounded-md border-2 transition-all duration-200 text-left w-full cursor-pointer hover:border-zinc-700 active:scale-[0.99] ${
                 isActive
-                  ? "border-primary bg-primary/10 shadow-[0_0_20px_rgba(255,107,0,0.2)]"
+                  ? "border-amber-500/80 bg-[#0e121b] shadow-[0_4px_20px_rgba(245,158,11,0.15)]"
                   : isDone
-                    ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-400"
-                    : "border-white/10 bg-black/60 opacity-60"
+                    ? "border-emerald-500/50 bg-[#0d1612] text-emerald-300"
+                    : "border-zinc-800 bg-[#080b12]/80 opacity-70"
               }`}
             >
               {isActive && (
-                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary shadow-[0_0_8px_var(--color-ff-orange)]" />
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-amber-500" />
               )}
 
-              <div className="flex items-center gap-2 w-full">
-                <div
-                  className={`flex h-6 w-6 items-center justify-center font-mono text-xs font-bold transition-colors rounded-xs ${
-                    isActive
-                      ? "bg-primary text-black shadow-[0_0_12px_rgba(255,107,0,0.6)]"
-                      : isDone
-                        ? "bg-emerald-500 text-black shadow-[0_0_10px_rgba(34,197,94,0.5)]"
-                        : "bg-black/80 text-zinc-400 border border-white/20"
-                  }`}
-                >
-                  {isDone ? (
-                    <Check className="h-3.5 w-3.5 stroke-[3]" />
-                  ) : (
-                    `0${s.num}`
-                  )}
-                </div>
+              {/* Number Badge */}
+              <div
+                className={`flex h-8 w-8 items-center justify-center rounded-full font-display text-base font-black shrink-0 transition-colors ${
+                  isActive
+                    ? "bg-amber-500 text-black shadow-[0_0_12px_rgba(245,158,11,0.4)]"
+                    : isDone
+                      ? "bg-emerald-500 text-black"
+                      : "bg-zinc-800 text-zinc-300 border border-zinc-700"
+                }`}
+              >
+                {isDone ? <Check className="h-4 w-4 stroke-[3]" /> : s.num}
+              </div>
 
+              <div className="min-w-0 flex-1">
                 <span
-                  className={`font-display text-xs font-bold uppercase tracking-wider transition-colors ${
+                  className={`block font-display text-base sm:text-lg font-bold uppercase tracking-wider transition-colors ${
                     isActive
-                      ? "text-primary"
+                      ? "text-amber-400"
                       : isDone
                         ? "text-emerald-400"
-                        : "text-zinc-400"
+                        : "text-zinc-300"
                   }`}
                 >
                   {s.label}
                 </span>
+                <span className="block font-sans text-xs sm:text-sm text-zinc-400 mt-0.5 truncate">
+                  {s.desc}
+                </span>
               </div>
-
-              <span className="font-sans text-[10px] text-zinc-500 mt-1 hidden sm:block">
-                {s.desc}
-              </span>
-            </div>
+            </button>
           );
         })}
       </div>
 
+      {/* Error Message Banner */}
       {errorMsg && (
-        <div className="reg-error-banner mb-6 flex items-center gap-3 border border-destructive/60 bg-destructive/15 p-4 text-white rounded-sm">
-          <AlertCircle className="h-5 w-5 shrink-0 text-primary animate-pulse" />
-          <div className="font-sans text-xs font-bold">{errorMsg}</div>
+        <div className="reg-error-banner mb-6 flex items-center gap-3 border border-red-500/50 bg-red-950/25 p-4 text-red-200 rounded-sm shadow-md">
+          <AlertCircle className="h-5 w-5 shrink-0 text-red-400" />
+          <div className="font-sans text-xs sm:text-sm font-bold leading-relaxed">{errorMsg}</div>
         </div>
       )}
 
       <div ref={stepContainerRef}>
         {step === 1 ? (
-          <div className="space-y-6">
-            <div className="ff-glass-card rounded-md p-5 sm:p-6 border border-primary/30 shadow-md bg-black/40 backdrop-blur-sm">
+          <div className="space-y-6 sm:space-y-7">
+            {/* Team Name Section */}
+            <div className="relative rounded-md p-5 sm:p-6 bg-[#080b12] border-2 border-zinc-800 shadow-[0_10px_30px_rgba(0,0,0,0.85)]">
+              <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-zinc-600 pointer-events-none" />
+              <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-zinc-600 pointer-events-none" />
+
               <label
                 htmlFor="team_name"
-                className="block font-display text-sm font-bold uppercase tracking-wider text-white mb-2 flex items-center gap-2"
+                className="block font-display text-lg sm:text-xl font-black uppercase tracking-wider text-white mb-2.5 flex items-center gap-2"
               >
-                <Shield className="w-4 h-4 text-primary" />
-
+                <Shield className="w-5 h-5 text-amber-400/90" />
                 <span>
-                  Team Name <span className="text-primary">*</span>
+                  Team Name <span className="text-amber-400/80 font-bold">*</span>
                 </span>
               </label>
 
@@ -484,76 +494,84 @@ export function RegistrationForm() {
                 required
                 value={teamName}
                 onChange={(e) => setTeamName(e.target.value)}
-                placeholder="e.g. Team Apex Gaming"
-                className="ff-input-terminal w-full rounded-sm px-4 py-3 bg-black/60 border border-white/20 font-display text-lg font-bold uppercase tracking-wider text-white placeholder:text-zinc-500 focus:outline-none focus:border-primary/50 transition-colors"
+                placeholder="e.g. Apex Predators"
+                className="w-full rounded-sm px-4 py-3.5 sm:py-4 bg-[#05070d] border-2 border-zinc-700/80 text-white font-display text-lg sm:text-xl md:text-2xl font-black uppercase tracking-wider placeholder:text-zinc-500 focus:outline-none focus:border-amber-500 focus:bg-[#0c101a] focus:shadow-[0_0_16px_rgba(245,158,11,0.2)] transition-all"
               />
 
-              <p className="mt-2 text-[11px] font-sans text-zinc-400 leading-relaxed">
-                Team Name must not contain any vulgar, offensive, abusive,
-                discriminatory, political, religious, regional, or copyrighted
-                terms. The organizer reserves the right to modify or reject
-                any team name that violates this rule.
+              <p className="mt-2 text-xs sm:text-sm font-sans text-zinc-400">
+                * Please enter your official squad name. Avoid offensive or copyrighted terms.
               </p>
             </div>
 
+            {/* Squad Members Section */}
             <div className="space-y-4">
-              <div className="flex items-center justify-between pb-1">
-                <span className="font-display text-sm font-black uppercase tracking-wider text-white flex items-center gap-2">
-                  <Users className="w-4 h-4 text-primary" />
-                  <span>SQUAD MEMBERS ({members.length} / 5)</span>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 pb-1">
+                <div className="flex items-center gap-2">
+                  <Users className="w-5 h-5 text-amber-400/90" />
+                  <span className="font-display text-base sm:text-lg font-black uppercase tracking-wider text-white">
+                    SQUAD MEMBERS ({members.length} / 5)
+                  </span>
+                </div>
+                <span className="font-sans text-xs sm:text-sm text-zinc-400">
+                  4 Core Players Required • 1 Optional Sub
                 </span>
               </div>
 
-              {members.map((member, index) => (
-                <MemberCard
-                  key={member.id}
-                  member={member}
-                  index={index}
-                  totalMembers={members.length}
-                  onChange={updateMember}
-                  onRemove={removeMember}
-                />
-              ))}
+              {/* Member Cards */}
+              <div className="space-y-4 sm:space-y-5">
+                {members.map((member, index) => (
+                  <MemberCard
+                    key={member.id}
+                    member={member}
+                    index={index}
+                    totalMembers={members.length}
+                    onChange={updateMember}
+                    onRemove={removeMember}
+                  />
+                ))}
+              </div>
             </div>
 
-            <div className="pt-2">
+            {/* Add Squad Member CTA */}
+            <div className="pt-1">
               {members.length < 5 ? (
                 <button
                   type="button"
                   onClick={addMember}
-                  className="w-full py-3.5 px-4 rounded-sm border-2 border-dashed border-primary/50 bg-primary/5 hover:bg-primary/15 hover:border-primary text-primary transition-all duration-200 font-display text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(255,107,0,0.1)] active:scale-[0.99]"
+                  className="w-full py-3.5 sm:py-4 px-4 sm:px-5 rounded-sm border border-dashed border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/20 hover:border-amber-500/70 text-amber-300 transition-all duration-200 font-display text-sm sm:text-base font-black uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-sm active:scale-[0.99] min-h-[48px]"
                 >
-                  <Plus className="w-4 h-4 stroke-[3]" />
-
+                  <Plus className="w-5 h-5 stroke-[3]" />
                   <span>
                     ADD SQUAD MEMBER ({5 - members.length}{" "}
                     {5 - members.length === 1 ? "SLOT" : "SLOTS"} REMAINING)
                   </span>
                 </button>
               ) : (
-                <div className="w-full py-3 px-4 rounded-sm border border-white/20 bg-black/60 text-zinc-400 text-center font-mono text-xs uppercase font-bold">
-                  ✓ SQUAD CAPACITY REACHED (MAXIMUM 5 MEMBERS)
+                <div className="w-full py-3.5 px-4 rounded-sm border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-center font-mono text-xs sm:text-sm uppercase font-bold flex items-center justify-center gap-2">
+                  <Check className="w-4 h-4 stroke-[3]" />
+                  <span>SQUAD CAPACITY REACHED (MAXIMUM 5 MEMBERS)</span>
                 </div>
               )}
             </div>
 
-            <div className="mt-8 flex items-center justify-between border-t border-white/20 pt-6">
+            {/* Bottom Actions Row */}
+            <div className="mt-8 flex flex-col-reverse sm:flex-row sm:items-center justify-between gap-4 border-t border-white/10 pt-6">
               <button
                 type="button"
                 onClick={() => navigate(previousPath)}
-                className="inline-flex items-center gap-1.5 font-display text-xs font-bold uppercase tracking-wider text-zinc-300 hover:text-white transition-colors cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-zinc-400 hover:text-white transition-colors cursor-pointer py-2.5 px-4 min-h-[44px]"
               >
-                <ArrowLeft className="h-3.5 w-3.5" />
-                Return to Previous
+                <ArrowLeft className="h-4 w-4" />
+                <span>Return to Previous</span>
               </button>
 
               <button
                 type="button"
                 onClick={goNext}
-                className="cc-button-primary inline-flex items-center gap-2 cursor-pointer ml-auto active:scale-95 transition-transform font-display"
+                className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-sm font-display text-base sm:text-lg font-black uppercase tracking-wider bg-gradient-to-r from-amber-300 via-amber-400 to-orange-400 hover:from-amber-200 hover:to-orange-300 text-black border-2 border-amber-200 shadow-[0_0_25px_rgba(245,158,11,0.5)] hover:shadow-[0_0_35px_rgba(245,158,11,0.7)] transition-all duration-200 cursor-pointer active:scale-95 w-full sm:w-auto min-h-[50px]"
               >
-                <span>NEXT: GOOGLE FORM CLEARANCE</span>
-                <ArrowRight className="h-4 w-4" />
+                <span>PROCEED TO STEP 2</span>
+                <ArrowRight className="h-5 w-5 stroke-[3] text-black shrink-0" />
               </button>
             </div>
           </div>
