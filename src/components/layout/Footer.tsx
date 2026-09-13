@@ -15,7 +15,6 @@ const footerNavLinks = [
   { label: "FAQ",        href: "/#faq" },
 ] as const;
 
-
 const characters = [
   { id: 0, name: "Nova",    title: "Infiltrator",  desc: "Master of deception and close combat. Uses speed to outmaneuver enemies and take objectives solo.",   color: "#e040fb" },
   { id: 1, name: "Kira",   title: "Striker",      desc: "Elite assault specialist trained for high-pressure situations. Excels in rapid zone control and elimination.", color: "var(--color-ff-orange)" },
@@ -23,7 +22,7 @@ const characters = [
 ];
 
 // Canvas particle system
-function useParticles(canvasRef: React.RefObject<HTMLCanvasElement>) {
+function useParticles(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -240,7 +239,6 @@ export function Footer() {
         {/* ── CHARACTER + WEAPON STAGE ─────────────────────────────── */}
         <div className="relative w-full overflow-visible md:overflow-hidden" style={{ height: "clamp(300px, 38vw, 520px)", zIndex: 5 }}>
 
-
           {/* Characters — clickable, show card on click */}
           <div className="absolute inset-x-0 bottom-[-30px] flex items-end justify-center z-[10]">
             {[
@@ -309,7 +307,6 @@ export function Footer() {
                 <style>{`@keyframes fadeSlideUp { from { opacity:0; transform: translateY(12px) } to { opacity:1; transform: translateY(0) } }`}</style>
                 <div className="relative bg-[#0e0e10]/95 border border-white/10 p-4 md:p-5 w-44 md:w-56 backdrop-blur-sm"
                   style={{ boxShadow: `0 0 30px ${ch.color}30, 0 4px 24px rgba(0,0,0,0.8)` }}>
-                  {/* Orange corner accent */}
                   <div className="absolute top-0 left-0 w-4 md:w-6 h-4 md:h-6" style={{ borderTop: `2px solid ${ch.color}`, borderLeft: `2px solid ${ch.color}` }} />
                   <div className="absolute bottom-0 right-0 w-4 md:w-6 h-4 md:h-6" style={{ borderBottom: `2px solid ${ch.color}`, borderRight: `2px solid ${ch.color}` }} />
                   {arrowDiv}
