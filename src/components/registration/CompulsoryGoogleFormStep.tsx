@@ -110,7 +110,7 @@ export function CompulsoryGoogleFormStep({
           {hasOpenedForm ? (
             <div className="mt-4 pt-3.5 border-t border-zinc-800 flex items-center gap-2 text-xs sm:text-sm font-mono text-emerald-400 font-bold">
               <CheckCircle2 className="w-4 h-4 shrink-0" />
-              <span>Google Form opened in new tab. Complete all questions, then confirm below.</span>
+              <span>Google Form opened in new tab.</span>
             </div>
           ) : (
             <div className="mt-4 pt-3.5 border-t border-zinc-800 text-xs sm:text-sm font-mono text-zinc-400">
