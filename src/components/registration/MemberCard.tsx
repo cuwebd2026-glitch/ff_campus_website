@@ -9,7 +9,6 @@ import {
   Trash2,
   Shield,
   Flame,
-  CheckCircle2,
 } from "lucide-react";
 import { MemberData } from "../../types/registration";
 
@@ -31,17 +30,6 @@ export function MemberCard({
   const isCaptain = index === 0;
   const isSubstitute = index === 4;
   const prefix = isCaptain ? "igl" : isSubstitute ? "sub5" : `player${index + 1}`;
-
-  // Check completion state
-  const isComplete = Boolean(
-    member.full_name?.trim() &&
-      member.college_uid?.trim() &&
-      member.phone_number?.trim()?.length === 10 &&
-      member.personal_email?.trim() &&
-      member.official_email?.trim() &&
-      member.section?.trim() &&
-      member.block?.trim(),
-  );
 
   const isPartiallyFilled = Boolean(
     member.full_name?.trim() ||
@@ -73,20 +61,12 @@ export function MemberCard({
     return (
       <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-sm font-display text-xs sm:text-sm font-bold uppercase tracking-wider bg-cyan-950/35 border border-cyan-500/50 text-cyan-300">
         <Shield className="w-4 h-4 text-cyan-400 shrink-0" />
-        <span>CORE ROSTER // PLAYER 0{index + 1}</span>
+        <span>PLAYER 0{index + 1}</span>
       </span>
     );
   };
 
   const renderStatusBadge = () => {
-    if (isComplete) {
-      return (
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/50 text-emerald-300 font-mono text-xs sm:text-sm font-bold shadow-[0_0_10px_rgba(16,185,129,0.15)]">
-          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-          <span>ROSTER READY</span>
-        </span>
-      );
-    }
     if (isSubstitute && !isPartiallyFilled) {
       return (
         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-800/80 border border-zinc-700 text-zinc-300 font-mono text-xs sm:text-sm font-medium">

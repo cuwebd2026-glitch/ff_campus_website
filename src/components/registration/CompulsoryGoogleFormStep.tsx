@@ -29,6 +29,7 @@ export function CompulsoryGoogleFormStep({
   onBack,
 }: CompulsoryGoogleFormStepProps) {
   const [hasOpenedForm, setHasOpenedForm] = useState<boolean>(false);
+  const [hasConfirmed, setHasConfirmed] = useState<boolean>(false);
 
   const effectiveTeamName = teamName.trim();
   const displayMembers = members;
@@ -42,6 +43,9 @@ export function CompulsoryGoogleFormStep({
     if (!hasOpenedForm) {
       setHasOpenedForm(true);
       window.open(GOOGLE_FORM_URL, "_blank", "noopener,noreferrer");
+      return;
+    }
+    if (!hasConfirmed) {
       return;
     }
     onFinalSubmit();
@@ -113,6 +117,10 @@ export function CompulsoryGoogleFormStep({
               * Click the button above to launch the Google Form in a new tab.
             </div>
           )}
+
+          <div className="mt-2 text-xs sm:text-sm font-mono text-amber-300/90 font-bold">
+            After filling the form, return back to this page to complete your registration.
+          </div>
         </div>
 
         {/* Squad Summary Roster */}
@@ -154,8 +162,8 @@ export function CompulsoryGoogleFormStep({
         <label className="flex items-start gap-3.5 p-4 sm:p-5 rounded-md border border-zinc-700 bg-black/70 cursor-pointer hover:border-amber-500/60 transition-colors backdrop-blur-md">
           <input
             type="checkbox"
-            checked={hasOpenedForm}
-            onChange={(e) => setHasOpenedForm(e.target.checked)}
+            checked={hasConfirmed}
+            onChange={(e) => setHasConfirmed(e.target.checked)}
             className="mt-1 h-5 w-5 rounded accent-amber-500 cursor-pointer shrink-0"
           />
           <div className="text-sm sm:text-base font-sans text-zinc-200">
@@ -185,8 +193,8 @@ export function CompulsoryGoogleFormStep({
         <button
           type="button"
           onClick={handleFinalClick}
-          disabled={submitting}
-          className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-sm font-display text-base sm:text-lg font-black uppercase tracking-wider bg-gradient-to-r from-amber-300 via-amber-400 to-orange-400 hover:from-amber-200 hover:to-orange-300 text-black border-2 border-amber-200 shadow-[0_0_30px_rgba(245,158,11,0.55)] hover:shadow-[0_0_40px_rgba(245,158,11,0.75)] transition-all duration-200 cursor-pointer active:scale-95 w-full sm:w-auto min-h-[50px]"
+          disabled={submitting || (hasOpenedForm && !hasConfirmed)}
+          className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-sm font-display text-base sm:text-lg font-black uppercase tracking-wider bg-gradient-to-r from-amber-300 via-amber-400 to-orange-400 hover:from-amber-200 hover:to-orange-300 text-black border-2 border-amber-200 shadow-[0_0_30px_rgba(245,158,11,0.55)] hover:shadow-[0_0_40px_rgba(245,158,11,0.75)] transition-all duration-200 cursor-pointer active:scale-95 w-full sm:w-auto min-h-[50px] disabled:opacity-50"
         >
           {submitting ? (
             <>

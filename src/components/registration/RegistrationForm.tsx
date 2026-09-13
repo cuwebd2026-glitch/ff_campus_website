@@ -55,6 +55,22 @@ export function RegistrationForm() {
   const victoryCardRef = useRef<HTMLDivElement>(null);
   const prevStepRef = useRef<number>(step);
 
+  useEffect(() => {
+    formCardRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }, [step]);
+
+  useEffect(() => {
+    if (successRegId) {
+      victoryCardRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [successRegId]);
+
   useGSAP(
     () => {
       if (prevStepRef.current !== step) {
@@ -104,17 +120,6 @@ export function RegistrationForm() {
             "-=0.3",
           )
           .from(
-            ".victory-ticket",
-            {
-              opacity: 0,
-              scale: 0.92,
-              y: 25,
-              duration: 0.6,
-              ease: "back.out(1.5)",
-            },
-            "-=0.2",
-          )
-          .from(
             ".victory-directive",
             {
               opacity: 0,
@@ -142,7 +147,7 @@ export function RegistrationForm() {
     if (errorMsg) {
       gsap.fromTo(
         ".reg-error-banner",
-        { opacity: 0, y: -8, scale: 0.98 },
+        { opacity: 0, y: 20, scale: 0.95 },
         {
           opacity: 1,
           y: 0,
@@ -198,48 +203,10 @@ export function RegistrationForm() {
             </p>
           </div>
 
-          <div className="victory-ticket relative border-2 border-amber/70 bg-black/60 p-6 text-center cc-ticket-shimmer shadow-[0_0_30px_rgba(230,170,40,0.2)] rounded-sm backdrop-blur-sm">
-            <div className="cc-scanline-laser opacity-40" />
-
-            <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-zinc-300 block mb-2">
-              OFFICIAL TOURNAMENT PASS IDENTIFIER
-            </span>
-
-            <div className="flex items-center justify-center gap-3">
-              <span className="font-mono text-3xl sm:text-4xl font-black text-amber tracking-wider drop-shadow-[0_0_10px_rgba(245,158,11,0.5)]">
-                {successRegId}
-              </span>
-
-              <button
-                type="button"
-                onClick={handleCopyRegId}
-                className="flex items-center gap-1.5 border border-amber/60 bg-black/80 px-3 py-2 font-display text-xs font-bold uppercase tracking-wider text-white hover:bg-amber hover:text-black transition-all duration-200 cursor-pointer active:scale-95"
-                title="Copy Registration ID"
-              >
-                {copied ? (
-                  <>
-                    <Check className="h-4 w-4 text-emerald-400" />
-                    <span className="text-emerald-400">COPIED</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="h-4 w-4 text-zinc-300" />
-                    <span>COPY</span>
-                  </>
-                )}
-              </button>
-            </div>
-
-            <p className="mt-3 font-sans text-[11px] text-zinc-400">
-              * Please screenshot this pass. Keep your Registration ID ready
-              during match lobby check-in.
-            </p>
-          </div>
-
           <div className="victory-directive border border-primary/40 bg-primary/10 p-4 text-left font-sans text-xs text-zinc-300 space-y-2 rounded-sm backdrop-blur-sm">
             <div className="flex items-center gap-2 font-display text-xs font-bold uppercase tracking-wider text-amber">
               <Flame className="h-4 w-4 fill-amber" />
-              COMPULSORY NEXT STEP
+              COMPULSORY STEP
             </div>
 
             <p>
@@ -294,19 +261,20 @@ export function RegistrationForm() {
             </div>
 
             <p>
-              1. Captains will receive lobby slots and discord access at{" "}
+              1. The squad leader is the designated Point of Contact (POC)
+              for this registration. Please keep{" "}
               <strong className="text-white">
                 {members[0]?.personal_email}
-              </strong>
-              .
+              </strong>{" "}
+              active for lobby slot and Discord access communication.
             </p>
 
             <p>
-              2. Keep WhatsApp notifications active on{" "}
+              2. Please keep WhatsApp notifications active on{" "}
               <strong className="text-white">
                 +91 {members[0]?.phone_number}
-              </strong>
-              .
+              </strong>{" "}
+              for match updates.
             </p>
 
             <p>
@@ -461,14 +429,6 @@ export function RegistrationForm() {
         })}
       </div>
 
-      {/* Error Message Banner */}
-      {errorMsg && (
-        <div className="reg-error-banner mb-6 flex items-center gap-3 border border-red-500/50 bg-red-950/25 p-4 text-red-200 rounded-sm shadow-md">
-          <AlertCircle className="h-5 w-5 shrink-0 text-red-400" />
-          <div className="font-sans text-xs sm:text-sm font-bold leading-relaxed">{errorMsg}</div>
-        </div>
-      )}
-
       <div ref={stepContainerRef}>
         {step === 1 ? (
           <div className="space-y-6 sm:space-y-7">
@@ -585,6 +545,16 @@ export function RegistrationForm() {
           />
         )}
       </div>
+
+      {/* Fixed Bottom Viewport Error Notification Banner */}
+      {errorMsg && (
+        <div className="reg-error-banner fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-md flex items-center gap-3 border border-red-500/60 bg-red-950/95 p-4 text-red-200 rounded-sm shadow-[0_10px_30px_rgba(0,0,0,0.8)] backdrop-blur-md">
+          <AlertCircle className="h-5 w-5 shrink-0 text-red-400" />
+          <div className="font-sans text-xs sm:text-sm font-bold leading-relaxed break-words flex-1">
+            {errorMsg}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
