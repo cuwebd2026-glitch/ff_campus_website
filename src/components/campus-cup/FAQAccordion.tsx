@@ -57,25 +57,15 @@ export function FAQAccordion() {
         },
       );
 
-      // Pulsing glow on the giant "?" mark
+      // Floating animation for the mascot
       gsap.to(questionMarkRef.current, {
-        textShadow: "0 0 30px rgba(255,107,0,0.95), 0 0 60px rgba(255,107,0,0.45)",
-        duration: 1.8,
+        y: -15,
+        duration: 2,
         ease: "sine.inOut",
         repeat: -1,
         yoyo: true,
       });
 
-      // Breathing border glow on the side info card
-      gsap.to(sideCardRef.current, {
-        boxShadow: "0 0 35px rgba(255,107,0,0.2)",
-        borderColor: "rgba(255,107,0,0.4)",
-        duration: 2.2,
-        ease: "sine.inOut",
-        repeat: -1,
-        yoyo: true,
-        delay: 1,
-      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -83,13 +73,7 @@ export function FAQAccordion() {
 
   return (
     <section id="faq" ref={sectionRef} className="ff-section-alt relative overflow-hidden py-24 md:py-32">
-      {/* Ambient glow backdrop */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div
-          className="absolute top-1/3 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full opacity-10 blur-[120px]"
-          style={{ background: "radial-gradient(circle, var(--color-ff-orange) 0%, transparent 70%)" }}
-        />
-      </div>
+      {/* Ambient glow backdrop - REMOVED */}
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <Reveal>
@@ -100,23 +84,23 @@ export function FAQAccordion() {
 
         <div className="grid md:grid-cols-[1fr_2fr] gap-10 md:gap-14 items-start mt-12">
           <Reveal>
-            <div
-              ref={sideCardRef}
-              className="border border-white/10 bg-white/[0.02] p-8 md:p-10 transition-colors duration-500"
-            >
-              <p
+            <div className="flex flex-col items-center md:items-start text-center md:text-left mt-4 md:mt-0">
+              <div
                 ref={questionMarkRef}
-                className="font-display text-7xl md:text-8xl text-[var(--color-ff-orange)] mb-5 leading-none"
-                style={{ textShadow: "0 0 18px rgba(255,107,0,0.55)" }}
+                className="w-48 md:w-64 mb-6 md:translate-x-10"
               >
-                ?
-              </p>
-              <p className="font-sans text-white/65 text-base md:text-lg leading-relaxed mb-7">
+                <img 
+                  src="/faq_mascot.png" 
+                  alt="FAQ Mascot" 
+                  className="w-full h-auto object-contain" 
+                />
+              </div>
+              <p className="font-sans text-white/50 text-sm leading-relaxed mb-4 max-w-sm">
                 Everything you need to know before you register — straight from the official qualifier rulebook.
               </p>
-              <div className="flex items-center gap-2.5">
-                <HelpCircle className="w-4 h-4 text-[var(--color-ff-orange)]/70 shrink-0" />
-                <span className="font-sans text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-[var(--color-ff-orange)]/80">
+              <div className="flex items-center gap-2 justify-center md:justify-start">
+                <HelpCircle className="w-3.5 h-3.5 text-[var(--color-ff-orange)]/70 shrink-0" />
+                <span className="font-sans text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase text-[var(--color-ff-orange)]/80">
                   Confirmed intel. No guesswork.
                 </span>
               </div>

@@ -87,28 +87,34 @@ export function EventOverview() {
       const pinned = pinnedRef.current;
       if (!track || !pinned) return;
 
-      // Dynamically calculate the amount to scroll so it updates on resize/refresh
-      const getScrollAmount = () => {
-        if (!track || !pinned) return 0;
-        // Adding a small buffer (e.g., 32px) for padding so the last card doesn't hug the edge
-        return track.scrollWidth - pinned.offsetWidth + 32;
-      };
+      const mm = gsap.matchMedia();
 
-      gsap.to(track, {
-        x: () => -getScrollAmount(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: pinned,
-          start: "top top",
-          end: () => `+=${getScrollAmount()}`,
-          scrub: 1.2,
-          pin: true,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        },
+      mm.add("(min-width: 768px)", () => {
+        // Dynamically calculate the amount to scroll so it updates on resize/refresh
+        const getScrollAmount = () => {
+          if (!track || !pinned) return 0;
+          // Adding a small buffer (e.g., 32px) for padding so the last card doesn't hug the edge
+          return track.scrollWidth - pinned.offsetWidth + 32;
+        };
+
+        gsap.to(track, {
+          x: () => -getScrollAmount(),
+          ease: "none",
+          scrollTrigger: {
+            trigger: pinned,
+            start: "top top",
+            end: () => `+=${getScrollAmount()}`,
+            scrub: 1.2,
+            pin: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
       });
 
+      return () => mm.revert();
     }, sectionRef);
+    
     return () => ctx.revert();
   }, []);
 
@@ -121,7 +127,7 @@ export function EventOverview() {
       <div className="absolute -left-32 top-1/3 w-[600px] h-[600px] rounded-full bg-[var(--color-ff-orange)] blur-[180px] opacity-[0.06] pointer-events-none" />
 
       {/* ── Pinned fullscreen section (heading + cards together, no gap) ── */}
-      <div ref={pinnedRef} className="relative h-screen flex flex-col overflow-hidden">
+      <div ref={pinnedRef} className="relative md:h-screen flex flex-col md:overflow-hidden py-10 md:py-0">
 
         {/* Heading - compact */}
         <div className="shrink-0 px-8 pt-10 pb-6 relative z-10">
@@ -141,16 +147,16 @@ export function EventOverview() {
         </div>
 
         {/* Cards track — fills remaining height */}
-        <div className="flex-1 overflow-visible flex items-center">
+        <div className="flex-1 overflow-x-auto md:overflow-visible flex items-center snap-x snap-mandatory pb-6 md:pb-0 scrollbar-hide">
           <div
             ref={trackRef}
-            className="flex gap-4 px-8"
+            className="flex gap-4 px-8 w-max md:w-auto"
             style={{ willChange: "transform" }}
           >
             {overviewItems.map((item, i) => (
               <div
                 key={i}
-                className="shrink-0 relative group w-[85vw] sm:w-[45vw] md:w-[calc((100vw-64px-16px)/3)]"
+                className="shrink-0 relative group w-[85vw] sm:w-[45vw] md:w-[calc((100vw-64px-16px)/3)] snap-center"
               >
                 {/* Card body */}
                 <div
