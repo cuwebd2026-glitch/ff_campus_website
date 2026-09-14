@@ -154,7 +154,7 @@ export function TournamentIntro() {
                   CU COLLEGE QUALIFIER <Zap className="w-3 h-3" />
                 </span>
                 <h3 className="font-display text-4xl md:text-6xl italic text-white mb-6 uppercase tracking-wider drop-shadow-[0_0_10px_rgba(255,107,0,0.3)]">Our Drop Zone</h3>
-                <p className="font-sans text-white/50 text-lg leading-relaxed">The Chandigarh University event is a distinct college qualifier, organized locally by GFG Community at CU on 14 September 2026. Prepare for combat.</p>
+                <p className="font-sans text-white/50 text-lg leading-relaxed">The Chandigarh University event is a distinct college qualifier, organized locally by GFG Community at CU on 15 September 2026. Prepare for combat.</p>
               </div>
               <div className="absolute top-0 right-0 w-16 h-16 border-t-4 border-r-4 border-[var(--color-ff-orange)]/20 m-4" />
               <div className="absolute bottom-0 left-0 w-16 h-16 border-b-4 border-l-4 border-[var(--color-ff-orange)]/20 m-4" />
