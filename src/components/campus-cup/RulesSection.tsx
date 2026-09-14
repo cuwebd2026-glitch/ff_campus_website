@@ -204,7 +204,7 @@ export function RulesSection() {
 
           {/* ── LEFT: Rules ── */}
           <div>
-            <div ref={titleRef} className="mb-14">
+            <div ref={titleRef} className="mb-6">
               <h2 className="font-display uppercase leading-[0.88] tracking-tight mb-8">
                 <span className="block text-white" style={{ fontSize: "clamp(3.5rem, 10vw, 7rem)" }}>
                   KNOW THE
@@ -232,7 +232,7 @@ export function RulesSection() {
                 <div key={i} className="group border-b border-white/[0.07]" style={{ opacity: 0 }}>
                   <button
                     onClick={() => toggle(i)}
-                    className="w-full flex items-center gap-6 py-6 text-left cursor-pointer"
+                    className="w-full flex items-center gap-6 py-4 text-left cursor-pointer"
                   >
                     <span className="font-display text-4xl text-[var(--color-ff-orange)]/20 w-10 shrink-0 group-hover:text-[var(--color-ff-orange)]/50 transition-colors">
                       0{i + 1}
@@ -251,7 +251,7 @@ export function RulesSection() {
                   </button>
 
                   <div className="rule-body overflow-hidden" style={{ height: 0, opacity: 0 }}>
-                    <div className="pb-6 pl-16 pr-4 border-l-2 border-[var(--color-ff-orange)]/20 ml-4">
+                    <div className="pb-4 pl-16 pr-4 border-l-2 border-[var(--color-ff-orange)]/20 ml-4">
                       <p className="font-sans text-sm md:text-base text-white/60 leading-relaxed mb-4">
                         {item.body}
                       </p>
